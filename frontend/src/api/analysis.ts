@@ -1,8 +1,8 @@
-import type { LocationId } from '../config/fields'
+import type { FeatureValues } from '../config/fields'
 
 export type ManualInput = {
-  locations: Record<LocationId, boolean>
-  // Add required dataset features here after the ML team supplies their schema.
+  schemaVersion: string
+  features: FeatureValues
 }
 
 export type AnalysisResult = {
