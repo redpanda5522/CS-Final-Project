@@ -1,39 +1,31 @@
 import { useState, type Dispatch, type SetStateAction } from 'react'
-import { FIELD_GROUPS, MANUAL_FIELDS, type BinaryValue, type FeatureValues } from '../config/fields'
+import { Plus, Trash2 } from 'lucide-react'
+import { MAX_CATHETERS, newPoint, type CatheterPoint, type ProcedureDraft } from '../types/procedure'
+import { REGIONS, sourceGroupsForRegion } from '../config/regions'
+import AtriaPlot from './AtriaPlot'
 
-type Props = { values: FeatureValues; onChange: Dispatch<SetStateAction<FeatureValues>> }
-const PAGE_SIZE = 24
-
+type Props = { values: ProcedureDraft; onChange: Dispatch<SetStateAction<ProcedureDraft>> }
 export default function ManualEntry({ values, onChange }: Props) {
-  const [query, setQuery] = useState('')
-  const [group, setGroup] = useState('All fields')
-  const [page, setPage] = useState(0)
-  const [enteredOnly, setEnteredOnly] = useState(false)
-  const entered = Object.values(values).filter(value => value !== null).length
-  const filtered = MANUAL_FIELDS.filter(field =>
-    field.id.toLowerCase().includes(query.toLowerCase()) &&
-    (group === 'All fields' || field.group === group) &&
-    (!enteredOnly || values[field.id] !== null),
-  )
-  const pages = Math.max(1, Math.ceil(filtered.length / PAGE_SIZE))
-  const currentPage = Math.min(page, pages - 1)
-
-  return <div className="entry-area">
-    <div className="manual-heading"><div><h3>Dataset binary fields</h3><p>{MANUAL_FIELDS.length.toLocaleString()} dataset fields.</p></div><span>{entered} entered</span></div>
-    <p className="schema-note">Choose 0 or 1 for each known value. Leave unknown values unspecified.</p>
-    <div className="field-filters">
-      <label>Search column name<input type="search" value={query} placeholder="e.g. la_ecg_export, contactforce, v3" onChange={event => { setQuery(event.target.value); setPage(0) }}/></label>
-      <label>Column group<select value={group} onChange={event => { setGroup(event.target.value); setPage(0) }}><option>All fields</option>{FIELD_GROUPS.map(item => <option key={item}>{item}</option>)}</select></label>
-    </div>
-    <label className="entered-filter"><input type="checkbox" checked={enteredOnly} onChange={event => { setEnteredOnly(event.target.checked); setPage(0) }}/> Show entered fields only</label>
-    <div className="dataset-fields">{filtered.slice(currentPage * PAGE_SIZE, (currentPage + 1) * PAGE_SIZE).map(field => <label className="dataset-field" key={field.id}>
-      <span><code>{field.id}</code><small>{field.group}</small></span>
-      <select aria-label={`${field.id} binary value`} value={values[field.id] ?? ''} onChange={event => {
-        const value: BinaryValue = event.target.value === '' ? null : event.target.value === '1' ? 1 : 0
-        onChange(current => ({ ...current, [field.id]: value }))
-      }}><option value="">Unspecified</option><option value="0">0</option><option value="1">1</option></select>
-    </label>)}</div>
-    {filtered.length === 0 && <p className="schema-note">No fields match your filters.</p>}
-    <div className="field-pagination"><button type="button" className="text-button" disabled={currentPage === 0} onClick={() => setPage(currentPage - 1)}>Previous</button><span>Page {currentPage + 1} of {pages} · {filtered.length.toLocaleString()} fields</span><button type="button" className="text-button" disabled={currentPage + 1 >= pages} onClick={() => setPage(currentPage + 1)}>Next</button></div>
+  const [selectedId, setSelectedId] = useState(values.points[0]?.id)
+  const selected = values.points.find(point => point.id === selectedId) ?? values.points[0]
+  const selectedIndex = values.points.findIndex(point => point.id === selected?.id)
+  function update(changes: Partial<CatheterPoint>) {
+    if (!selected) return
+    onChange(current => ({ ...current, points: current.points.map(point => point.id === selected.id ? { ...point, ...changes } : point) }))
+  }
+  function add() {
+    if (values.points.length >= MAX_CATHETERS) return
+    const point = newPoint()
+    onChange(current => ({ ...current, points: current.points.length < MAX_CATHETERS ? [...current.points, point] : current.points })); setSelectedId(point.id)
+  }
+  return <div className="entry-area catheter-entry">
+    <AtriaPlot points={values.points} selectedId={selected?.id} onRegionSelect={regionId => update({ regionId })}/>
+    <div className="position-heading"><h3>Catheters <span>{values.points.length} / {MAX_CATHETERS}</span></h3><button type="button" className="text-button" disabled={values.points.length >= MAX_CATHETERS} onClick={add}><Plus size={16}/> Add catheter</button></div>
+    <div className="position-tabs" aria-label="Catheters">{values.points.map((point, index) => <button type="button" key={point.id} className={selected?.id === point.id ? 'selected' : ''} aria-pressed={selected?.id === point.id} onClick={() => setSelectedId(point.id)}>Catheter {index + 1}</button>)}</div>
+    {selected && <div className="position-editor"><div className="position-heading"><strong>Catheter {selectedIndex + 1}</strong><button type="button" className="text-button" aria-label={`Remove catheter ${selectedIndex + 1}`} onClick={() => onChange(current => ({ ...current, points: current.points.filter(point => point.id !== selected.id) }))}><Trash2 size={15}/> Remove</button></div>
+      <div className="region-field"><label>Heart region *<select aria-label="Heart region" value={selected.regionId} onChange={event => update({ regionId: event.target.value as CatheterPoint['regionId'] })}><option value="">Choose a region</option>{REGIONS.map(region => <option key={region.id} value={region.id}>{region.label} ({region.short})</option>)}</select></label></div>
+      {selected.regionId && <details className="source-groups"><summary>{sourceGroupsForRegion(selected.regionId).length} associated named data groups</summary><ul>{sourceGroupsForRegion(selected.regionId).map(key => <li key={key}><code>{key}</code></li>)}</ul></details>}
+      <div className="measurement-fields"><label>Temperature<input type="number" step="any" placeholder="Optional" value={selected.temperature} onChange={event => update({ temperature: event.target.value })}/></label><label>Unit<select aria-label="Temperature unit" value={values.temperatureUnit} onChange={event => onChange(current => ({ ...current, temperatureUnit: event.target.value as ProcedureDraft['temperatureUnit'] }))}><option value="unspecified">Unspecified</option><option value="C">°C</option><option value="F">°F</option></select></label><label>Pressure / contact force<input type="number" min="0" step="any" placeholder="Optional" value={selected.pressure} onChange={event => update({ pressure: event.target.value })}/></label><label>Unit<select aria-label="Pressure unit" value={values.pressureUnit} onChange={event => onChange(current => ({ ...current, pressureUnit: event.target.value as ProcedureDraft['pressureUnit'] }))}><option value="unspecified">Unspecified</option><option value="g">g (contact force)</option><option value="mmHg">mmHg</option><option value="kPa">kPa</option></select></label></div>
+    </div>}
   </div>
 }
