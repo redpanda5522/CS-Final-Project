@@ -1,9 +1,6 @@
-import type { LocationId } from '../config/fields'
+import type { ManualAnalysisRequest } from '../types/procedure'
 
-export type ManualInput = {
-  locations: Record<LocationId, boolean>
-  // Add required dataset features here after the ML team supplies their schema.
-}
+export type ManualInput = ManualAnalysisRequest
 
 export type AnalysisResult = {
   analysisId: string
@@ -18,18 +15,23 @@ async function readResult(response: Response): Promise<AnalysisResult> {
     let message = `The server returned ${response.status}. Please try again.`
     try {
       const body = await response.json() as { detail?: unknown }
-      if (typeof body.detail === 'string') message = body.detail
+      if (typeof body.detail === 'string' && body.detail.trim()) message = body.detail
+      else if (Array.isArray(body.detail)) {
+        const first = body.detail.find(item => item && typeof item.msg === 'string') as { msg: string } | undefined
+        if (first) message = first.msg
+      }
     } catch { /* Use the HTTP status message. */ }
     throw new Error(message)
   }
   const result: unknown = await response.json()
   if (!result || typeof result !== 'object') throw new Error('The server returned an invalid result.')
   const data = result as Partial<AnalysisResult>
-  if (typeof data.analysisId !== 'string' ||
+  if (typeof data.analysisId !== 'string' || !data.analysisId.trim() ||
       (data.predictedOutcome !== 'success' && data.predictedOutcome !== 'failure') ||
       typeof data.probability !== 'number' || !Number.isFinite(data.probability) ||
       data.probability < 0 || data.probability > 1 ||
-      typeof data.outcomeDefinition !== 'string') {
+      typeof data.outcomeDefinition !== 'string' || !data.outcomeDefinition.trim() ||
+      (data.modelVersion !== undefined && typeof data.modelVersion !== 'string')) {
     throw new Error('The server response does not match the agreed analysis format.')
   }
   return data as AnalysisResult

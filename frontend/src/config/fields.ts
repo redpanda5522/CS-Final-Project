@@ -1,12 +1,10 @@
-// Replace these example IDs and labels with the dataset's actual binary location columns.
-// Keep IDs identical to the keys expected by FastAPI.
-export const LOCATION_FIELDS = [
-  { id: 'location_1', label: 'Location 1' },
-  { id: 'location_2', label: 'Location 2' },
-  { id: 'location_3', label: 'Location 3' },
-  { id: 'location_4', label: 'Location 4' },
-  { id: 'location_5', label: 'Location 5' },
-  { id: 'location_6', label: 'Location 6' },
-] as const
+import datasetFields from './dataset-fields.json'
 
-export type LocationId = typeof LOCATION_FIELDS[number]['id']
+// Header-derived candidates, not a verified model feature selection.
+export const MANUAL_FIELDS = datasetFields
+export const FIELD_GROUPS = [...new Set(MANUAL_FIELDS.map(field => field.group))]
+export const EXCLUDED_FIELDS = ['id', 'recur', 'redo'] as const
+export const SCHEMA_VERSION = 'data-csv-header-v1'
+export type BinaryValue = 0 | 1 | null
+export type FeatureValues = Record<string, BinaryValue>
+export const emptyFeatures = (): FeatureValues => Object.fromEntries(MANUAL_FIELDS.map(field => [field.id, null]))

@@ -1,0 +1,11 @@
+import { Link, useParams } from 'react-router-dom'
+import { ArrowLeft } from 'lucide-react'
+import { displayDate } from '../components/AnalysisTable'
+import type { AnalysisRecord } from '../types/records'
+
+export default function AnalysisDetail({ records }: { records: AnalysisRecord[] }) {
+  const { analysisId } = useParams()
+  const record = records.find(item => item.analysisId === analysisId)
+  if (!record) return <div className="empty-state work-card"><h1>Analysis unavailable</h1><p>This record may have been cleared when the page refreshed, or the link may be incorrect.</p><Link className="text-button" to="/analyses">Return to analyses →</Link></div>
+  return <><Link className="text-button back-link" to="/analyses"><ArrowLeft size={16}/> All analyses</Link><div className="page-heading"><div className="eyebrow"><span className="eyebrow-line"/> COMPLETED ANALYSIS</div><h1>Analysis details</h1><p>{record.analysisId} · {displayDate(record.createdAt)}</p></div><div className="detail-grid"><section className="work-card card-body"><h2>Outcome estimate</h2><div className="result-panel"><span className="result-label">MODEL PREDICTION</span><div className="result-outcome">{record.predictedOutcome === 'success' ? 'Successful outcome' : 'Unsuccessful outcome'}</div><p>Model-generated estimate requiring interpretation.</p><div className="probability-row"><span>Estimated probability of success</span><strong>{Math.round(record.probability * 100)}%</strong></div><div className="meter"><div style={{width: `${record.probability * 100}%`}}/></div></div>{!record.isDemo && <div className="definition"><strong>Outcome definition</strong><p>{record.outcomeDefinition}</p></div>}<p className="result-footnote">Probability of success is distinct from certainty that the prediction is correct.</p></section><section className="work-card card-body"><h2>Submission summary</h2><dl className="detail-list"><dt>Source</dt><dd>{record.sourceName}</dd><dt>Input method</dt><dd>{record.inputMode === 'file' ? 'File upload' : 'Manual entry'}</dd><dt>Status</dt><dd><span className="complete-badge">Completed</span></dd><dt>Model version</dt><dd>{record.modelVersion || 'Not supplied'}</dd><dt>Record type</dt><dd>{record.isDemo ? 'Demo' : 'Backend response'}</dd></dl><Link className="primary-button" to="/analyses/new">Create another analysis</Link></section></div></>
+}

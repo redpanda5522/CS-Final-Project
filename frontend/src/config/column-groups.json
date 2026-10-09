@@ -1,0 +1,10727 @@
+[
+  {
+    "key": "la_ecg_export",
+    "columns": [
+      "la_ecg_export",
+      "v3"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_magnetic_20_pole_a_connector_",
+    "columns": [
+      "la_magnetic_20_pole_a_connector_",
+      "v5",
+      "v6",
+      "v7"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_cs_connector_eleclectrode_pos",
+    "columns": [
+      "la_cs_connector_eleclectrode_pos",
+      "v9",
+      "v10",
+      "v11",
+      "v12",
+      "v13",
+      "v14"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_navistar_connector_sensor_pos",
+    "columns": [
+      "la_navistar_connector_sensor_pos",
+      "v16"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_mcc_dx_connector_sensor_posit",
+    "columns": [
+      "la_mcc_dx_connector_sensor_posit",
+      "v18"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_mcc_dx_connector_eleclectrode",
+    "columns": [
+      "la_mcc_dx_connector_eleclectrode",
+      "v20",
+      "v21",
+      "v22"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_ecg_export",
+    "columns": [
+      "la2_ecg_export",
+      "v24"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_dec_connector_eleclectrode_po",
+    "columns": [
+      "la_dec_connector_eleclectrode_po"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_magnetic_20_pole_a_connector",
+    "columns": [
+      "la2_magnetic_20_pole_a_connector",
+      "v27",
+      "v28",
+      "v29",
+      "v30",
+      "v31",
+      "v32",
+      "v33",
+      "v34",
+      "v35",
+      "v36",
+      "v37"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "ra_ecg_export",
+    "columns": [
+      "ra_ecg_export"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "la2_navistar_connector_sensor_po",
+    "columns": [
+      "la2_navistar_connector_sensor_po",
+      "v40"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_navistar_connector_eleclectro",
+    "columns": [
+      "la_navistar_connector_eleclectro",
+      "v42",
+      "v43",
+      "v44"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_uls_connector_sensor_position",
+    "columns": [
+      "la_uls_connector_sensor_position",
+      "v46",
+      "v47",
+      "v48",
+      "v49",
+      "v50"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "ra_cs_connector_eleclectrode_pos",
+    "columns": [
+      "ra_cs_connector_eleclectrode_pos",
+      "v52",
+      "v53",
+      "v54",
+      "v55"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "lae_ecg_export",
+    "columns": [
+      "lae_ecg_export",
+      "v57"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "lafam_ecg_export",
+    "columns": [
+      "lafam_ecg_export"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "ra_mcc_dx_connector_sensor_posit",
+    "columns": [
+      "ra_mcc_dx_connector_sensor_posit",
+      "v60"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_mcc_dx_connector_eleclectrode",
+    "columns": [
+      "ra_mcc_dx_connector_eleclectrode",
+      "v62",
+      "v63",
+      "v64"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "lafam_navistar_connector_sensor_",
+    "columns": [
+      "lafam_navistar_connector_sensor_",
+      "v66"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "lafam_magnetic_20_pole_a_connect",
+    "columns": [
+      "lafam_magnetic_20_pole_a_connect",
+      "v68"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "lae_cs_connector_eleclectrode_po",
+    "columns": [
+      "lae_cs_connector_eleclectrode_po",
+      "v70",
+      "v71",
+      "v72"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "lafam_dec_connector_eleclectrode",
+    "columns": [
+      "lafam_dec_connector_eleclectrode",
+      "v74"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_cs_connector_eleclectrode_po",
+    "columns": [
+      "la2_cs_connector_eleclectrode_po",
+      "v76",
+      "v77",
+      "v78",
+      "v79",
+      "v80"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_dec_connector_sensor_position",
+    "columns": [
+      "la_dec_connector_sensor_position",
+      "v82",
+      "v83"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_navistar_connector_eleclectr",
+    "columns": [
+      "la2_navistar_connector_eleclectr",
+      "v85",
+      "v86",
+      "v87",
+      "v88",
+      "v89",
+      "v90",
+      "v91",
+      "v92",
+      "v93",
+      "v94",
+      "v95",
+      "v96",
+      "v97",
+      "v98",
+      "v99"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "lae_magnetic_20_pole_a_connector",
+    "columns": [
+      "lae_magnetic_20_pole_a_connector",
+      "v101",
+      "v102",
+      "v103",
+      "v104",
+      "v105",
+      "v106",
+      "v107",
+      "v108",
+      "v109",
+      "v110",
+      "v111",
+      "v112"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "lae_uls_connector_sensor_positio",
+    "columns": [
+      "lae_uls_connector_sensor_positio",
+      "v114",
+      "v115",
+      "v116",
+      "v117",
+      "v118",
+      "v119"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "laedit_ecg_export",
+    "columns": [
+      "laedit_ecg_export"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "ra_navistar_connector_sensor_pos",
+    "columns": [
+      "ra_navistar_connector_sensor_pos",
+      "v122",
+      "v123",
+      "v124"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "lafam_cs_connector_eleclectrode_",
+    "columns": [
+      "lafam_cs_connector_eleclectrode_"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "ra_magnetic_20_pole_a_connector_",
+    "columns": [
+      "ra_magnetic_20_pole_a_connector_",
+      "v127",
+      "v128",
+      "v129",
+      "v130",
+      "v131"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "la2_dec_connector_eleclectrode_p",
+    "columns": [
+      "la2_dec_connector_eleclectrode_p",
+      "v133",
+      "v134"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "laedit_mcc_dx_connector_sensor_p",
+    "columns": [
+      "laedit_mcc_dx_connector_sensor_p",
+      "v138",
+      "v139",
+      "v140",
+      "v141"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "laedit_mcc_dx_connector_eleclect",
+    "columns": [
+      "laedit_mcc_dx_connector_eleclect",
+      "v143",
+      "v144"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "temperaturesinrf_1la",
+    "columns": [
+      "temperaturesinrf_1la"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_1la",
+    "columns": [
+      "rf_1la",
+      "v147"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_1la",
+    "columns": [
+      "contactforceinrf_1la",
+      "v149",
+      "v150",
+      "v151",
+      "v152",
+      "v153"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "lae_dec_connector_eleclectrode_p",
+    "columns": [
+      "lae_dec_connector_eleclectrode_p",
+      "v155",
+      "v156",
+      "v157",
+      "v158",
+      "v159",
+      "v160"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "lafam_navistar_connector_eleclec",
+    "columns": [
+      "lafam_navistar_connector_eleclec",
+      "v162"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "lafam_uls_connector_sensor_posit",
+    "columns": [
+      "lafam_uls_connector_sensor_posit",
+      "v164",
+      "v165",
+      "v166"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "ra_navistar_connector_eleclectro",
+    "columns": [
+      "ra_navistar_connector_eleclectro",
+      "v168",
+      "v169",
+      "v175",
+      "v176"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_uls_connector_sensor_position",
+    "columns": [
+      "ra_uls_connector_sensor_position",
+      "v178",
+      "v179",
+      "v180",
+      "v181",
+      "v182",
+      "v183",
+      "v184",
+      "v185",
+      "v186",
+      "v187",
+      "v188",
+      "v189"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "lae_navistar_connector_sensor_po",
+    "columns": [
+      "lae_navistar_connector_sensor_po",
+      "v191"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "rafam_ecg_export",
+    "columns": [
+      "rafam_ecg_export",
+      "v193"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "lafam_dec_connector_sensor_posit",
+    "columns": [
+      "lafam_dec_connector_sensor_posit",
+      "v195",
+      "v196",
+      "v197"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "rafam_magnetic_20_pole_a_connect",
+    "columns": [
+      "rafam_magnetic_20_pole_a_connect",
+      "v199",
+      "v200",
+      "v201",
+      "v202",
+      "v203"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "lae_mcc_dx_connector_sensor_posi",
+    "columns": [
+      "lae_mcc_dx_connector_sensor_posi",
+      "v205"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "lae_mcc_dx_connector_eleclectrod",
+    "columns": [
+      "lae_mcc_dx_connector_eleclectrod",
+      "v207",
+      "v208",
+      "v209",
+      "v210",
+      "v211",
+      "v212",
+      "v213",
+      "v214",
+      "v215",
+      "v216",
+      "v217",
+      "v219",
+      "v220",
+      "v221",
+      "v222"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "rf_1la2",
+    "columns": [
+      "rf_1la2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_1la2",
+    "columns": [
+      "temperaturesinrf_1la2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_1la2",
+    "columns": [
+      "contactforceinrf_1la2",
+      "v226",
+      "v227",
+      "v228",
+      "v229",
+      "v230",
+      "v231",
+      "v232",
+      "v233",
+      "v234",
+      "v235",
+      "v236",
+      "v237"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "laedit_cs_connector_eleclectrode",
+    "columns": [
+      "laedit_cs_connector_eleclectrode",
+      "v239",
+      "v240"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "temperaturesinrf_3la",
+    "columns": [
+      "temperaturesinrf_3la"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_3la",
+    "columns": [
+      "rf_3la"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_3la",
+    "columns": [
+      "contactforceinrf_3la",
+      "v244",
+      "v245",
+      "v246"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "laedit_navistar_connector_sensor",
+    "columns": [
+      "laedit_navistar_connector_sensor",
+      "v248",
+      "v249",
+      "v250",
+      "v251",
+      "v252",
+      "v253",
+      "v254",
+      "v255",
+      "v256",
+      "v257",
+      "v258",
+      "v259"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "laedit_magnetic_20_pole_a_connec",
+    "columns": [
+      "laedit_magnetic_20_pole_a_connec",
+      "v261",
+      "v262",
+      "v263",
+      "v264",
+      "v265",
+      "v266"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_quad_b_connector_eleclectrode",
+    "columns": [
+      "la_quad_b_connector_eleclectrode",
+      "v268",
+      "v269",
+      "v270",
+      "v280",
+      "v281",
+      "v284",
+      "v285",
+      "v286",
+      "v287",
+      "v312",
+      "v322",
+      "v323",
+      "v324",
+      "v325",
+      "v326",
+      "v327",
+      "v328"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la3_ecg_export",
+    "columns": [
+      "la3_ecg_export",
+      "v330",
+      "v331"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la3_magnetic_20_pole_a_connector",
+    "columns": [
+      "la3_magnetic_20_pole_a_connector",
+      "v333",
+      "v334",
+      "v335",
+      "v336",
+      "v337",
+      "v339",
+      "v340",
+      "v345",
+      "v363"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_quad_b_connector_eleclectrod",
+    "columns": [
+      "la2_quad_b_connector_eleclectrod",
+      "v366",
+      "v367",
+      "v368",
+      "v373",
+      "v374",
+      "v375",
+      "v380",
+      "v386",
+      "v387",
+      "v388",
+      "v389",
+      "v390",
+      "v391",
+      "v392",
+      "v393",
+      "v394",
+      "v395",
+      "v396",
+      "v397",
+      "v398",
+      "v399",
+      "v400",
+      "v401",
+      "v402"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "lae_navistar_connector_eleclectr",
+    "columns": [
+      "lae_navistar_connector_eleclectr",
+      "v405"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_uls_connector_sensor_positio",
+    "columns": [
+      "la2_uls_connector_sensor_positio",
+      "v407",
+      "v410",
+      "v411"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "rafam_navistar_connector_sensor_",
+    "columns": [
+      "rafam_navistar_connector_sensor_",
+      "v414"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_dec_connector_eleclectrode_po",
+    "columns": [
+      "ra_dec_connector_eleclectrode_po",
+      "v426",
+      "v427",
+      "v428",
+      "v433"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "la2_quad_b_connector_sensor_posi",
+    "columns": [
+      "la2_quad_b_connector_sensor_posi",
+      "v435",
+      "v436",
+      "v439",
+      "v440",
+      "v442",
+      "v447",
+      "v469",
+      "v470",
+      "v471",
+      "v472",
+      "v473",
+      "v474",
+      "v475",
+      "v476",
+      "v477",
+      "v499",
+      "v500",
+      "v501",
+      "v502",
+      "v503",
+      "v504",
+      "v505"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_quad_b_connector_sensor_posit",
+    "columns": [
+      "la_quad_b_connector_sensor_posit",
+      "v507",
+      "v508",
+      "v509",
+      "v510",
+      "v512",
+      "v513",
+      "v514",
+      "v515",
+      "v516",
+      "v517",
+      "v518",
+      "v520",
+      "v521",
+      "v522",
+      "v523"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_dec_connector_sensor_positio",
+    "columns": [
+      "la2_dec_connector_sensor_positio",
+      "v525",
+      "v526",
+      "v527",
+      "v528",
+      "v529",
+      "v530",
+      "v531",
+      "v583",
+      "v584",
+      "v585",
+      "v586",
+      "v587",
+      "v588",
+      "v589",
+      "v597",
+      "v598",
+      "v599",
+      "v638"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_magnetic_20_pole_b_connector_",
+    "columns": [
+      "la_magnetic_20_pole_b_connector_",
+      "v644",
+      "v648",
+      "v649",
+      "v650",
+      "v651",
+      "v652"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "laf_ecg_export",
+    "columns": [
+      "laf_ecg_export"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "laf_navistar_connector_sensor_po",
+    "columns": [
+      "laf_navistar_connector_sensor_po",
+      "v655",
+      "v656",
+      "v657",
+      "v658",
+      "v659",
+      "v660"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "laedit_uls_connector_sensor_posi",
+    "columns": [
+      "laedit_uls_connector_sensor_posi",
+      "v662",
+      "v663",
+      "v664"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "lapre_ecg_export",
+    "columns": [
+      "lapre_ecg_export",
+      "v671",
+      "v674",
+      "v675",
+      "v676",
+      "v677",
+      "v680",
+      "v681",
+      "v682",
+      "v683",
+      "v684",
+      "v685",
+      "v686",
+      "v688",
+      "v689",
+      "v690",
+      "v691",
+      "v692",
+      "v693",
+      "v694",
+      "v695",
+      "v696",
+      "v697",
+      "v698",
+      "v699",
+      "v700"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "laedit_dec_connector_eleclectrod",
+    "columns": [
+      "laedit_dec_connector_eleclectrod",
+      "v702",
+      "v703"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la3_navistar_connector_sensor_po",
+    "columns": [
+      "la3_navistar_connector_sensor_po",
+      "v729",
+      "v730",
+      "v739",
+      "v772",
+      "v773"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "rf_11rela",
+    "columns": [
+      "rf_11rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_11rela",
+    "columns": [
+      "temperaturesinrf_11rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_11rela",
+    "columns": [
+      "contactforceinrf_11rela",
+      "v782",
+      "v783",
+      "v785",
+      "v786",
+      "v787",
+      "v788",
+      "v790",
+      "v791",
+      "v792",
+      "v793",
+      "v794",
+      "v803",
+      "v804",
+      "v805",
+      "v806",
+      "v807",
+      "v809",
+      "v810"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_31rela",
+    "columns": [
+      "contactforceinrf_31rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_31rela",
+    "columns": [
+      "rf_31rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_31rela",
+    "columns": [
+      "temperaturesinrf_31rela",
+      "v814",
+      "v815"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_2la",
+    "columns": [
+      "contactforceinrf_2la"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_2la",
+    "columns": [
+      "rf_2la"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_2la",
+    "columns": [
+      "temperaturesinrf_2la"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_11rela2",
+    "columns": [
+      "rf_11rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_11rela2",
+    "columns": [
+      "temperaturesinrf_11rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_11rela2",
+    "columns": [
+      "contactforceinrf_11rela2",
+      "v852",
+      "v853",
+      "v865",
+      "v866",
+      "v867",
+      "v869",
+      "v871",
+      "v872",
+      "v873",
+      "v878",
+      "v879",
+      "v880",
+      "v881",
+      "v883",
+      "v884",
+      "v885",
+      "v886",
+      "v887",
+      "v893",
+      "v897",
+      "v898",
+      "v899",
+      "v907",
+      "v908",
+      "v909",
+      "v910",
+      "v911",
+      "v912",
+      "v913",
+      "v914",
+      "v915"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "laf_mcc_dx_connector_sensor_posi",
+    "columns": [
+      "laf_mcc_dx_connector_sensor_posi",
+      "v917",
+      "v918",
+      "v928",
+      "v929",
+      "v930",
+      "v931",
+      "v932",
+      "v933",
+      "v934",
+      "v937",
+      "v938",
+      "v939"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "laf_mcc_dx_connector_eleclectrod",
+    "columns": [
+      "laf_mcc_dx_connector_eleclectrod",
+      "v941",
+      "v942",
+      "v943",
+      "v944",
+      "v958",
+      "v959",
+      "v960",
+      "v961",
+      "v962",
+      "v977",
+      "v979",
+      "v980",
+      "v994",
+      "v995"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la3_dec_connector_eleclectrode_p",
+    "columns": [
+      "la3_dec_connector_eleclectrode_p",
+      "v1002",
+      "v1012",
+      "v1013",
+      "v1014",
+      "v1022",
+      "v1023",
+      "v1024",
+      "v1025",
+      "v1028",
+      "v1032",
+      "v1033",
+      "v1034",
+      "v1037",
+      "v1038",
+      "v1043",
+      "v1044"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "lapre_mcc_dx_connector_eleclectr",
+    "columns": [
+      "lapre_mcc_dx_connector_eleclectr",
+      "v1046"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "lapre_mcc_dx_connector_sensor_po",
+    "columns": [
+      "lapre_mcc_dx_connector_sensor_po",
+      "v1048",
+      "v1049",
+      "v1050",
+      "v1051",
+      "v1052",
+      "v1066",
+      "v1074",
+      "v1075"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "lapre_cs_connector_eleclectrode_",
+    "columns": [
+      "lapre_cs_connector_eleclectrode_"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "contactforceinrf_3lae",
+    "columns": [
+      "contactforceinrf_3lae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_3lae",
+    "columns": [
+      "rf_3lae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_3lae",
+    "columns": [
+      "temperaturesinrf_3lae",
+      "v1082",
+      "v1083",
+      "v1084",
+      "v1085",
+      "v1086",
+      "v1087",
+      "v1088",
+      "v1089",
+      "v1090",
+      "v1091",
+      "v1092",
+      "v1093",
+      "v1094",
+      "v1095",
+      "v1096",
+      "v1097",
+      "v1098",
+      "v1099",
+      "v1100",
+      "v1119",
+      "v1120",
+      "v1135",
+      "v1136",
+      "v1137",
+      "v1138",
+      "v1152",
+      "v1153",
+      "v1154",
+      "v1155",
+      "v1156",
+      "v1157",
+      "v1158",
+      "v1159",
+      "v1160",
+      "v1161",
+      "v1170",
+      "v1171",
+      "v1191",
+      "v1194",
+      "v1196",
+      "v1206",
+      "v1207",
+      "v1208",
+      "v1209",
+      "v1232",
+      "v1233",
+      "v1242",
+      "v1244",
+      "v1245"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_21rela",
+    "columns": [
+      "temperaturesinrf_21rela",
+      "v1247"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_21rela",
+    "columns": [
+      "contactforceinrf_21rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_21rela",
+    "columns": [
+      "rf_21rela",
+      "v1250",
+      "v1251",
+      "v1252",
+      "v1257",
+      "v1258",
+      "v1259",
+      "v1260"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rafam_uls_connector_sensor_posit",
+    "columns": [
+      "rafam_uls_connector_sensor_posit",
+      "v1262",
+      "v1272",
+      "v1286",
+      "v1288",
+      "v1289",
+      "v1290",
+      "v1291",
+      "v1292",
+      "v1293"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_dec_connector_sensor_position",
+    "columns": [
+      "ra_dec_connector_sensor_position",
+      "v1313",
+      "v1327",
+      "v1332",
+      "v1333",
+      "v1334",
+      "v1335",
+      "v1363",
+      "v1364",
+      "v1365",
+      "v1366",
+      "v1367",
+      "v1368",
+      "v1369",
+      "v1370",
+      "v1371",
+      "v1372",
+      "v1379",
+      "v1380"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "contactforceinrf_311rela",
+    "columns": [
+      "contactforceinrf_311rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_311rela",
+    "columns": [
+      "rf_311rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_311rela",
+    "columns": [
+      "temperaturesinrf_311rela",
+      "v1443",
+      "v1444",
+      "v1445",
+      "v1446",
+      "v1447",
+      "v1448",
+      "v1449",
+      "v1465",
+      "v1467",
+      "v1468"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_31relae",
+    "columns": [
+      "contactforceinrf_31relae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_31relae",
+    "columns": [
+      "rf_31relae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_31relae",
+    "columns": [
+      "temperaturesinrf_31relae",
+      "v1488",
+      "v1489"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "la2_mcc_dx_connector_eleclectrod",
+    "columns": [
+      "la2_mcc_dx_connector_eleclectrod",
+      "v1533"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_mcc_dx_connector_sensor_posi",
+    "columns": [
+      "la2_mcc_dx_connector_sensor_posi",
+      "v1535",
+      "v1541",
+      "v1555",
+      "v1558",
+      "v1564",
+      "v1567",
+      "v1568",
+      "v1569",
+      "v1570",
+      "v1571",
+      "v1572",
+      "v1573",
+      "v1579",
+      "v1580",
+      "v1581",
+      "v1582",
+      "v1583",
+      "v1587",
+      "v1588",
+      "v1589",
+      "v1590",
+      "v1593",
+      "v1594",
+      "v1595"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "rf_3la2",
+    "columns": [
+      "rf_3la2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_3la2",
+    "columns": [
+      "temperaturesinrf_3la2",
+      "v1598",
+      "v1599",
+      "v1600",
+      "v1601",
+      "v1603",
+      "v1604",
+      "v1605"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_3la2",
+    "columns": [
+      "contactforceinrf_3la2",
+      "v1607",
+      "v1610",
+      "v1611",
+      "v1612",
+      "v1613",
+      "v1626",
+      "v1627",
+      "v1628",
+      "v1629",
+      "v1634",
+      "v1635",
+      "v1652",
+      "v1657",
+      "v1678",
+      "v1682",
+      "v1683",
+      "v1691",
+      "v1692",
+      "v1700",
+      "v1711",
+      "v1712",
+      "v1713",
+      "v1714",
+      "v1740"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "lae_dec_connector_sensor_positio",
+    "columns": [
+      "lae_dec_connector_sensor_positio",
+      "v1742",
+      "v1743",
+      "v1744",
+      "v1757",
+      "v1762",
+      "v1766"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "map_ecg_export",
+    "columns": [
+      "map_ecg_export",
+      "v1768",
+      "v1769",
+      "v1770",
+      "v1771",
+      "v1772",
+      "v1773",
+      "v1774",
+      "v1784",
+      "v1791",
+      "v1792",
+      "v1813",
+      "v1814",
+      "v1815",
+      "v1816",
+      "v1817",
+      "v1818",
+      "v1819",
+      "v1820",
+      "v1822"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "laedit_navistar_connector_elecle",
+    "columns": [
+      "laedit_navistar_connector_elecle",
+      "v1830"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "laedit_dec_connector_sensor_posi",
+    "columns": [
+      "laedit_dec_connector_sensor_posi",
+      "v1852",
+      "v1881"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "contactforceinrf_111relaedit",
+    "columns": [
+      "contactforceinrf_111relaedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_111relaedit",
+    "columns": [
+      "rf_111relaedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_111relaedit",
+    "columns": [
+      "temperaturesinrf_111relaedit",
+      "v1885",
+      "v1887",
+      "v1889"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_3laedit",
+    "columns": [
+      "contactforceinrf_3laedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_3laedit",
+    "columns": [
+      "rf_3laedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_3laedit",
+    "columns": [
+      "temperaturesinrf_3laedit",
+      "v1907",
+      "v1909",
+      "v1921",
+      "v1924",
+      "v1925"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_2la2",
+    "columns": [
+      "temperaturesinrf_2la2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_2la2",
+    "columns": [
+      "contactforceinrf_2la2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_2la2",
+    "columns": [
+      "rf_2la2",
+      "v1963",
+      "v1964",
+      "v1968",
+      "v1971",
+      "v1974",
+      "v1997",
+      "v1998",
+      "v2045",
+      "v2046",
+      "v2049"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_21rela2",
+    "columns": [
+      "temperaturesinrf_21rela2",
+      "v2051",
+      "v2052"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_21rela2",
+    "columns": [
+      "contactforceinrf_21rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_21rela2",
+    "columns": [
+      "rf_21rela2",
+      "v2055",
+      "v2056",
+      "v2057",
+      "v2058",
+      "v2059",
+      "v2060",
+      "v2061",
+      "v2079",
+      "v2080",
+      "v2081",
+      "v2082",
+      "v2083",
+      "v2091",
+      "v2092",
+      "v2093",
+      "v2106",
+      "v2107",
+      "v2109",
+      "v2110",
+      "v2117",
+      "v2118",
+      "v2119",
+      "v2137",
+      "v2138",
+      "v2139",
+      "v2140",
+      "v2141",
+      "v2144",
+      "v2145"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "map_cs_connector_eleclectrode_po",
+    "columns": [
+      "map_cs_connector_eleclectrode_po",
+      "v2181",
+      "v2182",
+      "v2183",
+      "v2184",
+      "v2185",
+      "v2186",
+      "v2187",
+      "v2188",
+      "v2189",
+      "v2190",
+      "v2191",
+      "v2192",
+      "v2201",
+      "v2213",
+      "v2218",
+      "v2219",
+      "v2220",
+      "v2221",
+      "v2222",
+      "v2223",
+      "v2224",
+      "v2229",
+      "v2230",
+      "v2231",
+      "v2232",
+      "v2275"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_211rela",
+    "columns": [
+      "temperaturesinrf_211rela",
+      "v2289"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_211rela",
+    "columns": [
+      "contactforceinrf_211rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_211rela",
+    "columns": [
+      "rf_211rela",
+      "v2292",
+      "v2293",
+      "v2294",
+      "v2295",
+      "v2296",
+      "v2297",
+      "v2299",
+      "v2317",
+      "v2318",
+      "v2319"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_111rela",
+    "columns": [
+      "rf_111rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_111rela",
+    "columns": [
+      "temperaturesinrf_111rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_111rela",
+    "columns": [
+      "contactforceinrf_111rela",
+      "v2334",
+      "v2335",
+      "v2337",
+      "v2390",
+      "v2393",
+      "v2394",
+      "v2415",
+      "v2420"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_21relafam",
+    "columns": [
+      "contactforceinrf_21relafam"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_21relafam",
+    "columns": [
+      "rf_21relafam"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_21relafam",
+    "columns": [
+      "temperaturesinrf_21relafam"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_2lafam",
+    "columns": [
+      "temperaturesinrf_2lafam"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_2lafam",
+    "columns": [
+      "rf_2lafam"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_2lafam",
+    "columns": [
+      "contactforceinrf_2lafam",
+      "v2489",
+      "v2490",
+      "v2491"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_211rela2",
+    "columns": [
+      "temperaturesinrf_211rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_211rela2",
+    "columns": [
+      "contactforceinrf_211rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_211rela2",
+    "columns": [
+      "rf_211rela2",
+      "v2507",
+      "v2508",
+      "v2509",
+      "v2520",
+      "v2521",
+      "v2522",
+      "v2523",
+      "v2524",
+      "v2525",
+      "v2526",
+      "v2527",
+      "v2528",
+      "v2529",
+      "v2530",
+      "v2534",
+      "v2539",
+      "v2540",
+      "v2546",
+      "v2547",
+      "v2548"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rafam_cs_connector_eleclectrode_",
+    "columns": [
+      "rafam_cs_connector_eleclectrode_"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "la3_navistar_connector_eleclectr",
+    "columns": [
+      "la3_navistar_connector_eleclectr",
+      "v2575",
+      "v2596",
+      "v2597",
+      "v2598"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "contactforceinrf_11laedit",
+    "columns": [
+      "contactforceinrf_11laedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_11laedit",
+    "columns": [
+      "rf_11laedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_11laedit",
+    "columns": [
+      "temperaturesinrf_11laedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_5rspv",
+    "columns": [
+      "contactforceinrf_5rspv"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_5rspv",
+    "columns": [
+      "rf_5rspv"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_5rspv",
+    "columns": [
+      "temperaturesinrf_5rspv",
+      "v2760",
+      "v2761",
+      "v2762"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_31relaedit",
+    "columns": [
+      "contactforceinrf_31relaedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_31relaedit",
+    "columns": [
+      "rf_31relaedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_31relaedit",
+    "columns": [
+      "temperaturesinrf_31relaedit",
+      "v2828"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_2111rela2",
+    "columns": [
+      "contactforceinrf_2111rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_2111rela2",
+    "columns": [
+      "rf_2111rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_2111rela2",
+    "columns": [
+      "temperaturesinrf_2111rela2",
+      "v2839",
+      "v2842",
+      "v2843",
+      "v2844",
+      "v2845",
+      "v2855",
+      "v2859",
+      "v2860",
+      "v2861",
+      "v2862",
+      "v2878",
+      "v2879",
+      "v2900",
+      "v2901",
+      "v2904"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_311relae",
+    "columns": [
+      "contactforceinrf_311relae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_311relae",
+    "columns": [
+      "rf_311relae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_311relae",
+    "columns": [
+      "temperaturesinrf_311relae",
+      "v2936"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_1ra",
+    "columns": [
+      "rf_1ra"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_1ra",
+    "columns": [
+      "temperaturesinrf_1ra",
+      "v2951",
+      "v2957",
+      "v2958"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_1ra",
+    "columns": [
+      "contactforceinrf_1ra",
+      "v2977",
+      "v2978",
+      "v2986",
+      "v2987",
+      "v2988",
+      "v2989",
+      "v3032",
+      "v3040",
+      "v3041",
+      "v3042",
+      "v3043",
+      "v3044",
+      "v3062",
+      "v3063"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "apadata",
+    "columns": [
+      "apadata"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_carto_to_ablator_sessions_map",
+    "columns": [
+      "rf_carto_to_ablator_sessions_map"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "version",
+    "columns": [
+      "version",
+      "v3083",
+      "v3084",
+      "v3085",
+      "v3086",
+      "v3087",
+      "v3088",
+      "v3089",
+      "v3090",
+      "v3091"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_1111relaedit",
+    "columns": [
+      "contactforceinrf_1111relaedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_1111relaedit",
+    "columns": [
+      "rf_1111relaedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_1111relaedit",
+    "columns": [
+      "temperaturesinrf_1111relaedit",
+      "v3133",
+      "v3134",
+      "v3150",
+      "v3153",
+      "v3154",
+      "v3158",
+      "v3159",
+      "v3160",
+      "v3161",
+      "v3181",
+      "v3182",
+      "v3183",
+      "v3184",
+      "v3193",
+      "v3194",
+      "v3206"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_3lspv",
+    "columns": [
+      "contactforceinrf_3lspv"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_3lspv",
+    "columns": [
+      "rf_3lspv"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_3lspv",
+    "columns": [
+      "temperaturesinrf_3lspv",
+      "v3237",
+      "v3262",
+      "v3272",
+      "v3273",
+      "v3274",
+      "v3275",
+      "v3276",
+      "v3277",
+      "v3278",
+      "v3279",
+      "v3280",
+      "v3281",
+      "v3282",
+      "v3283",
+      "v3284",
+      "v3285",
+      "v3304",
+      "v3318",
+      "v3319",
+      "v3320",
+      "v3321",
+      "v3323",
+      "v3361",
+      "v3362"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_111rela2",
+    "columns": [
+      "contactforceinrf_111rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_111rela2",
+    "columns": [
+      "rf_111rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_111rela2",
+    "columns": [
+      "temperaturesinrf_111rela2",
+      "v3376",
+      "v3377",
+      "v3378",
+      "v3379",
+      "v3380",
+      "v3381",
+      "v3382"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_21111rela2",
+    "columns": [
+      "contactforceinrf_21111rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_21111rela2",
+    "columns": [
+      "rf_21111rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_21111rela2",
+    "columns": [
+      "temperaturesinrf_21111rela2",
+      "v3416",
+      "v3430",
+      "v3470",
+      "v3471",
+      "v3473",
+      "v3474",
+      "v3517",
+      "v3537",
+      "v3540",
+      "v3541",
+      "v3542",
+      "v3543",
+      "v3547",
+      "v3548",
+      "v3550",
+      "v3551",
+      "v3552",
+      "v3553",
+      "v3555"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_1la3",
+    "columns": [
+      "contactforceinrf_1la3"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_1la3",
+    "columns": [
+      "rf_1la3"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_1la3",
+    "columns": [
+      "temperaturesinrf_1la3",
+      "v3603",
+      "v3604",
+      "v3605",
+      "v3606",
+      "v3607",
+      "v3609",
+      "v3610",
+      "v3613",
+      "v3614",
+      "v3615",
+      "v3616",
+      "v3633",
+      "v3634",
+      "v3637",
+      "v3638",
+      "v3639",
+      "v3640",
+      "v3641"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_ecg_export",
+    "columns": [
+      "ls_ecg_export"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_magnetic_20_pole_a_connector_",
+    "columns": [
+      "ls_magnetic_20_pole_a_connector_",
+      "v3648",
+      "v3649",
+      "v3650"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_navistar_connector_eleclectro",
+    "columns": [
+      "ls_navistar_connector_eleclectro",
+      "v3652"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_navistar_connector_sensor_pos",
+    "columns": [
+      "ls_navistar_connector_sensor_pos",
+      "v3654",
+      "v3655",
+      "v3681",
+      "v3682"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_11lae",
+    "columns": [
+      "contactforceinrf_11lae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_11lae",
+    "columns": [
+      "rf_11lae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_11lae",
+    "columns": [
+      "temperaturesinrf_11lae",
+      "v3689",
+      "v3698",
+      "v3699"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_3111rela",
+    "columns": [
+      "contactforceinrf_3111rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_3111rela",
+    "columns": [
+      "rf_3111rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_3111rela",
+    "columns": [
+      "temperaturesinrf_3111rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_3111relae",
+    "columns": [
+      "contactforceinrf_3111relae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_3111relae",
+    "columns": [
+      "rf_3111relae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_3111relae",
+    "columns": [
+      "temperaturesinrf_3111relae",
+      "v3724",
+      "v3725",
+      "v3726",
+      "v3727",
+      "v3728",
+      "v3729"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_211relafam",
+    "columns": [
+      "contactforceinrf_211relafam"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_1lafam",
+    "columns": [
+      "rf_1lafam"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_211relafam",
+    "columns": [
+      "rf_211relafam"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_1lafam",
+    "columns": [
+      "temperaturesinrf_1lafam"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_211relafam",
+    "columns": [
+      "temperaturesinrf_211relafam",
+      "v3761",
+      "v3762"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_1lafam",
+    "columns": [
+      "contactforceinrf_1lafam",
+      "v3779",
+      "v3780",
+      "v3781",
+      "v3782",
+      "v3783"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_31rela3",
+    "columns": [
+      "contactforceinrf_31rela3"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_31rela3",
+    "columns": [
+      "rf_31rela3"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_31rela3",
+    "columns": [
+      "temperaturesinrf_31rela3",
+      "v3839",
+      "v3840",
+      "v3841",
+      "v3842",
+      "v3843",
+      "v3844",
+      "v3845"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_1lae",
+    "columns": [
+      "contactforceinrf_1lae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_1lae",
+    "columns": [
+      "rf_1lae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_1lae",
+    "columns": [
+      "temperaturesinrf_1lae",
+      "v3867",
+      "v3868",
+      "v3869",
+      "v3870",
+      "v3894"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_11rera",
+    "columns": [
+      "contactforceinrf_11rera"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_11rera",
+    "columns": [
+      "rf_11rera"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_11rera",
+    "columns": [
+      "temperaturesinrf_11rera"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ts1_ecg_export",
+    "columns": [
+      "ts1_ecg_export"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ts1_navistar_connector_eleclectr",
+    "columns": [
+      "ts1_navistar_connector_eleclectr",
+      "v3903"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ts1_navistar_connector_sensor_po",
+    "columns": [
+      "ts1_navistar_connector_sensor_po",
+      "v3905"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_121relae",
+    "columns": [
+      "rf_121relae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_121relae",
+    "columns": [
+      "temperaturesinrf_121relae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_111rera",
+    "columns": [
+      "contactforceinrf_111rera"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_111rera",
+    "columns": [
+      "temperaturesinrf_111rera",
+      "v3925"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_121relae",
+    "columns": [
+      "contactforceinrf_121relae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_111rera",
+    "columns": [
+      "rf_111rera",
+      "v3928",
+      "v3929",
+      "v3930",
+      "v3931",
+      "v3932"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_1111rela",
+    "columns": [
+      "rf_1111rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_1111rela",
+    "columns": [
+      "temperaturesinrf_1111rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_1111rela",
+    "columns": [
+      "contactforceinrf_1111rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_1laedit",
+    "columns": [
+      "contactforceinrf_1laedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_1laedit",
+    "columns": [
+      "rf_1laedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_1laedit",
+    "columns": [
+      "temperaturesinrf_1laedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "lspv_ecg_export",
+    "columns": [
+      "lspv_ecg_export"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_magnetic_20_pole_a_connecto",
+    "columns": [
+      "lspv_magnetic_20_pole_a_connecto",
+      "v4009"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_navistar_connector_eleclect",
+    "columns": [
+      "lspv_navistar_connector_eleclect",
+      "v4011"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_navistar_connector_sensor_p",
+    "columns": [
+      "lspv_navistar_connector_sensor_p",
+      "v4013",
+      "v4014",
+      "v4015",
+      "v4016",
+      "v4031",
+      "v4032",
+      "v4033",
+      "v4034"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "contactforceinrf_2111rela",
+    "columns": [
+      "contactforceinrf_2111rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_2111rela",
+    "columns": [
+      "rf_2111rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_2111rela",
+    "columns": [
+      "temperaturesinrf_2111rela",
+      "v4043",
+      "v4044"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_31rela2",
+    "columns": [
+      "rf_31rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_31rela2",
+    "columns": [
+      "temperaturesinrf_31rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_31rela2",
+    "columns": [
+      "contactforceinrf_31rela2",
+      "v4093",
+      "v4120"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_311relaedit",
+    "columns": [
+      "contactforceinrf_311relaedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_311relaedit",
+    "columns": [
+      "rf_311relaedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_311relaedit",
+    "columns": [
+      "temperaturesinrf_311relaedit",
+      "v4127",
+      "v4217",
+      "v4218"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_31lapost",
+    "columns": [
+      "contactforceinrf_31lapost"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_31lapost",
+    "columns": [
+      "rf_31lapost"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_31lapost",
+    "columns": [
+      "temperaturesinrf_31lapost"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_111lapostvoltag",
+    "columns": [
+      "contactforceinrf_111lapostvoltag"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_111lapostvoltage",
+    "columns": [
+      "rf_111lapostvoltage"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_111lapostvoltag",
+    "columns": [
+      "temperaturesinrf_111lapostvoltag",
+      "v4286",
+      "v4287",
+      "v4329",
+      "v4330",
+      "v4331",
+      "v4332",
+      "v4343",
+      "v4344"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_13laedit",
+    "columns": [
+      "contactforceinrf_13laedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_13laedit",
+    "columns": [
+      "rf_13laedit"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_13laedit",
+    "columns": [
+      "temperaturesinrf_13laedit",
+      "v4392",
+      "v4393",
+      "v4394",
+      "v4395"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_22rela2",
+    "columns": [
+      "contactforceinrf_22rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_22rela2",
+    "columns": [
+      "rf_22rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_22rela2",
+    "columns": [
+      "temperaturesinrf_22rela2",
+      "v4413"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_11rela3",
+    "columns": [
+      "contactforceinrf_11rela3"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_11rela3",
+    "columns": [
+      "rf_11rela3"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_11rela3",
+    "columns": [
+      "temperaturesinrf_11rela3",
+      "v4418",
+      "v4428",
+      "v4429",
+      "v4454",
+      "v4455",
+      "v4456",
+      "v4457",
+      "v4458",
+      "v4459",
+      "v4460",
+      "v4461",
+      "v4462",
+      "v4463",
+      "v4464",
+      "v4465",
+      "v4466"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_81rela2",
+    "columns": [
+      "contactforceinrf_81rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_81rela2",
+    "columns": [
+      "rf_81rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_81rela2",
+    "columns": [
+      "temperaturesinrf_81rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_3la3",
+    "columns": [
+      "contactforceinrf_3la3"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_3la3",
+    "columns": [
+      "rf_3la3"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_3la3",
+    "columns": [
+      "temperaturesinrf_3la3"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_8la2",
+    "columns": [
+      "contactforceinrf_8la2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_8la2",
+    "columns": [
+      "rf_8la2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_8la2",
+    "columns": [
+      "temperaturesinrf_8la2",
+      "v4552",
+      "v4578",
+      "v4579",
+      "v4580",
+      "v4581"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_21relaf",
+    "columns": [
+      "contactforceinrf_21relaf"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_21relaf",
+    "columns": [
+      "rf_21relaf"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_21relaf",
+    "columns": [
+      "temperaturesinrf_21relaf",
+      "v4604",
+      "v4605",
+      "v4606",
+      "v4607"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_11relae",
+    "columns": [
+      "contactforceinrf_11relae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_11relae",
+    "columns": [
+      "rf_11relae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_11relae",
+    "columns": [
+      "temperaturesinrf_11relae",
+      "v4635",
+      "v4636",
+      "v4637",
+      "v4638",
+      "v4701",
+      "v4702",
+      "v4703"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_1111rela2",
+    "columns": [
+      "contactforceinrf_1111rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_1111rela2",
+    "columns": [
+      "rf_1111rela2"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_1111rela2",
+    "columns": [
+      "temperaturesinrf_1111rela2",
+      "v4722",
+      "v4723",
+      "v4724",
+      "v4725",
+      "v4726",
+      "v4753"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_ecg_export",
+    "columns": [
+      "rs_ecg_export"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_magnetic_20_pole_a_connector_",
+    "columns": [
+      "rs_magnetic_20_pole_a_connector_",
+      "v4813",
+      "v4814",
+      "v4815"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_navistar_connector_eleclectro",
+    "columns": [
+      "rs_navistar_connector_eleclectro",
+      "v4817"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_navistar_connector_sensor_pos",
+    "columns": [
+      "rs_navistar_connector_sensor_pos",
+      "v4819",
+      "v4845",
+      "v4859",
+      "v4860"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "svc_ecg_export",
+    "columns": [
+      "svc_ecg_export"
+    ],
+    "regionId": "svc"
+  },
+  {
+    "key": "svc_navistar_connector_eleclectr",
+    "columns": [
+      "svc_navistar_connector_eleclectr",
+      "v4876"
+    ],
+    "regionId": "svc"
+  },
+  {
+    "key": "svc_navistar_connector_sensor_po",
+    "columns": [
+      "svc_navistar_connector_sensor_po",
+      "v4878",
+      "v4881",
+      "v4893",
+      "v4894",
+      "v4911",
+      "v4912",
+      "v4933",
+      "v4938",
+      "v4941"
+    ],
+    "regionId": "svc"
+  },
+  {
+    "key": "contactforceinrf_2laf",
+    "columns": [
+      "contactforceinrf_2laf"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_2laf",
+    "columns": [
+      "rf_2laf"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_2laf",
+    "columns": [
+      "temperaturesinrf_2laf"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rspv_ecg_export",
+    "columns": [
+      "rspv_ecg_export"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_magnetic_20_pole_a_connecto",
+    "columns": [
+      "rspv_magnetic_20_pole_a_connecto",
+      "v5024",
+      "v5025",
+      "v5026"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_navistar_connector_eleclect",
+    "columns": [
+      "rspv_navistar_connector_eleclect",
+      "v5028"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_navistar_connector_sensor_p",
+    "columns": [
+      "rspv_navistar_connector_sensor_p",
+      "v5030",
+      "v5076",
+      "v5077",
+      "v5086",
+      "v5087",
+      "v5088",
+      "v5089",
+      "v5090",
+      "v5091",
+      "v5092",
+      "v5093",
+      "v5094",
+      "v5097",
+      "v5098",
+      "v5102",
+      "v5147",
+      "v5171",
+      "v5184",
+      "v5185",
+      "v5211",
+      "v5212",
+      "v5213",
+      "v5214",
+      "v5215",
+      "v5216",
+      "v5236",
+      "v5237",
+      "v5238",
+      "v5239",
+      "v5263",
+      "v5264",
+      "v5265",
+      "v5271",
+      "v5272",
+      "v5298",
+      "v5299"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "contactforceinrf_10lae",
+    "columns": [
+      "contactforceinrf_10lae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_71rela",
+    "columns": [
+      "contactforceinrf_71rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_10lae",
+    "columns": [
+      "rf_10lae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_71rela",
+    "columns": [
+      "rf_71rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_10lae",
+    "columns": [
+      "temperaturesinrf_10lae"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_71rela",
+    "columns": [
+      "temperaturesinrf_71rela",
+      "v5312",
+      "v5322",
+      "v5323",
+      "v5324",
+      "v5325",
+      "v5326",
+      "v5327",
+      "v5328",
+      "v5329",
+      "v5330",
+      "v5342",
+      "v5343",
+      "v5344",
+      "v5345",
+      "v5346",
+      "v5347",
+      "v5348",
+      "v5349",
+      "v5350",
+      "v5351",
+      "v5360",
+      "v5361",
+      "v5365",
+      "v5388",
+      "v5409",
+      "v5410",
+      "v5411",
+      "v5450",
+      "v5451",
+      "v5452",
+      "v5453",
+      "v5454",
+      "v5455",
+      "v5456",
+      "v5457",
+      "v5458",
+      "v5459"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_31lapostvoltage",
+    "columns": [
+      "contactforceinrf_31lapostvoltage"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_31lapostvoltage",
+    "columns": [
+      "rf_31lapostvoltage"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_31lapostvoltage",
+    "columns": [
+      "temperaturesinrf_31lapostvoltage",
+      "v5497"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "la_car",
+    "columns": [
+      "la_car"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "contactforceinrf_3ra",
+    "columns": [
+      "contactforceinrf_3ra"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_3ra",
+    "columns": [
+      "rf_3ra"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_3ra",
+    "columns": [
+      "temperaturesinrf_3ra"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_8ra",
+    "columns": [
+      "contactforceinrf_8ra"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_8ra",
+    "columns": [
+      "rf_8ra"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_8ra",
+    "columns": [
+      "temperaturesinrf_8ra",
+      "v5618",
+      "v5619",
+      "v5624",
+      "v5638",
+      "v5767",
+      "v5811",
+      "v5866",
+      "v5867",
+      "v5887"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_4lipv",
+    "columns": [
+      "contactforceinrf_4lipv"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_4lipv",
+    "columns": [
+      "rf_4lipv"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_4lipv",
+    "columns": [
+      "temperaturesinrf_4lipv"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_ecg_export",
+    "columns": [
+      "li_ecg_export"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_magnetic_20_pole_a_connector_",
+    "columns": [
+      "li_magnetic_20_pole_a_connector_",
+      "v5949",
+      "v5950",
+      "v5951"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_navistar_connector_eleclectro",
+    "columns": [
+      "li_navistar_connector_eleclectro",
+      "v5953"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_navistar_connector_sensor_pos",
+    "columns": [
+      "li_navistar_connector_sensor_pos",
+      "v5955"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ra_car",
+    "columns": [
+      "ra_car",
+      "v5980"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ts1_cs_connector_eleclectrode_po",
+    "columns": [
+      "ts1_cs_connector_eleclectrode_po",
+      "v6024",
+      "v6025",
+      "v6026",
+      "v6027",
+      "v6028",
+      "v6062",
+      "v6065",
+      "v6158",
+      "v6159",
+      "v6160",
+      "v6161",
+      "v6162",
+      "v6163",
+      "v6164",
+      "v6165",
+      "v6166",
+      "v6167",
+      "v6168",
+      "v6169",
+      "v6170"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "lipv_ecg_export",
+    "columns": [
+      "lipv_ecg_export"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_magnetic_20_pole_a_connecto",
+    "columns": [
+      "lipv_magnetic_20_pole_a_connecto",
+      "v6181",
+      "v6182",
+      "v6183"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_navistar_connector_eleclect",
+    "columns": [
+      "lipv_navistar_connector_eleclect",
+      "v6185"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_navistar_connector_sensor_p",
+    "columns": [
+      "lipv_navistar_connector_sensor_p",
+      "v6187",
+      "v6198",
+      "v6247",
+      "v6248"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "rf_1map",
+    "columns": [
+      "rf_1map"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_1map",
+    "columns": [
+      "temperaturesinrf_1map"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_1map",
+    "columns": [
+      "contactforceinrf_1map"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_2ls",
+    "columns": [
+      "contactforceinrf_2ls"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_2ls",
+    "columns": [
+      "rf_2ls"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_2ls",
+    "columns": [
+      "temperaturesinrf_2ls",
+      "v6329",
+      "v6330",
+      "v6331",
+      "v6354"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_7la",
+    "columns": [
+      "contactforceinrf_7la"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_7la",
+    "columns": [
+      "rf_7la"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_7la",
+    "columns": [
+      "temperaturesinrf_7la",
+      "v6477",
+      "v6478",
+      "v6479",
+      "v6480",
+      "v6515"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_1111rera",
+    "columns": [
+      "contactforceinrf_1111rera"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_1111rera",
+    "columns": [
+      "temperaturesinrf_1111rera"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_1111rera",
+    "columns": [
+      "rf_1111rera",
+      "v6567",
+      "v6568",
+      "v6569",
+      "v6587",
+      "v6599",
+      "v6693",
+      "v6694",
+      "v6704",
+      "v6705",
+      "v6706",
+      "v6707",
+      "v6725",
+      "v6726",
+      "v6727"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ts_ecg_export",
+    "columns": [
+      "ts_ecg_export"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ts_navistar_connector_sensor_pos",
+    "columns": [
+      "ts_navistar_connector_sensor_pos",
+      "v6796"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ts_navistar_connector_eleclectro",
+    "columns": [
+      "ts_navistar_connector_eleclectro"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ts_car",
+    "columns": [
+      "ts_car"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_2ra",
+    "columns": [
+      "contactforceinrf_2ra"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_2ra",
+    "columns": [
+      "rf_2ra"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_2ra",
+    "columns": [
+      "temperaturesinrf_2ra",
+      "v6812",
+      "v6813",
+      "v6814",
+      "v6815",
+      "v6827",
+      "v6847",
+      "v6848",
+      "v6928",
+      "v6941",
+      "v7146",
+      "v7162"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ts_dec_connector_eleclectrode_po",
+    "columns": [
+      "ts_dec_connector_eleclectrode_po",
+      "v7176"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_21rera",
+    "columns": [
+      "contactforceinrf_21rera"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_21rera",
+    "columns": [
+      "rf_21rera"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_21rera",
+    "columns": [
+      "temperaturesinrf_21rera",
+      "v7197",
+      "v7209",
+      "v7261",
+      "v7263",
+      "v7264",
+      "v7265",
+      "v7291",
+      "v7365",
+      "v7366",
+      "v7367",
+      "v7368",
+      "v7369",
+      "v7370",
+      "v7371",
+      "v7372",
+      "v7373",
+      "v7374",
+      "v7375",
+      "v7383",
+      "v7384",
+      "v7385",
+      "v7400",
+      "v7401",
+      "v7402",
+      "v7403"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ts_cs_connector_eleclectrode_pos",
+    "columns": [
+      "ts_cs_connector_eleclectrode_pos"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "tsp_car",
+    "columns": [
+      "tsp_car"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ts_dec_connector_sensor_position",
+    "columns": [
+      "ts_dec_connector_sensor_position"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_91rela",
+    "columns": [
+      "contactforceinrf_91rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_91rela",
+    "columns": [
+      "rf_91rela"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_91rela",
+    "columns": [
+      "temperaturesinrf_91rela",
+      "v7469",
+      "v7470",
+      "v7498"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_211rera",
+    "columns": [
+      "contactforceinrf_211rera"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_211rera",
+    "columns": [
+      "rf_211rera"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_211rera",
+    "columns": [
+      "temperaturesinrf_211rera",
+      "v7588",
+      "v7600",
+      "v7601",
+      "v7658",
+      "v7659",
+      "v7660",
+      "v7661",
+      "v7662",
+      "v7668",
+      "v7688",
+      "v7698",
+      "v7699",
+      "v7700",
+      "v7701",
+      "v7702",
+      "v7703",
+      "v7704",
+      "v7804",
+      "v7819",
+      "v7820"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "tsp_ecg_export",
+    "columns": [
+      "tsp_ecg_export"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "tsp_navistar_connector_sensor_po",
+    "columns": [
+      "tsp_navistar_connector_sensor_po",
+      "v7888",
+      "v7889",
+      "v7890",
+      "v7893",
+      "v7894"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "tsp_navistar_connector_eleclectr",
+    "columns": [
+      "tsp_navistar_connector_eleclectr",
+      "v7914",
+      "v7929",
+      "v7949",
+      "v7950"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_2111rera",
+    "columns": [
+      "contactforceinrf_2111rera"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_2111rera",
+    "columns": [
+      "rf_2111rera"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_2111rera",
+    "columns": [
+      "temperaturesinrf_2111rera",
+      "v8105",
+      "v8106",
+      "v8107",
+      "v8108",
+      "v8109",
+      "v8112",
+      "v8113",
+      "v8114",
+      "v8115",
+      "v8141",
+      "v8142",
+      "v8191",
+      "v8197",
+      "v8203",
+      "v8217",
+      "v8218",
+      "v8219",
+      "v8220"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "tsp_p1_contactforce",
+    "columns": [
+      "tsp_p1_contactforce",
+      "v8233",
+      "v8234"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_8map",
+    "columns": [
+      "contactforceinrf_8map"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_8map",
+    "columns": [
+      "rf_8map"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_8map",
+    "columns": [
+      "temperaturesinrf_8map",
+      "v8269",
+      "v8270",
+      "v8271",
+      "v8278",
+      "v8279",
+      "v8280"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "laa_car",
+    "columns": [
+      "laa_car",
+      "v8343",
+      "v8356"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "la2_car",
+    "columns": [
+      "la2_car"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "lspv_car",
+    "columns": [
+      "lspv_car"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "ripv_car",
+    "columns": [
+      "ripv_car",
+      "v8413",
+      "v8414",
+      "v8415",
+      "v8416",
+      "v8417",
+      "v8418",
+      "v8419"
+    ],
+    "regionId": "ripv"
+  },
+  {
+    "key": "contactforceinrf_4rs",
+    "columns": [
+      "contactforceinrf_4rs"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_4rs",
+    "columns": [
+      "rf_4rs"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_4rs",
+    "columns": [
+      "temperaturesinrf_4rs",
+      "v8456",
+      "v8457",
+      "v8485",
+      "v8486",
+      "v8487",
+      "v8488",
+      "v8568"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_3svc",
+    "columns": [
+      "contactforceinrf_3svc"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_4cti",
+    "columns": [
+      "contactforceinrf_4cti"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_3svc",
+    "columns": [
+      "rf_3svc"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_4cti",
+    "columns": [
+      "rf_4cti"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_3svc",
+    "columns": [
+      "temperaturesinrf_3svc"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_4cti",
+    "columns": [
+      "temperaturesinrf_4cti",
+      "v8588",
+      "v8589"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "tsp_magnetic_20_pole_a_connector",
+    "columns": [
+      "tsp_magnetic_20_pole_a_connector",
+      "v8618"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ts_magnetic_20_pole_a_connector_",
+    "columns": [
+      "ts_magnetic_20_pole_a_connector_",
+      "v8620"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rspv_car",
+    "columns": [
+      "rspv_car",
+      "v8708",
+      "v8726",
+      "v8727",
+      "v8728",
+      "v8729"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "tsp_cs_connector_eleclectrode_po",
+    "columns": [
+      "tsp_cs_connector_eleclectrode_po"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ts_p1_contactforce",
+    "columns": [
+      "ts_p1_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_61rera",
+    "columns": [
+      "contactforceinrf_61rera"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_61rera",
+    "columns": [
+      "rf_61rera"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_61rera",
+    "columns": [
+      "temperaturesinrf_61rera",
+      "v8772",
+      "v8773",
+      "v8774",
+      "v8775",
+      "v8817",
+      "v8818",
+      "v8861",
+      "v8866",
+      "v8919",
+      "v8920"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "lipv_car",
+    "columns": [
+      "lipv_car"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "tsp_dec_connector_eleclectrode_p",
+    "columns": [
+      "tsp_dec_connector_eleclectrode_p",
+      "v9130",
+      "v9204",
+      "v9205",
+      "v9243",
+      "v9252",
+      "v9254",
+      "v9281",
+      "v9282",
+      "v9283",
+      "v9284",
+      "v9285",
+      "v9347",
+      "v9357",
+      "v9366",
+      "v9384"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ra_p1_contactforce",
+    "columns": [
+      "ra_p1_contactforce",
+      "v9451",
+      "v9452",
+      "v9488",
+      "v9529",
+      "v9530",
+      "v9544",
+      "v9640",
+      "v9641",
+      "v9705",
+      "v9713",
+      "v9758",
+      "v9759"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "lae_car",
+    "columns": [
+      "lae_car",
+      "v9778",
+      "v9779",
+      "v9780",
+      "v9827"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "lafam_car",
+    "columns": [
+      "lafam_car",
+      "v9836"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "tsp_mcc_dx_connector_sensor_posi",
+    "columns": [
+      "tsp_mcc_dx_connector_sensor_posi",
+      "v9840"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "tsp_p2_contactforce",
+    "columns": [
+      "tsp_p2_contactforce",
+      "v9857",
+      "v9858",
+      "v9880",
+      "v9881"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "map_car",
+    "columns": [
+      "map_car"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ra_p3_contactforce",
+    "columns": [
+      "ra_p3_contactforce",
+      "v9896",
+      "v9911",
+      "v9912",
+      "v9913",
+      "v9914",
+      "v9915",
+      "v9916",
+      "v9923",
+      "v9925",
+      "v9926",
+      "v9927",
+      "v9928",
+      "v9929"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "x_car",
+    "columns": [
+      "x_car",
+      "v9936",
+      "v9937",
+      "v9938",
+      "v9939",
+      "v9940"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "tsp_uls_connector_sensor_positio",
+    "columns": [
+      "tsp_uls_connector_sensor_positio",
+      "v9942"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ra_p2_contactforce",
+    "columns": [
+      "ra_p2_contactforce",
+      "v10026",
+      "v10041"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p4_contactforce",
+    "columns": [
+      "ra_p4_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p6_contactforce",
+    "columns": [
+      "ra_p6_contactforce",
+      "v10067",
+      "v10068",
+      "v10069",
+      "v10076",
+      "v10077",
+      "v10078",
+      "v10079",
+      "v10088",
+      "v10089",
+      "v10090",
+      "v10139"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "laedit_car",
+    "columns": [
+      "laedit_car",
+      "v10141",
+      "v10142",
+      "v10143",
+      "v10156"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "ridge_car",
+    "columns": [
+      "ridge_car",
+      "v10158",
+      "v10159",
+      "v10193",
+      "v10220"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "las_car",
+    "columns": [
+      "las_car"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "rafam_car",
+    "columns": [
+      "rafam_car"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p5_contactforce",
+    "columns": [
+      "ra_p5_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ts1_car",
+    "columns": [
+      "ts1_car",
+      "v10246",
+      "v10247",
+      "v10248",
+      "v10249",
+      "v10250",
+      "v10251",
+      "v10252",
+      "v10253",
+      "v10254",
+      "v10255",
+      "v10272",
+      "v10307",
+      "v10319",
+      "v10366"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "cti_car",
+    "columns": [
+      "cti_car",
+      "v10370",
+      "v10428"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ra_p21_contactforce",
+    "columns": [
+      "ra_p21_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p52_contactforce",
+    "columns": [
+      "ra_p52_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p7_contactforce",
+    "columns": [
+      "ra_p7_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p8_contactforce",
+    "columns": [
+      "ra_p8_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p9_contactforce",
+    "columns": [
+      "ra_p9_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "eso_car",
+    "columns": [
+      "eso_car",
+      "v10461",
+      "v10479",
+      "v10480"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "lapre_car",
+    "columns": [
+      "lapre_car"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "ts_p2_contactforce",
+    "columns": [
+      "ts_p2_contactforce",
+      "v10484"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "la_p1_contactforce",
+    "columns": [
+      "la_p1_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "lspv_p11_contactforce",
+    "columns": [
+      "lspv_p11_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p12_contactforce",
+    "columns": [
+      "lspv_p12_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p13_contactforce",
+    "columns": [
+      "lspv_p13_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p14_contactforce",
+    "columns": [
+      "lspv_p14_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p15_contactforce",
+    "columns": [
+      "lspv_p15_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p16_contactforce",
+    "columns": [
+      "lspv_p16_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p17_contactforce",
+    "columns": [
+      "lspv_p17_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p18_contactforce",
+    "columns": [
+      "lspv_p18_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p19_contactforce",
+    "columns": [
+      "lspv_p19_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p1_contactforce",
+    "columns": [
+      "lspv_p1_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p20_contactforce",
+    "columns": [
+      "lspv_p20_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p22_contactforce",
+    "columns": [
+      "lspv_p22_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p23_contactforce",
+    "columns": [
+      "lspv_p23_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p24_contactforce",
+    "columns": [
+      "lspv_p24_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p25_contactforce",
+    "columns": [
+      "lspv_p25_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p26_contactforce",
+    "columns": [
+      "lspv_p26_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p27_contactforce",
+    "columns": [
+      "lspv_p27_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p28_contactforce",
+    "columns": [
+      "lspv_p28_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p29_contactforce",
+    "columns": [
+      "lspv_p29_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p2_contactforce",
+    "columns": [
+      "lspv_p2_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p30_contactforce",
+    "columns": [
+      "lspv_p30_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p31_contactforce",
+    "columns": [
+      "lspv_p31_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p33_contactforce",
+    "columns": [
+      "lspv_p33_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p34_contactforce",
+    "columns": [
+      "lspv_p34_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p35_contactforce",
+    "columns": [
+      "lspv_p35_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p36_contactforce",
+    "columns": [
+      "lspv_p36_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p3_contactforce",
+    "columns": [
+      "lspv_p3_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p4_contactforce",
+    "columns": [
+      "lspv_p4_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p5_contactforce",
+    "columns": [
+      "lspv_p5_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p6_contactforce",
+    "columns": [
+      "lspv_p6_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p7_contactforce",
+    "columns": [
+      "lspv_p7_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p8_contactforce",
+    "columns": [
+      "lspv_p8_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p9_contactforce",
+    "columns": [
+      "lspv_p9_contactforce",
+      "v10542",
+      "v10543",
+      "v10544",
+      "v10545"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "rspv_p10_contactforce",
+    "columns": [
+      "rspv_p10_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p11_contactforce",
+    "columns": [
+      "rspv_p11_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p12_contactforce",
+    "columns": [
+      "rspv_p12_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p13_contactforce",
+    "columns": [
+      "rspv_p13_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p14_contactforce",
+    "columns": [
+      "rspv_p14_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p15_contactforce",
+    "columns": [
+      "rspv_p15_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p16_contactforce",
+    "columns": [
+      "rspv_p16_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p17_contactforce",
+    "columns": [
+      "rspv_p17_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p18_contactforce",
+    "columns": [
+      "rspv_p18_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p19_contactforce",
+    "columns": [
+      "rspv_p19_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p1_contactforce",
+    "columns": [
+      "rspv_p1_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p20_contactforce",
+    "columns": [
+      "rspv_p20_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p21_contactforce",
+    "columns": [
+      "rspv_p21_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p22_contactforce",
+    "columns": [
+      "rspv_p22_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p23_contactforce",
+    "columns": [
+      "rspv_p23_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p2_contactforce",
+    "columns": [
+      "rspv_p2_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p3_contactforce",
+    "columns": [
+      "rspv_p3_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p4_contactforce",
+    "columns": [
+      "rspv_p4_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p5_contactforce",
+    "columns": [
+      "rspv_p5_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p6_contactforce",
+    "columns": [
+      "rspv_p6_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p7_contactforce",
+    "columns": [
+      "rspv_p7_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p8_contactforce",
+    "columns": [
+      "rspv_p8_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p9_contactforce",
+    "columns": [
+      "rspv_p9_contactforce",
+      "v10569",
+      "v10572"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "misc_car",
+    "columns": [
+      "misc_car",
+      "v10580",
+      "v10581",
+      "v10624",
+      "v10625",
+      "v10626",
+      "v10627"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "lasound_car",
+    "columns": [
+      "lasound_car"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la3_car",
+    "columns": [
+      "la3_car"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "ra_p11_contactforce",
+    "columns": [
+      "ra_p11_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p12_contactforce",
+    "columns": [
+      "ra_p12_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p13_contactforce",
+    "columns": [
+      "ra_p13_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p14_contactforce",
+    "columns": [
+      "ra_p14_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p15_contactforce",
+    "columns": [
+      "ra_p15_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p16_contactforce",
+    "columns": [
+      "ra_p16_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p17_contactforce",
+    "columns": [
+      "ra_p17_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p18_contactforce",
+    "columns": [
+      "ra_p18_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p20_contactforce",
+    "columns": [
+      "ra_p20_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p22_contactforce",
+    "columns": [
+      "ra_p22_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p25_contactforce",
+    "columns": [
+      "ra_p25_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p26_contactforce",
+    "columns": [
+      "ra_p26_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p27_contactforce",
+    "columns": [
+      "ra_p27_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p28_contactforce",
+    "columns": [
+      "ra_p28_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p29_contactforce",
+    "columns": [
+      "ra_p29_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p30_contactforce",
+    "columns": [
+      "ra_p30_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p31_contactforce",
+    "columns": [
+      "ra_p31_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p51_contactforce",
+    "columns": [
+      "ra_p51_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p53_contactforce",
+    "columns": [
+      "ra_p53_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p54_contactforce",
+    "columns": [
+      "ra_p54_contactforce",
+      "v10653",
+      "v10654",
+      "v10664",
+      "v10665",
+      "v10667",
+      "v10668",
+      "v10669",
+      "v10670",
+      "v10671",
+      "v10672",
+      "v10673",
+      "v10674",
+      "v10707",
+      "v10708",
+      "v10741",
+      "v10746",
+      "v10747",
+      "v10750",
+      "v10751",
+      "v10756",
+      "v10757",
+      "v10760",
+      "v10774",
+      "v10776",
+      "v10777"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "lspv_p10_contactforce",
+    "columns": [
+      "lspv_p10_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p21_contactforce",
+    "columns": [
+      "lspv_p21_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p32_contactforce",
+    "columns": [
+      "lspv_p32_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p37_contactforce",
+    "columns": [
+      "lspv_p37_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p38_contactforce",
+    "columns": [
+      "lspv_p38_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p39_contactforce",
+    "columns": [
+      "lspv_p39_contactforce",
+      "v10785",
+      "v10786",
+      "v10787",
+      "v10788",
+      "v10789",
+      "v10790",
+      "v10791",
+      "v10792",
+      "v10793"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lasou_car",
+    "columns": [
+      "lasou_car",
+      "v10797"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "rspv_p24_contactforce",
+    "columns": [
+      "rspv_p24_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p25_contactforce",
+    "columns": [
+      "rspv_p25_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p26_contactforce",
+    "columns": [
+      "rspv_p26_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p27_contactforce",
+    "columns": [
+      "rspv_p27_contactforce",
+      "v10815",
+      "v10833",
+      "v10834"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "x2_car",
+    "columns": [
+      "x2_car",
+      "v10840",
+      "v10841"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ablationdata",
+    "columns": [
+      "ablationdata"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ablationdata_qmode",
+    "columns": [
+      "ablationdata_qmode"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ablationsites",
+    "columns": [
+      "ablationsites"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ablationsites_qmode",
+    "columns": [
+      "ablationsites_qmode"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "adjustedpositions",
+    "columns": [
+      "adjustedpositions"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "adjustedpositions_qmode",
+    "columns": [
+      "adjustedpositions_qmode"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "allpositioningrids",
+    "columns": [
+      "allpositioningrids"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforcedata",
+    "columns": [
+      "contactforcedata"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforcedata_qmode",
+    "columns": [
+      "contactforcedata_qmode"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "contactforceinrf_2ts",
+    "columns": [
+      "contactforceinrf_2ts"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "endexpiriums",
+    "columns": [
+      "endexpiriums"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "endexpiriums_qmode",
+    "columns": [
+      "endexpiriums_qmode"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "grids",
+    "columns": [
+      "grids"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "positionsdata",
+    "columns": [
+      "positionsdata"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "positionsdata_qmode",
+    "columns": [
+      "positionsdata_qmode"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rf_2ts",
+    "columns": [
+      "rf_2ts"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rawpositions",
+    "columns": [
+      "rawpositions"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rawpositions_qmode",
+    "columns": [
+      "rawpositions_qmode"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "sites",
+    "columns": [
+      "sites"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "sites_qmode",
+    "columns": [
+      "sites_qmode"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "temperaturesinrf_2ts",
+    "columns": [
+      "temperaturesinrf_2ts"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "visitagdisplay",
+    "columns": [
+      "visitagdisplay"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "visitagpresets",
+    "columns": [
+      "visitagpresets"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "visitagsessions",
+    "columns": [
+      "visitagsessions"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "visitagsessions_qmode",
+    "columns": [
+      "visitagsessions_qmode"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "visitagsettings",
+    "columns": [
+      "visitagsettings"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "visitagsettings_qmode",
+    "columns": [
+      "visitagsettings_qmode",
+      "v10875",
+      "v10880",
+      "v10895",
+      "v10898",
+      "v10899",
+      "v10900",
+      "v10901",
+      "v10902",
+      "v10903",
+      "v10904",
+      "v10905",
+      "v10906",
+      "v10907",
+      "v10908",
+      "v10909",
+      "v10910",
+      "v10911",
+      "v10912",
+      "v10913",
+      "v10914"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "la_p1477_contactforce",
+    "columns": [
+      "la_p1477_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1478_contactforce",
+    "columns": [
+      "la_p1478_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1479_contactforce",
+    "columns": [
+      "la_p1479_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1480_contactforce",
+    "columns": [
+      "la_p1480_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1482_contactforce",
+    "columns": [
+      "la_p1482_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1483_contactforce",
+    "columns": [
+      "la_p1483_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1485_contactforce",
+    "columns": [
+      "la_p1485_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1486_contactforce",
+    "columns": [
+      "la_p1486_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1487_contactforce",
+    "columns": [
+      "la_p1487_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1488_contactforce",
+    "columns": [
+      "la_p1488_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1489_contactforce",
+    "columns": [
+      "la_p1489_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1490_contactforce",
+    "columns": [
+      "la_p1490_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1492_contactforce",
+    "columns": [
+      "la_p1492_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1493_contactforce",
+    "columns": [
+      "la_p1493_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1494_contactforce",
+    "columns": [
+      "la_p1494_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1495_contactforce",
+    "columns": [
+      "la_p1495_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1497_contactforce",
+    "columns": [
+      "la_p1497_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1498_contactforce",
+    "columns": [
+      "la_p1498_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1499_contactforce",
+    "columns": [
+      "la_p1499_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1500_contactforce",
+    "columns": [
+      "la_p1500_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1501_contactforce",
+    "columns": [
+      "la_p1501_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1502_contactforce",
+    "columns": [
+      "la_p1502_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1503_contactforce",
+    "columns": [
+      "la_p1503_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1504_contactforce",
+    "columns": [
+      "la_p1504_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1505_contactforce",
+    "columns": [
+      "la_p1505_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1506_contactforce",
+    "columns": [
+      "la_p1506_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1507_contactforce",
+    "columns": [
+      "la_p1507_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1508_contactforce",
+    "columns": [
+      "la_p1508_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1509_contactforce",
+    "columns": [
+      "la_p1509_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1510_contactforce",
+    "columns": [
+      "la_p1510_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1511_contactforce",
+    "columns": [
+      "la_p1511_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1512_contactforce",
+    "columns": [
+      "la_p1512_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1513_contactforce",
+    "columns": [
+      "la_p1513_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1514_contactforce",
+    "columns": [
+      "la_p1514_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1516_contactforce",
+    "columns": [
+      "la_p1516_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1517_contactforce",
+    "columns": [
+      "la_p1517_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1518_contactforce",
+    "columns": [
+      "la_p1518_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1519_contactforce",
+    "columns": [
+      "la_p1519_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1520_contactforce",
+    "columns": [
+      "la_p1520_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1521_contactforce",
+    "columns": [
+      "la_p1521_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1522_contactforce",
+    "columns": [
+      "la_p1522_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1523_contactforce",
+    "columns": [
+      "la_p1523_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1524_contactforce",
+    "columns": [
+      "la_p1524_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1525_contactforce",
+    "columns": [
+      "la_p1525_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1527_contactforce",
+    "columns": [
+      "la_p1527_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1528_contactforce",
+    "columns": [
+      "la_p1528_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1530_contactforce",
+    "columns": [
+      "la_p1530_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1531_contactforce",
+    "columns": [
+      "la_p1531_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1532_contactforce",
+    "columns": [
+      "la_p1532_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1533_contactforce",
+    "columns": [
+      "la_p1533_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1534_contactforce",
+    "columns": [
+      "la_p1534_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1535_contactforce",
+    "columns": [
+      "la_p1535_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1536_contactforce",
+    "columns": [
+      "la_p1536_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1537_contactforce",
+    "columns": [
+      "la_p1537_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1538_contactforce",
+    "columns": [
+      "la_p1538_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1539_contactforce",
+    "columns": [
+      "la_p1539_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1540_contactforce",
+    "columns": [
+      "la_p1540_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1541_contactforce",
+    "columns": [
+      "la_p1541_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p889_contactforce",
+    "columns": [
+      "la_p889_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p891_contactforce",
+    "columns": [
+      "la_p891_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p892_contactforce",
+    "columns": [
+      "la_p892_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p893_contactforce",
+    "columns": [
+      "la_p893_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p894_contactforce",
+    "columns": [
+      "la_p894_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p968_contactforce",
+    "columns": [
+      "la_p968_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p969_contactforce",
+    "columns": [
+      "la_p969_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p972_contactforce",
+    "columns": [
+      "la_p972_contactforce",
+      "v10983"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "ra_p32_contactforce",
+    "columns": [
+      "ra_p32_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p33_contactforce",
+    "columns": [
+      "ra_p33_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p35_contactforce",
+    "columns": [
+      "ra_p35_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p36_contactforce",
+    "columns": [
+      "ra_p36_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p37_contactforce",
+    "columns": [
+      "ra_p37_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p38_contactforce",
+    "columns": [
+      "ra_p38_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p39_contactforce",
+    "columns": [
+      "ra_p39_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p44_contactforce",
+    "columns": [
+      "ra_p44_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p45_contactforce",
+    "columns": [
+      "ra_p45_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p46_contactforce",
+    "columns": [
+      "ra_p46_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p48_contactforce",
+    "columns": [
+      "ra_p48_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p49_contactforce",
+    "columns": [
+      "ra_p49_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p50_contactforce",
+    "columns": [
+      "ra_p50_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p55_contactforce",
+    "columns": [
+      "ra_p55_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p56_contactforce",
+    "columns": [
+      "ra_p56_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p57_contactforce",
+    "columns": [
+      "ra_p57_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p58_contactforce",
+    "columns": [
+      "ra_p58_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p59_contactforce",
+    "columns": [
+      "ra_p59_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p61_contactforce",
+    "columns": [
+      "ra_p61_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p62_contactforce",
+    "columns": [
+      "ra_p62_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p63_contactforce",
+    "columns": [
+      "ra_p63_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p64_contactforce",
+    "columns": [
+      "ra_p64_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p65_contactforce",
+    "columns": [
+      "ra_p65_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p66_contactforce",
+    "columns": [
+      "ra_p66_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p67_contactforce",
+    "columns": [
+      "ra_p67_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p68_contactforce",
+    "columns": [
+      "ra_p68_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p69_contactforce",
+    "columns": [
+      "ra_p69_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p70_contactforce",
+    "columns": [
+      "ra_p70_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p71_contactforce",
+    "columns": [
+      "ra_p71_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p72_contactforce",
+    "columns": [
+      "ra_p72_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p73_contactforce",
+    "columns": [
+      "ra_p73_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p74_contactforce",
+    "columns": [
+      "ra_p74_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p75_contactforce",
+    "columns": [
+      "ra_p75_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p76_contactforce",
+    "columns": [
+      "ra_p76_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p77_contactforce",
+    "columns": [
+      "ra_p77_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p78_contactforce",
+    "columns": [
+      "ra_p78_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p79_contactforce",
+    "columns": [
+      "ra_p79_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p80_contactforce",
+    "columns": [
+      "ra_p80_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p81_contactforce",
+    "columns": [
+      "ra_p81_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p82_contactforce",
+    "columns": [
+      "ra_p82_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p83_contactforce",
+    "columns": [
+      "ra_p83_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p84_contactforce",
+    "columns": [
+      "ra_p84_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p85_contactforce",
+    "columns": [
+      "ra_p85_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p86_contactforce",
+    "columns": [
+      "ra_p86_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p87_contactforce",
+    "columns": [
+      "ra_p87_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ts1_magnetic_20_pole_a_connector",
+    "columns": [
+      "ts1_magnetic_20_pole_a_connector",
+      "v11031",
+      "v11032",
+      "v11033",
+      "v11034",
+      "v11035",
+      "v11038",
+      "v11051",
+      "v11052"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "tsp_mcc_dx_connector_eleclectrod",
+    "columns": [
+      "tsp_mcc_dx_connector_eleclectrod",
+      "v11054",
+      "v11055",
+      "v11056",
+      "v11058",
+      "v11059",
+      "v11073",
+      "v11074",
+      "v11075",
+      "v11076",
+      "v11104",
+      "v11109",
+      "v11121"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "laf_car",
+    "columns": [
+      "laf_car",
+      "v11126",
+      "v11135"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "tsp_dec_connector_sensor_positio",
+    "columns": [
+      "tsp_dec_connector_sensor_positio"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "tsp_magnetic_20_pole_b_connector",
+    "columns": [
+      "tsp_magnetic_20_pole_b_connector",
+      "v11138",
+      "v11139",
+      "v11140",
+      "v11141",
+      "v11160",
+      "v11163",
+      "v11167",
+      "v11170"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "lspv_p40_contactforce",
+    "columns": [
+      "lspv_p40_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p41_contactforce",
+    "columns": [
+      "lspv_p41_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p42_contactforce",
+    "columns": [
+      "lspv_p42_contactforce",
+      "v11175",
+      "v11176",
+      "v11177",
+      "v11178",
+      "v11179",
+      "v11180",
+      "v11181",
+      "v11183"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lipv_p10_contactforce",
+    "columns": [
+      "lipv_p10_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p11_contactforce",
+    "columns": [
+      "lipv_p11_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p12_contactforce",
+    "columns": [
+      "lipv_p12_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p13_contactforce",
+    "columns": [
+      "lipv_p13_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p14_contactforce",
+    "columns": [
+      "lipv_p14_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p15_contactforce",
+    "columns": [
+      "lipv_p15_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p16_contactforce",
+    "columns": [
+      "lipv_p16_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p17_contactforce",
+    "columns": [
+      "lipv_p17_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p18_contactforce",
+    "columns": [
+      "lipv_p18_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p19_contactforce",
+    "columns": [
+      "lipv_p19_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p1_contactforce",
+    "columns": [
+      "lipv_p1_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p20_contactforce",
+    "columns": [
+      "lipv_p20_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p21_contactforce",
+    "columns": [
+      "lipv_p21_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p22_contactforce",
+    "columns": [
+      "lipv_p22_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p23_contactforce",
+    "columns": [
+      "lipv_p23_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p24_contactforce",
+    "columns": [
+      "lipv_p24_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p25_contactforce",
+    "columns": [
+      "lipv_p25_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p26_contactforce",
+    "columns": [
+      "lipv_p26_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p27_contactforce",
+    "columns": [
+      "lipv_p27_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p28_contactforce",
+    "columns": [
+      "lipv_p28_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p29_contactforce",
+    "columns": [
+      "lipv_p29_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p2_contactforce",
+    "columns": [
+      "lipv_p2_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p30_contactforce",
+    "columns": [
+      "lipv_p30_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p3_contactforce",
+    "columns": [
+      "lipv_p3_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p4_contactforce",
+    "columns": [
+      "lipv_p4_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p5_contactforce",
+    "columns": [
+      "lipv_p5_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p6_contactforce",
+    "columns": [
+      "lipv_p6_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p7_contactforce",
+    "columns": [
+      "lipv_p7_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p8_contactforce",
+    "columns": [
+      "lipv_p8_contactforce"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "lipv_p9_contactforce",
+    "columns": [
+      "lipv_p9_contactforce",
+      "v11214",
+      "v11215",
+      "v11216",
+      "v11217"
+    ],
+    "regionId": "lipv"
+  },
+  {
+    "key": "rspv_p28_contactforce",
+    "columns": [
+      "rspv_p28_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p29_contactforce",
+    "columns": [
+      "rspv_p29_contactforce",
+      "v11227",
+      "v11228",
+      "v11229",
+      "v11230",
+      "v11231",
+      "v11232",
+      "v11250",
+      "v11251",
+      "v11252",
+      "v11253",
+      "v11254"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "app_car",
+    "columns": [
+      "app_car",
+      "v11257",
+      "v11258",
+      "v11259",
+      "v11260",
+      "v11261",
+      "v11262",
+      "v11263",
+      "v11264",
+      "v11265",
+      "v11266",
+      "v11267"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ablationsites_whitetags",
+    "columns": [
+      "ablationsites_whitetags"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ablationsites_whitetags_qmode",
+    "columns": [
+      "ablationsites_whitetags_qmode"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "respirationindications",
+    "columns": [
+      "respirationindications"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "respirationindications_qmode",
+    "columns": [
+      "respirationindications_qmode"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "sites_location",
+    "columns": [
+      "sites_location"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "sites_location_qmode",
+    "columns": [
+      "sites_location_qmode"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "sites_validity",
+    "columns": [
+      "sites_validity"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "sites_validity_qmode",
+    "columns": [
+      "sites_validity_qmode"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "sites_whitetags",
+    "columns": [
+      "sites_whitetags"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "sites_whitetags_qmode",
+    "columns": [
+      "sites_whitetags_qmode",
+      "v11287",
+      "v11301",
+      "v11306",
+      "v11307",
+      "v11308",
+      "v11309",
+      "v11310",
+      "v11311",
+      "v11313",
+      "v11314",
+      "v11315",
+      "v11316",
+      "v11317",
+      "v11410",
+      "v11411",
+      "v11412",
+      "v11413",
+      "v11414",
+      "v11415",
+      "v11416",
+      "v11417",
+      "v11418",
+      "v11419",
+      "v11420",
+      "v11421",
+      "v11422",
+      "v11423",
+      "v11424",
+      "v11425",
+      "v11426",
+      "v11427",
+      "v11428",
+      "v11429",
+      "v11430",
+      "v11431",
+      "v11432",
+      "v11433",
+      "v11434",
+      "v11435",
+      "v11436",
+      "v11437",
+      "v11455",
+      "v11456",
+      "v11457",
+      "v11458",
+      "v11459",
+      "v11460",
+      "v11461",
+      "v11462",
+      "v11463",
+      "v11464",
+      "v11465",
+      "v11466",
+      "v11467",
+      "v11468",
+      "v11469",
+      "v11470",
+      "v11471",
+      "v11472",
+      "v11473",
+      "v11474",
+      "v11475",
+      "v11476",
+      "v11477",
+      "v11478",
+      "v11479",
+      "v11480",
+      "v11481",
+      "v11482",
+      "v11483",
+      "v11484",
+      "v11485",
+      "v11486",
+      "v11487",
+      "v11488",
+      "v11489",
+      "v11490",
+      "v11491",
+      "v11492",
+      "v11493",
+      "v11494",
+      "v11495",
+      "v11496",
+      "v11497",
+      "v11498",
+      "v11499",
+      "v11500",
+      "v11501",
+      "v11502",
+      "v11503",
+      "v11504",
+      "v11505",
+      "v11506",
+      "v11507",
+      "v11508",
+      "v11509",
+      "v11510",
+      "v11511",
+      "v11512",
+      "v11513",
+      "v11514",
+      "v11515",
+      "v11516",
+      "v11517",
+      "v11518",
+      "v11519",
+      "v11520",
+      "v11521",
+      "v11522",
+      "v11523",
+      "v11524",
+      "v11525",
+      "v11526",
+      "v11527",
+      "v11528",
+      "v11529",
+      "v11530",
+      "v11531",
+      "v11532",
+      "v11533",
+      "v11534",
+      "v11535",
+      "v11536",
+      "v11537",
+      "v11538",
+      "v11539",
+      "v11552",
+      "v11564"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "la2_p1516_contactforce",
+    "columns": [
+      "la2_p1516_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1517_contactforce",
+    "columns": [
+      "la2_p1517_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1519_contactforce",
+    "columns": [
+      "la2_p1519_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1546_contactforce",
+    "columns": [
+      "la2_p1546_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1547_contactforce",
+    "columns": [
+      "la2_p1547_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1548_contactforce",
+    "columns": [
+      "la2_p1548_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1549_contactforce",
+    "columns": [
+      "la2_p1549_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1550_contactforce",
+    "columns": [
+      "la2_p1550_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1551_contactforce",
+    "columns": [
+      "la2_p1551_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1552_contactforce",
+    "columns": [
+      "la2_p1552_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1553_contactforce",
+    "columns": [
+      "la2_p1553_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1554_contactforce",
+    "columns": [
+      "la2_p1554_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1555_contactforce",
+    "columns": [
+      "la2_p1555_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1556_contactforce",
+    "columns": [
+      "la2_p1556_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1557_contactforce",
+    "columns": [
+      "la2_p1557_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1558_contactforce",
+    "columns": [
+      "la2_p1558_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1560_contactforce",
+    "columns": [
+      "la2_p1560_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1561_contactforce",
+    "columns": [
+      "la2_p1561_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1562_contactforce",
+    "columns": [
+      "la2_p1562_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1572_contactforce",
+    "columns": [
+      "la2_p1572_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p1584_contactforce",
+    "columns": [
+      "la2_p1584_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p6_contactforce",
+    "columns": [
+      "la2_p6_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p7435_contactforce",
+    "columns": [
+      "la2_p7435_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p7436_contactforce",
+    "columns": [
+      "la2_p7436_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p7437_contactforce",
+    "columns": [
+      "la2_p7437_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p7438_contactforce",
+    "columns": [
+      "la2_p7438_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p7439_contactforce",
+    "columns": [
+      "la2_p7439_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p7_contactforce",
+    "columns": [
+      "la2_p7_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la2_p8_contactforce",
+    "columns": [
+      "la2_p8_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1300_contactforce",
+    "columns": [
+      "la_p1300_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1301_contactforce",
+    "columns": [
+      "la_p1301_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1302_contactforce",
+    "columns": [
+      "la_p1302_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1304_contactforce",
+    "columns": [
+      "la_p1304_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1305_contactforce",
+    "columns": [
+      "la_p1305_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1367_contactforce",
+    "columns": [
+      "la_p1367_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1466_contactforce",
+    "columns": [
+      "la_p1466_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1467_contactforce",
+    "columns": [
+      "la_p1467_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1468_contactforce",
+    "columns": [
+      "la_p1468_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1469_contactforce",
+    "columns": [
+      "la_p1469_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1470_contactforce",
+    "columns": [
+      "la_p1470_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1471_contactforce",
+    "columns": [
+      "la_p1471_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1472_contactforce",
+    "columns": [
+      "la_p1472_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1473_contactforce",
+    "columns": [
+      "la_p1473_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1474_contactforce",
+    "columns": [
+      "la_p1474_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1475_contactforce",
+    "columns": [
+      "la_p1475_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1476_contactforce",
+    "columns": [
+      "la_p1476_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1481_contactforce",
+    "columns": [
+      "la_p1481_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1484_contactforce",
+    "columns": [
+      "la_p1484_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1491_contactforce",
+    "columns": [
+      "la_p1491_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1496_contactforce",
+    "columns": [
+      "la_p1496_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1515_contactforce",
+    "columns": [
+      "la_p1515_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1526_contactforce",
+    "columns": [
+      "la_p1526_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1529_contactforce",
+    "columns": [
+      "la_p1529_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1542_contactforce",
+    "columns": [
+      "la_p1542_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1543_contactforce",
+    "columns": [
+      "la_p1543_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1544_contactforce",
+    "columns": [
+      "la_p1544_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1545_contactforce",
+    "columns": [
+      "la_p1545_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1546_contactforce",
+    "columns": [
+      "la_p1546_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1547_contactforce",
+    "columns": [
+      "la_p1547_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1548_contactforce",
+    "columns": [
+      "la_p1548_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1549_contactforce",
+    "columns": [
+      "la_p1549_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1550_contactforce",
+    "columns": [
+      "la_p1550_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1551_contactforce",
+    "columns": [
+      "la_p1551_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1552_contactforce",
+    "columns": [
+      "la_p1552_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1553_contactforce",
+    "columns": [
+      "la_p1553_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1554_contactforce",
+    "columns": [
+      "la_p1554_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1555_contactforce",
+    "columns": [
+      "la_p1555_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1556_contactforce",
+    "columns": [
+      "la_p1556_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1557_contactforce",
+    "columns": [
+      "la_p1557_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1558_contactforce",
+    "columns": [
+      "la_p1558_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1560_contactforce",
+    "columns": [
+      "la_p1560_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1561_contactforce",
+    "columns": [
+      "la_p1561_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1562_contactforce",
+    "columns": [
+      "la_p1562_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1565_contactforce",
+    "columns": [
+      "la_p1565_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1566_contactforce",
+    "columns": [
+      "la_p1566_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1567_contactforce",
+    "columns": [
+      "la_p1567_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1568_contactforce",
+    "columns": [
+      "la_p1568_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1569_contactforce",
+    "columns": [
+      "la_p1569_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1570_contactforce",
+    "columns": [
+      "la_p1570_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1572_contactforce",
+    "columns": [
+      "la_p1572_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1582_contactforce",
+    "columns": [
+      "la_p1582_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p1584_contactforce",
+    "columns": [
+      "la_p1584_contactforce",
+      "v11647"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p508_contactforce",
+    "columns": [
+      "la_p508_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p509_contactforce",
+    "columns": [
+      "la_p509_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p510_contactforce",
+    "columns": [
+      "la_p510_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p511_contactforce",
+    "columns": [
+      "la_p511_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p512_contactforce",
+    "columns": [
+      "la_p512_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p513_contactforce",
+    "columns": [
+      "la_p513_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p517_contactforce",
+    "columns": [
+      "la_p517_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6_contactforce",
+    "columns": [
+      "la_p6_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p7_contactforce",
+    "columns": [
+      "la_p7_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p877_contactforce",
+    "columns": [
+      "la_p877_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p878_contactforce",
+    "columns": [
+      "la_p878_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p879_contactforce",
+    "columns": [
+      "la_p879_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p880_contactforce",
+    "columns": [
+      "la_p880_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p881_contactforce",
+    "columns": [
+      "la_p881_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p882_contactforce",
+    "columns": [
+      "la_p882_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p883_contactforce",
+    "columns": [
+      "la_p883_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p884_contactforce",
+    "columns": [
+      "la_p884_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p885_contactforce",
+    "columns": [
+      "la_p885_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p886_contactforce",
+    "columns": [
+      "la_p886_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p887_contactforce",
+    "columns": [
+      "la_p887_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p888_contactforce",
+    "columns": [
+      "la_p888_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p890_contactforce",
+    "columns": [
+      "la_p890_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p896_contactforce",
+    "columns": [
+      "la_p896_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p897_contactforce",
+    "columns": [
+      "la_p897_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p898_contactforce",
+    "columns": [
+      "la_p898_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p899_contactforce",
+    "columns": [
+      "la_p899_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p8_contactforce",
+    "columns": [
+      "la_p8_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p900_contactforce",
+    "columns": [
+      "la_p900_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p901_contactforce",
+    "columns": [
+      "la_p901_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p902_contactforce",
+    "columns": [
+      "la_p902_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p903_contactforce",
+    "columns": [
+      "la_p903_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p904_contactforce",
+    "columns": [
+      "la_p904_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p905_contactforce",
+    "columns": [
+      "la_p905_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p906_contactforce",
+    "columns": [
+      "la_p906_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p907_contactforce",
+    "columns": [
+      "la_p907_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p908_contactforce",
+    "columns": [
+      "la_p908_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p909_contactforce",
+    "columns": [
+      "la_p909_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p910_contactforce",
+    "columns": [
+      "la_p910_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p911_contactforce",
+    "columns": [
+      "la_p911_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p912_contactforce",
+    "columns": [
+      "la_p912_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p913_contactforce",
+    "columns": [
+      "la_p913_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p914_contactforce",
+    "columns": [
+      "la_p914_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p915_contactforce",
+    "columns": [
+      "la_p915_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p916_contactforce",
+    "columns": [
+      "la_p916_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p918_contactforce",
+    "columns": [
+      "la_p918_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p919_contactforce",
+    "columns": [
+      "la_p919_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p920_contactforce",
+    "columns": [
+      "la_p920_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p921_contactforce",
+    "columns": [
+      "la_p921_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p922_contactforce",
+    "columns": [
+      "la_p922_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p923_contactforce",
+    "columns": [
+      "la_p923_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p924_contactforce",
+    "columns": [
+      "la_p924_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p926_contactforce",
+    "columns": [
+      "la_p926_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p927_contactforce",
+    "columns": [
+      "la_p927_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p928_contactforce",
+    "columns": [
+      "la_p928_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p929_contactforce",
+    "columns": [
+      "la_p929_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p930_contactforce",
+    "columns": [
+      "la_p930_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p931_contactforce",
+    "columns": [
+      "la_p931_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p932_contactforce",
+    "columns": [
+      "la_p932_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p933_contactforce",
+    "columns": [
+      "la_p933_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p934_contactforce",
+    "columns": [
+      "la_p934_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p935_contactforce",
+    "columns": [
+      "la_p935_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p936_contactforce",
+    "columns": [
+      "la_p936_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p937_contactforce",
+    "columns": [
+      "la_p937_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p938_contactforce",
+    "columns": [
+      "la_p938_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p939_contactforce",
+    "columns": [
+      "la_p939_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p940_contactforce",
+    "columns": [
+      "la_p940_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p941_contactforce",
+    "columns": [
+      "la_p941_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p942_contactforce",
+    "columns": [
+      "la_p942_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p943_contactforce",
+    "columns": [
+      "la_p943_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p944_contactforce",
+    "columns": [
+      "la_p944_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p945_contactforce",
+    "columns": [
+      "la_p945_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p946_contactforce",
+    "columns": [
+      "la_p946_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p947_contactforce",
+    "columns": [
+      "la_p947_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p958_contactforce",
+    "columns": [
+      "la_p958_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p967_contactforce",
+    "columns": [
+      "la_p967_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p970_contactforce",
+    "columns": [
+      "la_p970_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p971_contactforce",
+    "columns": [
+      "la_p971_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p973_contactforce",
+    "columns": [
+      "la_p973_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p979_contactforce",
+    "columns": [
+      "la_p979_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "laedit_p4915_contactforce",
+    "columns": [
+      "laedit_p4915_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "laedit_p4919_contactforce",
+    "columns": [
+      "laedit_p4919_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "laedit_p4922_contactforce",
+    "columns": [
+      "laedit_p4922_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "laedit_p4923_contactforce",
+    "columns": [
+      "laedit_p4923_contactforce",
+      "v11731"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "ra_p10_contactforce",
+    "columns": [
+      "ra_p10_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p19_contactforce",
+    "columns": [
+      "ra_p19_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p23_contactforce",
+    "columns": [
+      "ra_p23_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p24_contactforce",
+    "columns": [
+      "ra_p24_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ra_p88_contactforce",
+    "columns": [
+      "ra_p88_contactforce"
+    ],
+    "regionId": "ra"
+  },
+  {
+    "key": "ts1_p1_contactforce",
+    "columns": [
+      "ts1_p1_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ts1_p28_contactforce",
+    "columns": [
+      "ts1_p28_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ts1_p2_contactforce",
+    "columns": [
+      "ts1_p2_contactforce",
+      "v11741",
+      "v11748",
+      "v11750",
+      "v11753",
+      "v11754",
+      "v11755",
+      "v11756",
+      "v11757",
+      "v11758",
+      "v11759",
+      "v11760",
+      "v11761",
+      "v11776",
+      "v11778",
+      "v11779",
+      "v11780",
+      "v11781",
+      "v11790",
+      "v11801",
+      "v11815",
+      "v11816",
+      "v11817",
+      "v11818",
+      "v11819",
+      "v11820",
+      "v11821",
+      "v11822",
+      "v11823",
+      "v11824",
+      "v11833",
+      "v11836",
+      "v11840",
+      "v11852",
+      "v11853",
+      "v11854",
+      "v11856",
+      "v11858",
+      "v11859",
+      "v11864",
+      "v11866"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "lafam_p1_contactforce",
+    "columns": [
+      "lafam_p1_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p10893_contactforce",
+    "columns": [
+      "la_p10893_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p10896_contactforce",
+    "columns": [
+      "la_p10896_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p10897_contactforce",
+    "columns": [
+      "la_p10897_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p10898_contactforce",
+    "columns": [
+      "la_p10898_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p11_contactforce",
+    "columns": [
+      "la_p11_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p12_contactforce",
+    "columns": [
+      "la_p12_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p13_contactforce",
+    "columns": [
+      "la_p13_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p163_contactforce",
+    "columns": [
+      "la_p163_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p164_contactforce",
+    "columns": [
+      "la_p164_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p165_contactforce",
+    "columns": [
+      "la_p165_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p166_contactforce",
+    "columns": [
+      "la_p166_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p167_contactforce",
+    "columns": [
+      "la_p167_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p168_contactforce",
+    "columns": [
+      "la_p168_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p169_contactforce",
+    "columns": [
+      "la_p169_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p197_contactforce",
+    "columns": [
+      "la_p197_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p198_contactforce",
+    "columns": [
+      "la_p198_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p2_contactforce",
+    "columns": [
+      "la_p2_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p3_contactforce",
+    "columns": [
+      "la_p3_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p445_contactforce",
+    "columns": [
+      "la_p445_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p447_contactforce",
+    "columns": [
+      "la_p447_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p448_contactforce",
+    "columns": [
+      "la_p448_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p449_contactforce",
+    "columns": [
+      "la_p449_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p450_contactforce",
+    "columns": [
+      "la_p450_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p451_contactforce",
+    "columns": [
+      "la_p451_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p452_contactforce",
+    "columns": [
+      "la_p452_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p454_contactforce",
+    "columns": [
+      "la_p454_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p48_contactforce",
+    "columns": [
+      "la_p48_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p49_contactforce",
+    "columns": [
+      "la_p49_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p4_contactforce",
+    "columns": [
+      "la_p4_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p50_contactforce",
+    "columns": [
+      "la_p50_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p51_contactforce",
+    "columns": [
+      "la_p51_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p52_contactforce",
+    "columns": [
+      "la_p52_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p53_contactforce",
+    "columns": [
+      "la_p53_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p54_contactforce",
+    "columns": [
+      "la_p54_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p55_contactforce",
+    "columns": [
+      "la_p55_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p56_contactforce",
+    "columns": [
+      "la_p56_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p57_contactforce",
+    "columns": [
+      "la_p57_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p58_contactforce",
+    "columns": [
+      "la_p58_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p59_contactforce",
+    "columns": [
+      "la_p59_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p5_contactforce",
+    "columns": [
+      "la_p5_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p60_contactforce",
+    "columns": [
+      "la_p60_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p61_contactforce",
+    "columns": [
+      "la_p61_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p62_contactforce",
+    "columns": [
+      "la_p62_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p63_contactforce",
+    "columns": [
+      "la_p63_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p64_contactforce",
+    "columns": [
+      "la_p64_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p65_contactforce",
+    "columns": [
+      "la_p65_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p66_contactforce",
+    "columns": [
+      "la_p66_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p67_contactforce",
+    "columns": [
+      "la_p67_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p68_contactforce",
+    "columns": [
+      "la_p68_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p69_contactforce",
+    "columns": [
+      "la_p69_contactforce",
+      "v11924"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p70_contactforce",
+    "columns": [
+      "la_p70_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p71_contactforce",
+    "columns": [
+      "la_p71_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p72_contactforce",
+    "columns": [
+      "la_p72_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p73_contactforce",
+    "columns": [
+      "la_p73_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p74_contactforce",
+    "columns": [
+      "la_p74_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p75_contactforce",
+    "columns": [
+      "la_p75_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p76_contactforce",
+    "columns": [
+      "la_p76_contactforce",
+      "v11932",
+      "v11933"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "ls_p100_contactforce",
+    "columns": [
+      "ls_p100_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p101_contactforce",
+    "columns": [
+      "ls_p101_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p102_contactforce",
+    "columns": [
+      "ls_p102_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p103_contactforce",
+    "columns": [
+      "ls_p103_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p104_contactforce",
+    "columns": [
+      "ls_p104_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p105_contactforce",
+    "columns": [
+      "ls_p105_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p106_contactforce",
+    "columns": [
+      "ls_p106_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p107_contactforce",
+    "columns": [
+      "ls_p107_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p108_contactforce",
+    "columns": [
+      "ls_p108_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p109_contactforce",
+    "columns": [
+      "ls_p109_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p110_contactforce",
+    "columns": [
+      "ls_p110_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p111_contactforce",
+    "columns": [
+      "ls_p111_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p112_contactforce",
+    "columns": [
+      "ls_p112_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p113_contactforce",
+    "columns": [
+      "ls_p113_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p114_contactforce",
+    "columns": [
+      "ls_p114_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p115_contactforce",
+    "columns": [
+      "ls_p115_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p116_contactforce",
+    "columns": [
+      "ls_p116_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p11_contactforce",
+    "columns": [
+      "ls_p11_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p12_contactforce",
+    "columns": [
+      "ls_p12_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p13_contactforce",
+    "columns": [
+      "ls_p13_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p14_contactforce",
+    "columns": [
+      "ls_p14_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p15_contactforce",
+    "columns": [
+      "ls_p15_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p16_contactforce",
+    "columns": [
+      "ls_p16_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p17_contactforce",
+    "columns": [
+      "ls_p17_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p18_contactforce",
+    "columns": [
+      "ls_p18_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p19_contactforce",
+    "columns": [
+      "ls_p19_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p1_contactforce",
+    "columns": [
+      "ls_p1_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p20_contactforce",
+    "columns": [
+      "ls_p20_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p21_contactforce",
+    "columns": [
+      "ls_p21_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p22_contactforce",
+    "columns": [
+      "ls_p22_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p23_contactforce",
+    "columns": [
+      "ls_p23_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p24_contactforce",
+    "columns": [
+      "ls_p24_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p26_contactforce",
+    "columns": [
+      "ls_p26_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p28_contactforce",
+    "columns": [
+      "ls_p28_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p29_contactforce",
+    "columns": [
+      "ls_p29_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p2_contactforce",
+    "columns": [
+      "ls_p2_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p30_contactforce",
+    "columns": [
+      "ls_p30_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p32_contactforce",
+    "columns": [
+      "ls_p32_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p33_contactforce",
+    "columns": [
+      "ls_p33_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p34_contactforce",
+    "columns": [
+      "ls_p34_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p35_contactforce",
+    "columns": [
+      "ls_p35_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p36_contactforce",
+    "columns": [
+      "ls_p36_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p38_contactforce",
+    "columns": [
+      "ls_p38_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p39_contactforce",
+    "columns": [
+      "ls_p39_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p3_contactforce",
+    "columns": [
+      "ls_p3_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p40_contactforce",
+    "columns": [
+      "ls_p40_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p41_contactforce",
+    "columns": [
+      "ls_p41_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p42_contactforce",
+    "columns": [
+      "ls_p42_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p43_contactforce",
+    "columns": [
+      "ls_p43_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p44_contactforce",
+    "columns": [
+      "ls_p44_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p45_contactforce",
+    "columns": [
+      "ls_p45_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p46_contactforce",
+    "columns": [
+      "ls_p46_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p47_contactforce",
+    "columns": [
+      "ls_p47_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p48_contactforce",
+    "columns": [
+      "ls_p48_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p49_contactforce",
+    "columns": [
+      "ls_p49_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p4_contactforce",
+    "columns": [
+      "ls_p4_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p50_contactforce",
+    "columns": [
+      "ls_p50_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p51_contactforce",
+    "columns": [
+      "ls_p51_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p52_contactforce",
+    "columns": [
+      "ls_p52_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p53_contactforce",
+    "columns": [
+      "ls_p53_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p54_contactforce",
+    "columns": [
+      "ls_p54_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p55_contactforce",
+    "columns": [
+      "ls_p55_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p56_contactforce",
+    "columns": [
+      "ls_p56_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p57_contactforce",
+    "columns": [
+      "ls_p57_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p58_contactforce",
+    "columns": [
+      "ls_p58_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p59_contactforce",
+    "columns": [
+      "ls_p59_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p5_contactforce",
+    "columns": [
+      "ls_p5_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p60_contactforce",
+    "columns": [
+      "ls_p60_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p61_contactforce",
+    "columns": [
+      "ls_p61_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p62_contactforce",
+    "columns": [
+      "ls_p62_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p63_contactforce",
+    "columns": [
+      "ls_p63_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p64_contactforce",
+    "columns": [
+      "ls_p64_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p65_contactforce",
+    "columns": [
+      "ls_p65_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p66_contactforce",
+    "columns": [
+      "ls_p66_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p67_contactforce",
+    "columns": [
+      "ls_p67_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p68_contactforce",
+    "columns": [
+      "ls_p68_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p69_contactforce",
+    "columns": [
+      "ls_p69_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p6_contactforce",
+    "columns": [
+      "ls_p6_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p70_contactforce",
+    "columns": [
+      "ls_p70_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p71_contactforce",
+    "columns": [
+      "ls_p71_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p72_contactforce",
+    "columns": [
+      "ls_p72_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p73_contactforce",
+    "columns": [
+      "ls_p73_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p74_contactforce",
+    "columns": [
+      "ls_p74_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p75_contactforce",
+    "columns": [
+      "ls_p75_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p76_contactforce",
+    "columns": [
+      "ls_p76_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p77_contactforce",
+    "columns": [
+      "ls_p77_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p78_contactforce",
+    "columns": [
+      "ls_p78_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p79_contactforce",
+    "columns": [
+      "ls_p79_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p7_contactforce",
+    "columns": [
+      "ls_p7_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p80_contactforce",
+    "columns": [
+      "ls_p80_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p81_contactforce",
+    "columns": [
+      "ls_p81_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p82_contactforce",
+    "columns": [
+      "ls_p82_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p83_contactforce",
+    "columns": [
+      "ls_p83_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p84_contactforce",
+    "columns": [
+      "ls_p84_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p85_contactforce",
+    "columns": [
+      "ls_p85_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p86_contactforce",
+    "columns": [
+      "ls_p86_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p87_contactforce",
+    "columns": [
+      "ls_p87_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p88_contactforce",
+    "columns": [
+      "ls_p88_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p89_contactforce",
+    "columns": [
+      "ls_p89_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p8_contactforce",
+    "columns": [
+      "ls_p8_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p90_contactforce",
+    "columns": [
+      "ls_p90_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p91_contactforce",
+    "columns": [
+      "ls_p91_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p92_contactforce",
+    "columns": [
+      "ls_p92_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p93_contactforce",
+    "columns": [
+      "ls_p93_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p94_contactforce",
+    "columns": [
+      "ls_p94_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p95_contactforce",
+    "columns": [
+      "ls_p95_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p96_contactforce",
+    "columns": [
+      "ls_p96_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p97_contactforce",
+    "columns": [
+      "ls_p97_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p98_contactforce",
+    "columns": [
+      "ls_p98_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_p99_contactforce",
+    "columns": [
+      "ls_p99_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ls_car",
+    "columns": [
+      "ls_car"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "lv_car",
+    "columns": [
+      "lv_car",
+      "v12050",
+      "v12060"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "tsp_quad_b_connector_eleclectrod",
+    "columns": [
+      "tsp_quad_b_connector_eleclectrod",
+      "v12062",
+      "v12063"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ts_p3_contactforce",
+    "columns": [
+      "ts_p3_contactforce",
+      "v12065",
+      "v12066",
+      "v12067",
+      "v12068",
+      "v12071",
+      "v12076",
+      "v12077",
+      "v12078",
+      "v12079",
+      "v12080",
+      "v12081",
+      "v12082",
+      "v12083",
+      "v12104",
+      "v12105",
+      "v12106",
+      "v12107",
+      "v12114"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "la_p247_contactforce",
+    "columns": [
+      "la_p247_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p248_contactforce",
+    "columns": [
+      "la_p248_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6280_contactforce",
+    "columns": [
+      "la_p6280_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6281_contactforce",
+    "columns": [
+      "la_p6281_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6282_contactforce",
+    "columns": [
+      "la_p6282_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6283_contactforce",
+    "columns": [
+      "la_p6283_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6284_contactforce",
+    "columns": [
+      "la_p6284_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6285_contactforce",
+    "columns": [
+      "la_p6285_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6286_contactforce",
+    "columns": [
+      "la_p6286_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6287_contactforce",
+    "columns": [
+      "la_p6287_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6288_contactforce",
+    "columns": [
+      "la_p6288_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6289_contactforce",
+    "columns": [
+      "la_p6289_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6290_contactforce",
+    "columns": [
+      "la_p6290_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6291_contactforce",
+    "columns": [
+      "la_p6291_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6292_contactforce",
+    "columns": [
+      "la_p6292_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6293_contactforce",
+    "columns": [
+      "la_p6293_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6294_contactforce",
+    "columns": [
+      "la_p6294_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6295_contactforce",
+    "columns": [
+      "la_p6295_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6296_contactforce",
+    "columns": [
+      "la_p6296_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6297_contactforce",
+    "columns": [
+      "la_p6297_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6298_contactforce",
+    "columns": [
+      "la_p6298_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6299_contactforce",
+    "columns": [
+      "la_p6299_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6300_contactforce",
+    "columns": [
+      "la_p6300_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6301_contactforce",
+    "columns": [
+      "la_p6301_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6302_contactforce",
+    "columns": [
+      "la_p6302_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6303_contactforce",
+    "columns": [
+      "la_p6303_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6304_contactforce",
+    "columns": [
+      "la_p6304_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6305_contactforce",
+    "columns": [
+      "la_p6305_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6306_contactforce",
+    "columns": [
+      "la_p6306_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6307_contactforce",
+    "columns": [
+      "la_p6307_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6308_contactforce",
+    "columns": [
+      "la_p6308_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6309_contactforce",
+    "columns": [
+      "la_p6309_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6310_contactforce",
+    "columns": [
+      "la_p6310_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6311_contactforce",
+    "columns": [
+      "la_p6311_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6312_contactforce",
+    "columns": [
+      "la_p6312_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6313_contactforce",
+    "columns": [
+      "la_p6313_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6314_contactforce",
+    "columns": [
+      "la_p6314_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6315_contactforce",
+    "columns": [
+      "la_p6315_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6316_contactforce",
+    "columns": [
+      "la_p6316_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6317_contactforce",
+    "columns": [
+      "la_p6317_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6318_contactforce",
+    "columns": [
+      "la_p6318_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6319_contactforce",
+    "columns": [
+      "la_p6319_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6320_contactforce",
+    "columns": [
+      "la_p6320_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6321_contactforce",
+    "columns": [
+      "la_p6321_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6322_contactforce",
+    "columns": [
+      "la_p6322_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6323_contactforce",
+    "columns": [
+      "la_p6323_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6324_contactforce",
+    "columns": [
+      "la_p6324_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6325_contactforce",
+    "columns": [
+      "la_p6325_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6326_contactforce",
+    "columns": [
+      "la_p6326_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6327_contactforce",
+    "columns": [
+      "la_p6327_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6328_contactforce",
+    "columns": [
+      "la_p6328_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6329_contactforce",
+    "columns": [
+      "la_p6329_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6330_contactforce",
+    "columns": [
+      "la_p6330_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6331_contactforce",
+    "columns": [
+      "la_p6331_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6332_contactforce",
+    "columns": [
+      "la_p6332_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6333_contactforce",
+    "columns": [
+      "la_p6333_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6334_contactforce",
+    "columns": [
+      "la_p6334_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6335_contactforce",
+    "columns": [
+      "la_p6335_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6336_contactforce",
+    "columns": [
+      "la_p6336_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6337_contactforce",
+    "columns": [
+      "la_p6337_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6338_contactforce",
+    "columns": [
+      "la_p6338_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6339_contactforce",
+    "columns": [
+      "la_p6339_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6340_contactforce",
+    "columns": [
+      "la_p6340_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6341_contactforce",
+    "columns": [
+      "la_p6341_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6342_contactforce",
+    "columns": [
+      "la_p6342_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6343_contactforce",
+    "columns": [
+      "la_p6343_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6344_contactforce",
+    "columns": [
+      "la_p6344_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6345_contactforce",
+    "columns": [
+      "la_p6345_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6346_contactforce",
+    "columns": [
+      "la_p6346_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6347_contactforce",
+    "columns": [
+      "la_p6347_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6348_contactforce",
+    "columns": [
+      "la_p6348_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6349_contactforce",
+    "columns": [
+      "la_p6349_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6350_contactforce",
+    "columns": [
+      "la_p6350_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6351_contactforce",
+    "columns": [
+      "la_p6351_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6352_contactforce",
+    "columns": [
+      "la_p6352_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6353_contactforce",
+    "columns": [
+      "la_p6353_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6354_contactforce",
+    "columns": [
+      "la_p6354_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6355_contactforce",
+    "columns": [
+      "la_p6355_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6356_contactforce",
+    "columns": [
+      "la_p6356_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6357_contactforce",
+    "columns": [
+      "la_p6357_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6358_contactforce",
+    "columns": [
+      "la_p6358_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6359_contactforce",
+    "columns": [
+      "la_p6359_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6360_contactforce",
+    "columns": [
+      "la_p6360_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6361_contactforce",
+    "columns": [
+      "la_p6361_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6362_contactforce",
+    "columns": [
+      "la_p6362_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6363_contactforce",
+    "columns": [
+      "la_p6363_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6364_contactforce",
+    "columns": [
+      "la_p6364_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6365_contactforce",
+    "columns": [
+      "la_p6365_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6366_contactforce",
+    "columns": [
+      "la_p6366_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6367_contactforce",
+    "columns": [
+      "la_p6367_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6368_contactforce",
+    "columns": [
+      "la_p6368_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6369_contactforce",
+    "columns": [
+      "la_p6369_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6370_contactforce",
+    "columns": [
+      "la_p6370_contactforce"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "la_p6371_contactforce",
+    "columns": [
+      "la_p6371_contactforce",
+      "v12209"
+    ],
+    "regionId": "la"
+  },
+  {
+    "key": "li_p10_contactforce",
+    "columns": [
+      "li_p10_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p11_contactforce",
+    "columns": [
+      "li_p11_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p12_contactforce",
+    "columns": [
+      "li_p12_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p13_contactforce",
+    "columns": [
+      "li_p13_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p14_contactforce",
+    "columns": [
+      "li_p14_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p15_contactforce",
+    "columns": [
+      "li_p15_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p16_contactforce",
+    "columns": [
+      "li_p16_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p17_contactforce",
+    "columns": [
+      "li_p17_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p18_contactforce",
+    "columns": [
+      "li_p18_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p19_contactforce",
+    "columns": [
+      "li_p19_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p20_contactforce",
+    "columns": [
+      "li_p20_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p21_contactforce",
+    "columns": [
+      "li_p21_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p22_contactforce",
+    "columns": [
+      "li_p22_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p23_contactforce",
+    "columns": [
+      "li_p23_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p24_contactforce",
+    "columns": [
+      "li_p24_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p25_contactforce",
+    "columns": [
+      "li_p25_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p26_contactforce",
+    "columns": [
+      "li_p26_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p27_contactforce",
+    "columns": [
+      "li_p27_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p28_contactforce",
+    "columns": [
+      "li_p28_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p29_contactforce",
+    "columns": [
+      "li_p29_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p2_contactforce",
+    "columns": [
+      "li_p2_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p30_contactforce",
+    "columns": [
+      "li_p30_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p31_contactforce",
+    "columns": [
+      "li_p31_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p32_contactforce",
+    "columns": [
+      "li_p32_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p33_contactforce",
+    "columns": [
+      "li_p33_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p34_contactforce",
+    "columns": [
+      "li_p34_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p35_contactforce",
+    "columns": [
+      "li_p35_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p36_contactforce",
+    "columns": [
+      "li_p36_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p37_contactforce",
+    "columns": [
+      "li_p37_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p38_contactforce",
+    "columns": [
+      "li_p38_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p39_contactforce",
+    "columns": [
+      "li_p39_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p3_contactforce",
+    "columns": [
+      "li_p3_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p40_contactforce",
+    "columns": [
+      "li_p40_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p41_contactforce",
+    "columns": [
+      "li_p41_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p42_contactforce",
+    "columns": [
+      "li_p42_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p4_contactforce",
+    "columns": [
+      "li_p4_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p5_contactforce",
+    "columns": [
+      "li_p5_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p6_contactforce",
+    "columns": [
+      "li_p6_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p7_contactforce",
+    "columns": [
+      "li_p7_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p8_contactforce",
+    "columns": [
+      "li_p8_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_p9_contactforce",
+    "columns": [
+      "li_p9_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "li_car",
+    "columns": [
+      "li_car"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "lspv_p43_contactforce",
+    "columns": [
+      "lspv_p43_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p44_contactforce",
+    "columns": [
+      "lspv_p44_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p45_contactforce",
+    "columns": [
+      "lspv_p45_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p46_contactforce",
+    "columns": [
+      "lspv_p46_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p47_contactforce",
+    "columns": [
+      "lspv_p47_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p50_contactforce",
+    "columns": [
+      "lspv_p50_contactforce"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "lspv_p51_contactforce",
+    "columns": [
+      "lspv_p51_contactforce",
+      "v12259",
+      "v12260"
+    ],
+    "regionId": "lspv"
+  },
+  {
+    "key": "phrenic_car",
+    "columns": [
+      "phrenic_car",
+      "v12270"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "svc_car",
+    "columns": [
+      "svc_car",
+      "v12272",
+      "v12273",
+      "v12274",
+      "v12275",
+      "v12276",
+      "v12277",
+      "v12278",
+      "v12279"
+    ],
+    "regionId": "svc"
+  },
+  {
+    "key": "veins_car",
+    "columns": [
+      "veins_car",
+      "v12282"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ivc_car",
+    "columns": [
+      "ivc_car",
+      "v12284",
+      "v12285",
+      "v12286"
+    ],
+    "regionId": "ivc"
+  },
+  {
+    "key": "rs_p10_contactforce",
+    "columns": [
+      "rs_p10_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p11_contactforce",
+    "columns": [
+      "rs_p11_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p12_contactforce",
+    "columns": [
+      "rs_p12_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p13_contactforce",
+    "columns": [
+      "rs_p13_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p14_contactforce",
+    "columns": [
+      "rs_p14_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p15_contactforce",
+    "columns": [
+      "rs_p15_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p16_contactforce",
+    "columns": [
+      "rs_p16_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p17_contactforce",
+    "columns": [
+      "rs_p17_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p18_contactforce",
+    "columns": [
+      "rs_p18_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p1_contactforce",
+    "columns": [
+      "rs_p1_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p20_contactforce",
+    "columns": [
+      "rs_p20_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p21_contactforce",
+    "columns": [
+      "rs_p21_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p22_contactforce",
+    "columns": [
+      "rs_p22_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p23_contactforce",
+    "columns": [
+      "rs_p23_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p24_contactforce",
+    "columns": [
+      "rs_p24_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p25_contactforce",
+    "columns": [
+      "rs_p25_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p26_contactforce",
+    "columns": [
+      "rs_p26_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p27_contactforce",
+    "columns": [
+      "rs_p27_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p28_contactforce",
+    "columns": [
+      "rs_p28_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p29_contactforce",
+    "columns": [
+      "rs_p29_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p2_contactforce",
+    "columns": [
+      "rs_p2_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p30_contactforce",
+    "columns": [
+      "rs_p30_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p31_contactforce",
+    "columns": [
+      "rs_p31_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p32_contactforce",
+    "columns": [
+      "rs_p32_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p33_contactforce",
+    "columns": [
+      "rs_p33_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p34_contactforce",
+    "columns": [
+      "rs_p34_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p35_contactforce",
+    "columns": [
+      "rs_p35_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p36_contactforce",
+    "columns": [
+      "rs_p36_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p37_contactforce",
+    "columns": [
+      "rs_p37_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p38_contactforce",
+    "columns": [
+      "rs_p38_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p39_contactforce",
+    "columns": [
+      "rs_p39_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p3_contactforce",
+    "columns": [
+      "rs_p3_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p40_contactforce",
+    "columns": [
+      "rs_p40_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p41_contactforce",
+    "columns": [
+      "rs_p41_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p42_contactforce",
+    "columns": [
+      "rs_p42_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p43_contactforce",
+    "columns": [
+      "rs_p43_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p44_contactforce",
+    "columns": [
+      "rs_p44_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p45_contactforce",
+    "columns": [
+      "rs_p45_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p46_contactforce",
+    "columns": [
+      "rs_p46_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p47_contactforce",
+    "columns": [
+      "rs_p47_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p48_contactforce",
+    "columns": [
+      "rs_p48_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p49_contactforce",
+    "columns": [
+      "rs_p49_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p4_contactforce",
+    "columns": [
+      "rs_p4_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p50_contactforce",
+    "columns": [
+      "rs_p50_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p51_contactforce",
+    "columns": [
+      "rs_p51_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p52_contactforce",
+    "columns": [
+      "rs_p52_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p53_contactforce",
+    "columns": [
+      "rs_p53_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p54_contactforce",
+    "columns": [
+      "rs_p54_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p55_contactforce",
+    "columns": [
+      "rs_p55_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p56_contactforce",
+    "columns": [
+      "rs_p56_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p57_contactforce",
+    "columns": [
+      "rs_p57_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p58_contactforce",
+    "columns": [
+      "rs_p58_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p59_contactforce",
+    "columns": [
+      "rs_p59_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p5_contactforce",
+    "columns": [
+      "rs_p5_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p60_contactforce",
+    "columns": [
+      "rs_p60_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p61_contactforce",
+    "columns": [
+      "rs_p61_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p62_contactforce",
+    "columns": [
+      "rs_p62_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p63_contactforce",
+    "columns": [
+      "rs_p63_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p64_contactforce",
+    "columns": [
+      "rs_p64_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p65_contactforce",
+    "columns": [
+      "rs_p65_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p66_contactforce",
+    "columns": [
+      "rs_p66_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p67_contactforce",
+    "columns": [
+      "rs_p67_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p68_contactforce",
+    "columns": [
+      "rs_p68_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p69_contactforce",
+    "columns": [
+      "rs_p69_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p6_contactforce",
+    "columns": [
+      "rs_p6_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p70_contactforce",
+    "columns": [
+      "rs_p70_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p71_contactforce",
+    "columns": [
+      "rs_p71_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p72_contactforce",
+    "columns": [
+      "rs_p72_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p73_contactforce",
+    "columns": [
+      "rs_p73_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p74_contactforce",
+    "columns": [
+      "rs_p74_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p75_contactforce",
+    "columns": [
+      "rs_p75_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p76_contactforce",
+    "columns": [
+      "rs_p76_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p77_contactforce",
+    "columns": [
+      "rs_p77_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p78_contactforce",
+    "columns": [
+      "rs_p78_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p7_contactforce",
+    "columns": [
+      "rs_p7_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p8_contactforce",
+    "columns": [
+      "rs_p8_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_p9_contactforce",
+    "columns": [
+      "rs_p9_contactforce"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rs_car",
+    "columns": [
+      "rs_car",
+      "v12366"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ridgeveins_car",
+    "columns": [
+      "ridgeveins_car",
+      "v12369",
+      "v12370",
+      "v12371",
+      "v12372"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ri_car",
+    "columns": [
+      "ri_car"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rspv_p30_contactforce",
+    "columns": [
+      "rspv_p30_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p31_contactforce",
+    "columns": [
+      "rspv_p31_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p32_contactforce",
+    "columns": [
+      "rspv_p32_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p33_contactforce",
+    "columns": [
+      "rspv_p33_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p34_contactforce",
+    "columns": [
+      "rspv_p34_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p35_contactforce",
+    "columns": [
+      "rspv_p35_contactforce"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "rspv_p36_contactforce",
+    "columns": [
+      "rspv_p36_contactforce",
+      "v12394"
+    ],
+    "regionId": "rspv"
+  },
+  {
+    "key": "esotsp_car",
+    "columns": [
+      "esotsp_car",
+      "v12396",
+      "v12397",
+      "v12398",
+      "v12399",
+      "v12400",
+      "v12401",
+      "v12404",
+      "v12405",
+      "v12406",
+      "v12407",
+      "v12408",
+      "v12420",
+      "v12421",
+      "v12432",
+      "v12433",
+      "v12434",
+      "v12435",
+      "v12436"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "cs_car",
+    "columns": [
+      "cs_car",
+      "v12438"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "map_p2_contactforce",
+    "columns": [
+      "map_p2_contactforce",
+      "v12440",
+      "v12441",
+      "v12442",
+      "v12444",
+      "v12445",
+      "v12446",
+      "v12447",
+      "v12448"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "ablationdata_pfa",
+    "columns": [
+      "ablationdata_pfa"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "applications_pfa",
+    "columns": [
+      "applications_pfa"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "detectorsversion",
+    "columns": [
+      "detectorsversion"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "grids_pfa",
+    "columns": [
+      "grids_pfa"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "rawpositions_pfa",
+    "columns": [
+      "rawpositions_pfa"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "sites_pfa",
+    "columns": [
+      "sites_pfa"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "visitagsessions_pfa",
+    "columns": [
+      "visitagsessions_pfa"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "visitagsettings_pfa",
+    "columns": [
+      "visitagsettings_pfa"
+    ],
+    "regionId": null
+  },
+  {
+    "key": "vvversion",
+    "columns": [
+      "vvversion"
+    ],
+    "regionId": null
+  }
+]
