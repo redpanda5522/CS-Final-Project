@@ -11,14 +11,14 @@ warnings.filterwarnings('ignore')
 
 RANDOM_SEED = 45
 
-ablation_data = pd.read_csv('data.csv')
+ablation_data = pd.read_csv('data_combined.csv')
 ablation_data = ablation_data.dropna(subset=['recur'])
 
 
 cols_to_drop = [
     'ablationdata_pfa', 'applications_pfa', 'detectorsversion',
     'grids_pfa', 'rawpositions_pfa', 'sites_pfa',
-    'visitagsessions_pfa', 'visitagsettings_pfa', 'vvversion'
+    'visitagsessions_pfa', 'visitagsettings_pfa', 'vvversion', 'id'
 ]
 ablation_data = ablation_data.drop(columns=cols_to_drop, errors='ignore')
 
