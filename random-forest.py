@@ -3,17 +3,18 @@ from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score, classification_report
 import warnings
+import joblib 
 
 warnings.filterwarnings('ignore')
 
 RANDOM_SEED = 45
 
-ablation_data = pd.read_csv('data.csv')
+ablation_data = pd.read_csv('data_combined.csv')
 ablation_data = ablation_data.dropna(subset=['recur'])
 
 cols_to_drop = ['ablationdata_pfa',	'applications_pfa',	'detectorsversion',	'grids_pfa', 'rawpositions_pfa',	'sites_pfa',	'visitagsessions_pfa',	'visitagsettings_pfa',	'vvversion', 'id']
 
-ablation_data = ablation_data.drop(columns=cols_to_drop)
+#ablation_data = ablation_data.drop(columns=cols_to_drop)
 
 x = ablation_data[[col for col in ablation_data.columns if col != 'recur']]
 y = ablation_data['recur']
@@ -25,6 +26,8 @@ rf_classifier = RandomForestClassifier(n_estimators=100, random_state=RANDOM_SEE
 rf_classifier.fit(X_train, y_train)
 
 y_pred = rf_classifier.predict(X_test)
+
+joblib.dump(rf_classifier, "./models/random_forest_model.joblib")
 
 accuracy = accuracy_score(y_test, y_pred)
 classification_rep = classification_report(y_test, y_pred)

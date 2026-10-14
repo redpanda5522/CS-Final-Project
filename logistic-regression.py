@@ -1,6 +1,7 @@
 import pandas as pd
 import warnings
 
+import joblib
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
 from sklearn.impute import SimpleImputer
@@ -18,7 +19,7 @@ ablation_data = ablation_data.dropna(subset=['recur'])
 cols_to_drop = [
     'ablationdata_pfa', 'applications_pfa', 'detectorsversion',
     'grids_pfa', 'rawpositions_pfa', 'sites_pfa',
-    'visitagsessions_pfa', 'visitagsettings_pfa', 'vvversion', 'id'
+    'visitagsessions_pfa', 'visitagsettings_pfa', 'vvversion', 'id', 
 ]
 ablation_data = ablation_data.drop(columns=cols_to_drop, errors='ignore')
 
@@ -33,15 +34,16 @@ X_train, X_test, y_train, y_test = train_test_split(
 )
 
 # Build pipeline: fill missing values, then train logistic regression
-pipeline = Pipeline([
-    ('imputer', SimpleImputer(strategy='median')),
-    ('model', LogisticRegression(class_weight='balanced', random_state=RANDOM_SEED, max_iter=1000))
-])
-pipeline.fit(X_train, y_train)
 
+model = LogisticRegression(class_weight='balanced', random_state=RANDOM_SEED, max_iter=1000)
+model.fit(X_train, y_train)
 
-y_pred = pipeline.predict(X_test)
-y_prob = pipeline.predict_proba(X_test)[:, 1]
+joblib.dump(list(model.feature_names_in_), "./models/expected_features.joblib")
+
+y_pred = model.predict(X_test)
+y_prob = model.predict_proba(X_test)[:, 1]
+
+joblib.dump(model, "./models/logistic_model.joblib")
 
 # Evaluate
 print("Accuracy:", accuracy_score(y_test, y_pred))

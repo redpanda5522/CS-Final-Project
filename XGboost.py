@@ -1,5 +1,6 @@
 import pandas as pd
 import warnings
+import joblib
 
 from sklearn.metrics import accuracy_score
 import xgboost as xgb
@@ -41,8 +42,12 @@ params = {
 n=50
 model = xgb.train(params=params,dtrain=xgb_train,num_boost_round=n)
 
+print(model.feature_names_in_)
+
 preds = model.predict(xgb_test)
 preds = np.round(preds)
+
+joblib.dump(model, "./models/xgboost_model.joblib")
 
 print("Accuracy:", accuracy_score(y_test, preds))
 print("\nClassification Report:\n", classification_report(y_test, preds))
