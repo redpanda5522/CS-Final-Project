@@ -39,12 +39,13 @@ CSV upload previews collapse binary values per row, show recognized region flags
 
 **Start with [the backend handoff guide](docs/backend-handoff.md)** for exact requests, responses, error handling, local integration steps, and unresolved ML decisions. The current browser flow expects one synchronous prediction per submission; a multirow file workflow still needs agreement.
 
-**File:** `POST /api/analyses/file`, multipart field `file`, containing the original CSV/JSON/XLSX file, unchanged. The browser's region preview never replaces the uploaded file. Current size limit: 10 MB.
+**File:** `POST /api/analyses/file`, multipart fields `file` and `model_name`, containing the original CSV/JSON/XLSX file, unchanged, and the selected model ID. The browser's region preview never replaces the uploaded file. Current size limit: 10 MB.
 
 **Manual:** `POST /api/analyses/manual`, JSON:
 
 ```json
 {
+  "model_name": "logistic",
   "schemaVersion": "catheter-regions-v2",
   "groupingVersion": "left-named-column-v1",
   "units": { "temperature": "C", "pressure": "g" },
@@ -55,6 +56,8 @@ CSV upload previews collapse binary values per row, show recognized region flags
 ```
 
 This **replaces the earlier coordinate-based and binary-feature manual schemas**. No X/Y fields are sent. The backend must accept region IDs and enforce the 1–4 limit. Optional measurements are numbers or null. Temperature units: `unspecified`, `C`, `F`. Pressure units: `unspecified`, `g` (contact force), `mmHg`, `kPa`. Force and pressure are distinct quantities and must not be converted interchangeably.
+
+The model dropdown sends `logistic`, `random_forest`, or `xgboost` as `model_name` for both input methods. Demo mode labels the selection but returns the same illustrative result. Live selection requires backend routing and the matching deployed model artifact; this checkout currently includes only the logistic artifact.
 
 The backend owns authoritative validation, formatting, missing-value policy, feature ordering, and ML invocation. `src/data/regionGrouping.ts` supplies the preview grouping logic; `column-groups.json` supplies the complete named-to-V mapping for a backend implementation. The frontend does not assume region data already matches the trained model.
 
