@@ -29,6 +29,11 @@ MODEL_MAP = {
         "version":"random_forest_v1", 
         "type": "sklearn"
     },
+    "k_nearest": {
+            "model": joblib.load(MODEL_DIR / "knc_model.joblib"), 
+            "version":"k_nearest_v1", 
+            "type": "sklearn"
+    },
     "xgboost": {
         "model": joblib.load(MODEL_DIR / "xgboost_model.joblib"), 
         "version": "xgboost_v1", 
