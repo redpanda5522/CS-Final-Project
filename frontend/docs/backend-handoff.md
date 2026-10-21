@@ -11,14 +11,14 @@ This is the current **proposed v1 HTTP contract** implemented by the frontend. T
 
 ## File submission
 
-`POST /api/analyses/file` with `multipart/form-data`. The single form field is named **`file`** and contains the original uploaded bytes and filename. The browser does not send its CSV preview, chosen preview row, region summary, or a converted feature vector. Do not require any of those fields from this endpoint.
+`POST /api/analyses/file` with `multipart/form-data`. The **`file`** field contains the original uploaded bytes and filename. The **`model_name`** text field selects `logistic`, `random_forest`, or `xgboost`. The browser does not send its CSV preview, chosen preview row, region summary, or a converted feature vector. Do not require any of those fields from this endpoint.
 
 The UI accepts `.csv`, `.json`, and `.xlsx`, with nonempty files up to **10 MiB (10,485,760 bytes)**. This is a provisional product limit; the backend must enforce its own size and content checks. A file's extension alone does not prove its format. If a format or shape is unsupported by the model pipeline, return a clear 4xx error.
 
 Example request (with a file containing non-sensitive test data):
 
 ```bash
-curl -i -F 'file=@sample.csv' http://localhost:8000/api/analyses/file
+curl -i -F 'file=@sample.csv' -F 'model_name=logistic' http://localhost:8000/api/analyses/file
 ```
 
 ## Manual submission
@@ -27,6 +27,7 @@ curl -i -F 'file=@sample.csv' http://localhost:8000/api/analyses/file
 
 ```json
 {
+  "model_name": "logistic",
   "schemaVersion": "catheter-regions-v2",
   "groupingVersion": "left-named-column-v1",
   "units": { "temperature": "C", "pressure": "g" },
@@ -46,7 +47,7 @@ Example request:
 ```bash
 curl -i http://localhost:8000/api/analyses/manual \
   -H 'Content-Type: application/json' \
-  --data-binary '{"schemaVersion":"catheter-regions-v2","groupingVersion":"left-named-column-v1","units":{"temperature":"C","pressure":"g"},"catheters":[{"id":"550e8400-e29b-41d4-a716-446655440000","regionId":"la","temperature":37,"pressure":12}]}'
+  --data-binary '{"model_name":"logistic","schemaVersion":"catheter-regions-v2","groupingVersion":"left-named-column-v1","units":{"temperature":"C","pressure":"g"},"catheters":[{"id":"550e8400-e29b-41d4-a716-446655440000","regionId":"la","temperature":37,"pressure":12}]}'
 ```
 
 ## Response and errors
@@ -82,5 +83,6 @@ For a validation or processing failure, return an appropriate 4xx/5xx status and
 - Specify accepted CSV/JSON/XLSX schemas and whether `id`, `recur`, or `redo` are permitted in uploaded data. The CSV preview only summarizes region flags; it is not the model parser.
 - Define how manual region IDs and optional measurements map to trained features. The frontend cannot infer thousands of raw `V` flags or invent missing features. [`src/config/column-groups.json`](../src/config/column-groups.json) is a grouping reference, not a validated feature specification.
 - Resolve missing measurement and unspecified-unit policies, and whether force and pressure need separate model fields.
+- Validate `model_name` against the three supported IDs and return a clear 4xx error for an unknown or unavailable model. The current checkout contains only `models/logistic_model.joblib`; random forest and XGBoost artifacts must be produced and deployed before those selections can run. `predictor.py` names all three but is not wired to the HTTP endpoints.
 
 Until these decisions are made, a fixed backend test response proves the transport and UI integration only; it does not validate the clinical or ML prediction pipeline.

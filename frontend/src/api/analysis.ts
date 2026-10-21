@@ -1,4 +1,5 @@
 import type { ManualAnalysisRequest } from '../types/procedure'
+import type { ModelName } from '../config/models'
 
 export type ManualInput = ManualAnalysisRequest
 
@@ -40,26 +41,27 @@ async function readResult(response: Response): Promise<AnalysisResult> {
 const mockMode = import.meta.env.VITE_USE_MOCK_API !== 'false'
 export const isDemoMode = mockMode
 
-async function demoResult(): Promise<AnalysisResult> {
+async function demoResult(modelName: ModelName): Promise<AnalysisResult> {
   await new Promise(resolve => setTimeout(resolve, 800))
   return {
     analysisId: 'demo-analysis', predictedOutcome: 'success', probability: 0.72,
     outcomeDefinition: 'Outcome definition pending confirmation from the dataset team.',
-    modelVersion: 'Demo only',
+    modelVersion: `Demo only (${modelName})`,
   }
 }
 
-export async function analyzeFile(file: File): Promise<AnalysisResult> {
-  if (mockMode) return demoResult()
+export async function analyzeFile(file: File, modelName: ModelName): Promise<AnalysisResult> {
+  if (mockMode) return demoResult(modelName)
   const form = new FormData()
   form.append('file', file, file.name)
+  form.append('model_name', modelName)
   // Do not set Content-Type: the browser adds the multipart boundary.
   return readResult(await fetch('/api/analyses/file', { method: 'POST', body: form }))
 }
 
-export async function analyzeManual(input: ManualInput): Promise<AnalysisResult> {
-  if (mockMode) return demoResult()
+export async function analyzeManual(input: ManualInput, modelName: ModelName): Promise<AnalysisResult> {
+  if (mockMode) return demoResult(modelName)
   return readResult(await fetch('/api/analyses/manual', {
-    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(input),
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...input, model_name: modelName }),
   }))
 }

@@ -7,6 +7,7 @@ import AtriaPlot from '../components/AtriaPlot'
 import { regionById } from '../config/regions'
 import DatasetPreview from '../components/DatasetPreview'
 import ManualEntry from '../components/ManualEntry'
+import { defaultModel, modelOptions, type ModelName } from '../config/models'
 
 type Mode = 'file' | 'manual'
 type Stage = 'input' | 'review' | 'result'
@@ -17,6 +18,7 @@ type Props = { onComplete: (result: AnalysisResult, mode: Mode, sourceName: stri
 
 function NewAnalysis({ onComplete }: Props) {
   const [mode, setMode] = useState<Mode>('file')
+  const [modelName, setModelName] = useState<ModelName>(defaultModel)
   const [stage, setStage] = useState<Stage>('input')
   const [file, setFile] = useState<File | null>(null)
   const [procedure, setProcedure] = useState(emptyProcedure)
@@ -56,8 +58,8 @@ function NewAnalysis({ onComplete }: Props) {
     setLoading(true); setError('')
     try {
       const output = mode === 'file' && file
-        ? await analyzeFile(file)
-        : await analyzeManual(procedurePayload(procedure))
+        ? await analyzeFile(file, modelName)
+        : await analyzeManual(procedurePayload(procedure), modelName)
       setResult(output); setStage('result')
       onComplete(output, mode, mode === 'file' ? file!.name : 'Manual entry')
     } catch (cause) {
@@ -66,7 +68,7 @@ function NewAnalysis({ onComplete }: Props) {
   }
 
   function reset() {
-    setStage('input'); setMode('file'); setFile(null); setPreviewRow(0); setProcedure(emptyProcedure())
+    setStage('input'); setMode('file'); setModelName(defaultModel); setFile(null); setPreviewRow(0); setProcedure(emptyProcedure())
     setResult(null); setError('')
   }
 
@@ -80,10 +82,11 @@ function NewAnalysis({ onComplete }: Props) {
               {file && <div className="selected-file"><FileSpreadsheet size={22}/><div><strong>{file.name}</strong><span>{(file.size / 1024).toFixed(1)} KB · Ready to submit</span></div><button type="button" aria-label="Remove selected file" onClick={() => setFile(null)}><X size={18}/></button></div>}
               {file && <DatasetPreview file={file} rowIndex={previewRow} onRowChange={setPreviewRow}/>}</div>
             : <ManualEntry values={procedure} onChange={action => { setProcedure(action); setError('') }} />}
+            <div className="model-choice"><label className="field-label" htmlFor="model-name">Model variant</label><select id="model-name" value={modelName} onChange={event => setModelName(event.target.value as ModelName)}>{modelOptions.map(option => <option key={option.id} value={option.id}>{option.label}</option>)}</select><p>The backend must have the selected model available to run this analysis.</p></div>
             {error && <p className="error-message" role="alert">{error}</p>}
             <div className="card-actions"><span>Fields marked * are required</span><button type="button" className="primary-button" onClick={next}>Continue to review <ArrowRight size={17}/></button></div>
           </div>}
-          {stage === 'review' && <div className="card-body"><div className="section-title"><span className="icon-box"><ShieldCheck size={20}/></span><div><h2>Review submission</h2><p>Check the information before starting the analysis.</p></div></div><div className="review-panel"><span>INPUT METHOD</span><strong>{mode === 'file' ? 'Uploaded file' : 'Manual entry'}</strong><hr/><span>{mode === 'file' ? 'SELECTED FILE' : 'CATHETERS'}</span><strong>{mode === 'file' ? file?.name : `${procedure.points.length} catheters`}</strong></div>{mode === 'file' && file && <DatasetPreview file={file} rowIndex={previewRow} onRowChange={setPreviewRow}/>}{mode === 'manual' && <><AtriaPlot points={procedure.points}/><div className="table-scroll"><table className="position-review"><thead><tr><th>Catheter</th><th>Region</th><th>Temperature</th><th>Pressure / force</th></tr></thead><tbody>{procedure.points.map((point, index) => <tr key={point.id}><td>{index + 1}</td><td>{regionById(point.regionId)?.label}</td><td>{point.temperature === '' ? '—' : `${point.temperature} ${procedure.temperatureUnit === 'unspecified' ? '(unit unspecified)' : procedure.temperatureUnit}`}</td><td>{point.pressure === '' ? '—' : `${point.pressure} ${procedure.pressureUnit === 'unspecified' ? '(unit unspecified)' : procedure.pressureUnit}`}</td></tr>)}</tbody></table></div></>}{error && <p className="error-message" role="alert">{error}</p>}<div className="card-actions"><button type="button" className="text-button" onClick={() => { setStage('input'); setError('') }}><ArrowLeft size={17}/> Edit information</button><button type="button" className="primary-button" disabled={loading} onClick={submit}>{loading ? 'Analyzing…' : 'Run analysis'} {!loading && <ArrowRight size={17}/>}</button></div></div>}
+          {stage === 'review' && <div className="card-body"><div className="section-title"><span className="icon-box"><ShieldCheck size={20}/></span><div><h2>Review submission</h2><p>Check the information before starting the analysis.</p></div></div><div className="review-panel"><span>INPUT METHOD</span><strong>{mode === 'file' ? 'Uploaded file' : 'Manual entry'}</strong><hr/><span>{mode === 'file' ? 'SELECTED FILE' : 'CATHETERS'}</span><strong>{mode === 'file' ? file?.name : `${procedure.points.length} catheters`}</strong><hr/><span>MODEL VARIANT</span><strong>{modelOptions.find(option => option.id === modelName)?.label}</strong></div>{mode === 'file' && file && <DatasetPreview file={file} rowIndex={previewRow} onRowChange={setPreviewRow}/>}{mode === 'manual' && <><AtriaPlot points={procedure.points}/><div className="table-scroll"><table className="position-review"><thead><tr><th>Catheter</th><th>Region</th><th>Temperature</th><th>Pressure / force</th></tr></thead><tbody>{procedure.points.map((point, index) => <tr key={point.id}><td>{index + 1}</td><td>{regionById(point.regionId)?.label}</td><td>{point.temperature === '' ? '—' : `${point.temperature} ${procedure.temperatureUnit === 'unspecified' ? '(unit unspecified)' : procedure.temperatureUnit}`}</td><td>{point.pressure === '' ? '—' : `${point.pressure} ${procedure.pressureUnit === 'unspecified' ? '(unit unspecified)' : procedure.pressureUnit}`}</td></tr>)}</tbody></table></div></>}{error && <p className="error-message" role="alert">{error}</p>}<div className="card-actions"><button type="button" className="text-button" onClick={() => { setStage('input'); setError('') }}><ArrowLeft size={17}/> Edit information</button><button type="button" className="primary-button" disabled={loading} onClick={submit}>{loading ? 'Analyzing…' : 'Run analysis'} {!loading && <ArrowRight size={17}/>}</button></div></div>}
           {stage === 'result' && result && <div className="card-body"><div className="section-title"><span className="icon-box"><Activity size={20}/></span><div><h2>{isDemoMode ? 'Sample prediction' : 'Model prediction'}</h2><p>Outcome estimate based on the submitted procedure data.</p></div></div><div className="result-panel"><span className="result-label">PREDICTED OUTCOME</span><div className="result-outcome">{result.predictedOutcome === 'success' ? 'Successful outcome' : 'Unsuccessful outcome'}</div><p>Model estimate based on this procedure’s inputs.</p><div className="probability-row"><span>Estimated probability of success</span><strong>{Math.round(result.probability * 100)}%</strong></div><div className="meter"><div style={{ width: `${result.probability * 100}%` }}/></div></div>{!isDemoMode && <div className="definition"><strong>Outcome definition</strong><p>{result.outcomeDefinition}</p></div>}<p className="result-footnote">{isDemoMode ? 'Illustrative result only. Do not use for clinical decisions.' : 'Prediction is model generated and requires clinical interpretation.'} {result.modelVersion && `Model: ${result.modelVersion}.`}</p><div className="card-actions"><Link className="text-button" to="/analyses">View analyses →</Link><button type="button" className="text-button" onClick={reset}><RotateCcw size={17}/> Start another analysis</button></div></div>}
         </section><aside className="right-rail"><div className="rail-card"><div className="rail-icon"><HeartPulse size={21}/></div><h3>How it works</h3><div className="rail-step"><span>01</span><div><strong>Provide procedure data</strong><p>Upload a file or choose catheter regions and measurements.</p></div></div><div className="rail-step"><span>02</span><div><strong>Backend processing</strong><p>The service validates and formats data for the model.</p></div></div><div className="rail-step"><span>03</span><div><strong>Review prediction</strong><p>See the model’s estimated procedure outcome.</p></div></div></div></aside></div>
   </>
