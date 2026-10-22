@@ -7,12 +7,19 @@ and parsing work, in its threadpool.
 import json
 from typing import Annotated, Any, Literal
 
-from fastapi import APIRouter, Depends, HTTPException, Query, UploadFile
+from fastapi import APIRouter, Depends, Form, HTTPException, Query, UploadFile
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
 from app.db import get_session
-from app.schemas import AnalysisDetail, AnalysisRecord, AnalysisResult, ManualAnalysisRequest
+from app.schemas import (
+    DEFAULT_MODEL,
+    AnalysisDetail,
+    AnalysisRecord,
+    AnalysisResult,
+    ManualAnalysisRequest,
+    ModelName,
+)
 from app.services import analysis_store, predictor
 from app.services.file_parser import MAX_UPLOAD_BYTES, FileParseError, parse_procedure_file
 
@@ -22,7 +29,11 @@ SessionDep = Annotated[Session, Depends(get_session)]
 
 
 @router.post("/file", response_model_exclude_none=True)
-def analyze_file(file: UploadFile, session: SessionDep) -> AnalysisResult:
+def analyze_file(
+    file: UploadFile,
+    session: SessionDep,
+    model_name: Annotated[ModelName, Form()] = DEFAULT_MODEL,
+) -> AnalysisResult:
     """Analyze one procedure from an uploaded .csv, .json, or .xlsx file."""
     # Read one byte past the limit so an oversized upload is detected without reading all of it.
     content = file.file.read(MAX_UPLOAD_BYTES + 1)
@@ -30,7 +41,7 @@ def analyze_file(file: UploadFile, session: SessionDep) -> AnalysisResult:
         row = parse_procedure_file(file.filename, content)
     except FileParseError as error:
         raise HTTPException(status_code=error.status_code, detail=error.detail) from error
-    result = predictor.predict_from_file(row)
+    result = predictor.predict_from_file(row, model_name)
     # to_json converts NaN to null and NumPy scalars to plain JSON values.
     input_data = json.loads(row.to_json(orient="records"))[0]
     _save(session, result, "file", file.filename or "Uploaded file", input_data)
@@ -40,7 +51,7 @@ def analyze_file(file: UploadFile, session: SessionDep) -> AnalysisResult:
 @router.post("/manual", response_model_exclude_none=True)
 def analyze_manual(request: ManualAnalysisRequest, session: SessionDep) -> AnalysisResult:
     """Analyze one procedure from manually entered catheter measurements."""
-    result = predictor.predict_from_manual(request)
+    result = predictor.predict_from_manual(request, request.model_name)
     _save(session, result, "manual", "Manual entry", request.model_dump(mode="json"))
     return result
 

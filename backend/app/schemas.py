@@ -14,6 +14,9 @@ GROUPING_VERSION = "left-named-column-v1"
 MAX_CATHETERS = 4
 
 RegionId = Literal["la", "ra", "lspv", "lipv", "rspv", "ripv", "svc", "ivc"]
+# The frontend dropdown offers the first three; k_nearest is backend-only for now.
+ModelName = Literal["logistic", "random_forest", "xgboost", "k_nearest"]
+DEFAULT_MODEL: ModelName = "logistic"
 TemperatureUnit = Literal["unspecified", "C", "F"]
 PressureUnit = Literal["unspecified", "g", "mmHg", "kPa"]
 
@@ -47,6 +50,8 @@ class Catheter(StrictModel):
 
 
 class ManualAnalysisRequest(StrictModel):
+    # snake_case to match the frontend's request body.
+    model_name: ModelName = DEFAULT_MODEL
     schemaVersion: Literal["catheter-regions-v2"]
     groupingVersion: Literal["left-named-column-v1"]
     units: Units

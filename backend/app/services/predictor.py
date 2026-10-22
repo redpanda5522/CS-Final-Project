@@ -15,7 +15,7 @@ from xgboost import DMatrix
 from pathlib import Path
 from uuid import uuid4
 
-from app.schemas import AnalysisResult, ManualAnalysisRequest
+from app.schemas import AnalysisResult, ManualAnalysisRequest, ModelName
 
 MODEL_DIR = Path(__file__).resolve().parent / "models"
 MODEL_MAP = {
@@ -41,7 +41,20 @@ MODEL_MAP = {
     },
     #"nueral": joblib.load(MODEL_DIR / "neural_net_model.joblib"),
 }
-FEATURES = joblib.load(MODEL_DIR / "expected_features.joblib")
+
+
+def _feature_names(model) -> list[str]:
+    """Columns the model was trained on, in training order."""
+    names = getattr(model, "feature_names_in_", None)  # sklearn estimators and pipelines
+    if names is None:
+        names = model.feature_names  # xgboost Booster
+    return [str(name).strip() for name in names]
+
+
+# Models were trained on different column sets (k_nearest uses the raw columns, the
+# others the combined ones), so each is aligned to its own list.
+for _info in MODEL_MAP.values():
+    _info["features"] = _feature_names(_info["model"])
 
 # Adjust these values later
 SUCCESS_THRESHOLD = 0.5
@@ -59,18 +72,17 @@ def _result(probability: float, model_version: str) -> AnalysisResult:
         modelVersion=model_version,
     )
 
-def _prepare_features(row: pd.DataFrame) -> pd.DataFrame:
-    """Align the uploaded single-row DataFrame to `FEATURES`.
+def _prepare_features(row: pd.DataFrame, features: list[str]) -> pd.DataFrame:
+    """Align the uploaded single-row DataFrame to the model's `features`.
 
-    - Adds any missing features from `FEATURES` with value 0.
-    - Drops any extra columns not in `FEATURES`.
+    - Adds any missing features with value 0.
+    - Drops any extra columns not in `features`.
     - Coerces all columns to numeric where possible and fills NaN with 0.
     """
     X = row.copy()
     # Normalize incoming column names
     X.columns = [str(c).strip() for c in X.columns]
-    expected = list(FEATURES)
-    expected = [str(c).strip() for c in expected]
+    expected = features
     # add missing expected features with 0
     for feat in expected:
         if feat not in X.columns:
@@ -90,10 +102,10 @@ def _predict_xgb(model, row: pd.DataFrame) -> int:
     # Calculate Probability of a 0 for recur (which is a successful operation)
     return 1 - model.predict(DMatrix(row))[0]
 
-def predict_from_file(row: pd.DataFrame, model_name: str = "logistic") -> AnalysisResult:
+def predict_from_file(row: pd.DataFrame, model_name: ModelName = "logistic") -> AnalysisResult:
     """Predict from one parsed procedure row."""
-    prepared_row = _prepare_features(row)
     model_info = MODEL_MAP[model_name]
+    prepared_row = _prepare_features(row, model_info["features"])
     prob_of_success = None
     match model_info["type"]:
         case "sklearn":
@@ -105,7 +117,7 @@ def predict_from_file(row: pd.DataFrame, model_name: str = "logistic") -> Analys
     return _result(prob_of_success, model_info["version"])
 
 
-def predict_from_manual(request: ManualAnalysisRequest, model_name: str = "logistic") -> AnalysisResult:
+def predict_from_manual(request: ManualAnalysisRequest, model_name: ModelName = "logistic") -> AnalysisResult:
     """Predict from manually entered catheter measurements."""
     # TODO(ML team): Map catheters to model features and call the model.
     model_info = MODEL_MAP[model_name]
