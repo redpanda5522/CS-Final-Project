@@ -153,3 +153,29 @@ def test_model_failure_returns_json_500(client, monkeypatch):
     response = _upload(client, _csv(_raw_row()), "xgboost")
     assert response.status_code == 500
     assert response.json()["detail"] == "The xgboost model could not process this input."
+
+
+def test_model_catalog_lists_every_model(client):
+    response = client.get("/api/models")
+    assert response.status_code == 200
+    body = response.json()
+    assert body["defaultModel"] == "logistic"
+    assert [model["id"] for model in body["models"]] == ["logistic", "random_forest", "xgboost", "k_nearest"]
+    assert all(model["available"] for model in body["models"])
+    formats = {model["id"]: model["inputFormats"] for model in body["models"]}
+    assert formats["k_nearest"] == ["raw"]
+    assert formats["logistic"] == ["raw", "combined"]
+
+
+def test_model_catalog_marks_unloaded_model_unavailable(client, monkeypatch):
+    monkeypatch.delitem(predictor.MODEL_MAP, "xgboost")
+    xgboost = next(m for m in client.get("/api/models").json()["models"] if m["id"] == "xgboost")
+    assert xgboost == {"id": "xgboost", "label": "XGBoost", "available": False, "inputFormats": []}
+
+
+def test_catalog_ids_are_exactly_the_accepted_model_names():
+    from typing import get_args
+
+    from app.schemas import ModelName
+
+    assert list(predictor.MODEL_SPECS) == list(get_args(ModelName))

@@ -14,7 +14,7 @@ GROUPING_VERSION = "left-named-column-v1"
 MAX_CATHETERS = 4
 
 RegionId = Literal["la", "ra", "lspv", "lipv", "rspv", "ripv", "svc", "ivc"]
-# The frontend dropdown offers the first three; k_nearest is backend-only for now.
+# The frontend dropdown is built from GET /api/models.
 ModelName = Literal["logistic", "random_forest", "xgboost", "k_nearest"]
 DEFAULT_MODEL: ModelName = "logistic"
 TemperatureUnit = Literal["unspecified", "C", "F"]
@@ -65,6 +65,20 @@ class AnalysisResult(BaseModel):
     probability: Annotated[float, Field(ge=0, le=1, allow_inf_nan=False)]
     outcomeDefinition: Annotated[str, Field(min_length=1)]
     modelVersion: str | None = None
+
+
+class ModelOption(BaseModel):
+    id: ModelName
+    label: str
+    # False when the artifact failed to load; selecting it returns 503.
+    available: bool
+    # File formats the model accepts: raw data.csv columns and/or the combined columns.
+    inputFormats: list[Literal["raw", "combined"]]
+
+
+class ModelCatalog(BaseModel):
+    defaultModel: ModelName
+    models: list[ModelOption]
 
 
 class AnalysisRecord(AnalysisResult):

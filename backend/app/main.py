@@ -4,7 +4,7 @@ from fastapi import FastAPI, Request
 from fastapi.exceptions import RequestValidationError
 from fastapi.responses import JSONResponse
 
-from app.routers import analyses, health
+from app.routers import analyses, health, model_catalog
 
 app = FastAPI(
     title="Senior Project API",
@@ -14,6 +14,7 @@ app = FastAPI(
 
 app.include_router(health.router)
 app.include_router(analyses.router)
+app.include_router(model_catalog.router)
 
 
 @app.exception_handler(RequestValidationError)

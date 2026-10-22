@@ -18,16 +18,18 @@ import joblib
 import pandas as pd
 from xgboost import DMatrix
 
-from app.schemas import AnalysisResult, ManualAnalysisRequest, ModelName
+from app.schemas import AnalysisResult, ManualAnalysisRequest, ModelName, ModelOption
 
 MODEL_DIR = Path(__file__).resolve().parent / "models"
 logger = logging.getLogger(__name__)
 
+# Order and labels here are what the frontend dropdown shows (GET /api/models).
 MODEL_SPECS = {
-    "logistic": {"file": "logistic_model.joblib", "version": "logistic_regression_v1", "type": "sklearn"},
-    "random_forest": {"file": "random_forest_model.joblib", "version": "random_forest_v1", "type": "sklearn"},
-    "k_nearest": {"file": "knc_model.joblib", "version": "k_nearest_v1", "type": "sklearn"},
-    "xgboost": {"file": "xgboost_model.joblib", "version": "xgboost_v1", "type": "xgb"},
+    "logistic": {"label": "Logistic regression", "file": "logistic_model.joblib", "version": "logistic_regression_v1", "type": "sklearn"},
+    "random_forest": {"label": "Random forest", "file": "random_forest_model.joblib", "version": "random_forest_v1", "type": "sklearn"},
+    "xgboost": {"label": "XGBoost", "file": "xgboost_model.joblib", "version": "xgboost_v1", "type": "xgb"},
+    # knc.py trains a NearestCentroid classifier, despite the k_nearest ID.
+    "k_nearest": {"label": "Nearest centroid", "file": "knc_model.joblib", "version": "k_nearest_v1", "type": "sklearn"},
     # "nueral": {"file": "neural_net_model.joblib", ...},
 }
 
@@ -147,6 +149,17 @@ def _model_info(model_name: ModelName) -> dict:
     if model_name not in MODEL_MAP:
         raise ModelUnavailableError(f"The {model_name} model is not available on this server.")
     return MODEL_MAP[model_name]
+
+
+def list_models() -> list[ModelOption]:
+    """Every known model, with whether its artifact loaded and which file formats it takes."""
+    options = []
+    for name, spec in MODEL_SPECS.items():
+        info = MODEL_MAP.get(name)
+        # Combined-column models also take raw files (combined server-side); raw-only models do not.
+        formats = [] if info is None else ["raw"] if info["raw_input"] else ["raw", "combined"]
+        options.append(ModelOption(id=name, label=spec["label"], available=info is not None, inputFormats=formats))
+    return options
 
 
 def predict_from_file(row: pd.DataFrame, model_name: ModelName = "logistic") -> AnalysisResult:

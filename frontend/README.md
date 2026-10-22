@@ -57,7 +57,7 @@ CSV upload previews collapse binary values per row, show recognized region flags
 
 This **replaces the earlier coordinate-based and binary-feature manual schemas**. No X/Y fields are sent. The backend must accept region IDs and enforce the 1–4 limit. Optional measurements are numbers or null. Temperature units: `unspecified`, `C`, `F`. Pressure units: `unspecified`, `g` (contact force), `mmHg`, `kPa`. Force and pressure are distinct quantities and must not be converted interchangeably.
 
-The model dropdown sends `logistic`, `random_forest`, or `xgboost` as `model_name` for both input methods. Demo mode labels the selection but returns the same illustrative result. Live selection requires backend routing and the matching deployed model artifact; this checkout currently includes only the logistic artifact.
+The model dropdown is built from `GET /api/models` and sends the chosen ID as `model_name` for both input methods. If that list cannot be loaded, and in demo mode, the built-in list in `src/config/models.ts` is used. Demo mode labels the selection but returns the same illustrative result.
 
 The backend owns authoritative validation, formatting, missing-value policy, feature ordering, and ML invocation. `src/data/regionGrouping.ts` supplies the preview grouping logic; `column-groups.json` supplies the complete named-to-V mapping for a backend implementation. The frontend does not assume region data already matches the trained model.
 

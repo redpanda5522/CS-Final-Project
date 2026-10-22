@@ -11,7 +11,7 @@ This is the current **proposed v1 HTTP contract** implemented by the frontend. T
 
 ## File submission
 
-`POST /api/analyses/file` with `multipart/form-data`. The **`file`** field contains the original uploaded bytes and filename. The **`model_name`** text field selects `logistic`, `random_forest`, or `xgboost`. The browser does not send its CSV preview, chosen preview row, region summary, or a converted feature vector. Do not require any of those fields from this endpoint.
+`POST /api/analyses/file` with `multipart/form-data`. The **`file`** field contains the original uploaded bytes and filename. The **`model_name`** text field holds the model ID chosen in the dropdown (see Model list below). The browser does not send its CSV preview, chosen preview row, region summary, or a converted feature vector. Do not require any of those fields from this endpoint.
 
 The UI accepts `.csv`, `.json`, and `.xlsx`, with nonempty files up to **10 MiB (10,485,760 bytes)**. This is a provisional product limit; the backend must enforce its own size and content checks. A file's extension alone does not prove its format. If a format or shape is unsupported by the model pipeline, return a clear 4xx error.
 
@@ -50,6 +50,10 @@ curl -i http://localhost:8000/api/analyses/manual \
   --data-binary '{"model_name":"logistic","schemaVersion":"catheter-regions-v2","groupingVersion":"left-named-column-v1","units":{"temperature":"C","pressure":"g"},"catheters":[{"id":"550e8400-e29b-41d4-a716-446655440000","regionId":"la","temperature":37,"pressure":12}]}'
 ```
 
+## Model list
+
+`GET /api/models` returns `{"defaultModel": "logistic", "models": [{"id", "label", "available", "inputFormats"}]}`. The New analysis page fetches it once on load and builds the model dropdown from it: unavailable models are shown but disabled, and a model whose `inputFormats` is only `raw` shows a note that it needs the raw data.csv columns. If the request fails or takes longer than 5 seconds, and in demo mode, the page uses the built-in list in [`src/config/models.ts`](../src/config/models.ts). The backend still validates `model_name` on every submission.
+
 ## Response and errors
 
 Both endpoints return HTTP `200` and one JSON object:
@@ -83,6 +87,5 @@ For a validation or processing failure, return an appropriate 4xx/5xx status and
 - Specify accepted CSV/JSON/XLSX schemas and whether `id`, `recur`, or `redo` are permitted in uploaded data. The CSV preview only summarizes region flags; it is not the model parser.
 - Define how manual region IDs and optional measurements map to trained features. The frontend cannot infer thousands of raw `V` flags or invent missing features. [`src/config/column-groups.json`](../src/config/column-groups.json) is a grouping reference, not a validated feature specification.
 - Resolve missing measurement and unspecified-unit policies, and whether force and pressure need separate model fields.
-- Validate `model_name` against the three supported IDs and return a clear 4xx error for an unknown or unavailable model. The current checkout contains only `models/logistic_model.joblib`; random forest and XGBoost artifacts must be produced and deployed before those selections can run. `predictor.py` names all three but is not wired to the HTTP endpoints.
 
 Until these decisions are made, a fixed backend test response proves the transport and UI integration only; it does not validate the clinical or ML prediction pipeline.

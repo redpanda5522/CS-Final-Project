@@ -97,9 +97,22 @@ unsaved prediction.
 
 ### Model selection
 
-`model_name` is `logistic` (the default), `random_forest`, `xgboost`, or `k_nearest`. The
-frontend dropdown offers the first three. An unknown name returns 422; a model whose
-artifact failed to load at startup returns 503, and the other models keep working.
+`model_name` is `logistic` (the default), `random_forest`, `xgboost`, or `k_nearest`
+(labelled "Nearest centroid": `knc.py` trains a `NearestCentroid` classifier). An unknown
+name returns 422; a model whose artifact failed to load at startup returns 503, and the
+other models keep working.
+
+The frontend builds its dropdown from `GET /api/models`, which lists every model with its
+label, whether it loaded, and which file formats it accepts:
+
+```json
+{"defaultModel": "logistic", "models": [
+  {"id": "k_nearest", "label": "Nearest centroid", "available": true, "inputFormats": ["raw"]}
+]}
+```
+
+To add a model, add it to `MODEL_SPECS` in `app/services/predictor.py` and to `ModelName`
+in `app/schemas.py` (a test checks they match). The frontend picks it up automatically.
 
 Artifacts live in `app/services/models/`. Each model is aligned to the columns it was
 trained on:
@@ -130,6 +143,7 @@ app/
     __init__.py
     health.py          # GET /health
     analyses.py        # POST /api/analyses/file and /api/analyses/manual
+    model_catalog.py   # GET /api/models (the frontend's model dropdown)
   services/
     __init__.py
     analysis_store.py  # Save and load analyses
