@@ -47,7 +47,7 @@ def analyze_file(
     result = _predict(predictor.predict_from_file, row, model_name)
     # to_json converts NaN to null and NumPy scalars to plain JSON values.
     input_data = json.loads(row.to_json(orient="records"))[0]
-    _save(session, result, "file", file.filename or "Uploaded file", input_data)
+    _save(session, result, "file", model_name, file.filename or "Uploaded file", input_data)
     return result
 
 
@@ -55,7 +55,9 @@ def analyze_file(
 def analyze_manual(request: ManualAnalysisRequest, session: SessionDep) -> AnalysisResult:
     """Analyze one procedure from manually entered catheter measurements."""
     result = _predict(predictor.predict_from_manual, request, request.model_name)
-    _save(session, result, "manual", "Manual entry", request.model_dump(mode="json"))
+    # model_name is stored in its own column, not with the procedure input.
+    input_data = request.model_dump(mode="json", exclude={"model_name"})
+    _save(session, result, "manual", request.model_name, "Manual entry", input_data)
     return result
 
 
@@ -97,12 +99,15 @@ def _save(
     session: Session,
     result: AnalysisResult,
     input_mode: Literal["file", "manual"],
+    model_name: ModelName,
     source_name: str,
     input_data: dict[str, Any],
 ) -> None:
     # Do not return a prediction the user cannot find again later.
     try:
-        analysis_store.save_analysis(session, result, input_mode, source_name, input_data)
+        analysis_store.save_analysis(
+            session, result, input_mode, model_name, source_name, input_data
+        )
     except SQLAlchemyError as error:
         session.rollback()
         raise HTTPException(

@@ -6,19 +6,21 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.models import Analysis
-from app.schemas import AnalysisDetail, AnalysisRecord, AnalysisResult
+from app.schemas import AnalysisDetail, AnalysisRecord, AnalysisResult, ModelName
 
 
 def save_analysis(
     session: Session,
     result: AnalysisResult,
     input_mode: Literal["file", "manual"],
+    model_name: ModelName,
     source_name: str,
     input_data: dict[str, Any],
 ) -> Analysis:
     analysis = Analysis(
         analysis_id=result.analysisId,
         input_mode=input_mode,
+        model_name=model_name,
         source_name=source_name,
         input_data=input_data,
         predicted_outcome=result.predictedOutcome,
@@ -56,6 +58,7 @@ def to_record(row: Analysis) -> AnalysisRecord:
         outcomeDefinition=row.outcome_definition,
         modelVersion=row.model_version,
         inputMode=row.input_mode,
+        modelName=row.model_name,
         sourceName=row.source_name,
         createdAt=row.created_at,
     )

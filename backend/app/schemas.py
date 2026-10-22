@@ -71,6 +71,7 @@ class AnalysisRecord(AnalysisResult):
     """A saved analysis, matching the frontend's AnalysisRecord type."""
 
     inputMode: Literal["file", "manual"]
+    modelName: ModelName | None = None
     sourceName: str
     createdAt: datetime
     isDemo: Literal[False] = False
