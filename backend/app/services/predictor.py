@@ -9,38 +9,43 @@ TODO(ML team): Replace the stub below with the trained model. Still to decide
   - The policy for missing measurements, and whether force and pressure need separate fields.
 """
 
+import logging
+import re
+from pathlib import Path
+from uuid import uuid4
+
 import joblib
 import pandas as pd
 from xgboost import DMatrix
-from pathlib import Path
-from uuid import uuid4
 
 from app.schemas import AnalysisResult, ManualAnalysisRequest, ModelName
 
 MODEL_DIR = Path(__file__).resolve().parent / "models"
-MODEL_MAP = {
-    "logistic": {
-        "model": joblib.load(MODEL_DIR / "logistic_model.joblib"), 
-        "version": "logistic_regression_v1", 
-        "type": "sklearn"
-    },
-    "random_forest": {
-        "model": joblib.load(MODEL_DIR / "random_forest_model.joblib"), 
-        "version":"random_forest_v1", 
-        "type": "sklearn"
-    },
-    "k_nearest": {
-            "model": joblib.load(MODEL_DIR / "knc_model.joblib"), 
-            "version":"k_nearest_v1", 
-            "type": "sklearn"
-    },
-    "xgboost": {
-        "model": joblib.load(MODEL_DIR / "xgboost_model.joblib"), 
-        "version": "xgboost_v1", 
-        "type": "xgb"
-    },
-    #"nueral": joblib.load(MODEL_DIR / "neural_net_model.joblib"),
+logger = logging.getLogger(__name__)
+
+MODEL_SPECS = {
+    "logistic": {"file": "logistic_model.joblib", "version": "logistic_regression_v1", "type": "sklearn"},
+    "random_forest": {"file": "random_forest_model.joblib", "version": "random_forest_v1", "type": "sklearn"},
+    "k_nearest": {"file": "knc_model.joblib", "version": "k_nearest_v1", "type": "sklearn"},
+    "xgboost": {"file": "xgboost_model.joblib", "version": "xgboost_v1", "type": "xgb"},
+    # "nueral": {"file": "neural_net_model.joblib", ...},
 }
+
+# Raw data.csv sub-columns are named v<number>; clean_data.py OR-s them into the named
+# column before them. These are the columns clean_data.py drops before combining.
+_RAW_SUBCOLUMN = re.compile(r"v\d+")
+_DROPPED_BEFORE_COMBINING = [
+    "ablationdata_pfa", "applications_pfa", "detectorsversion", "grids_pfa", "rawpositions_pfa",
+    "sites_pfa", "visitagsessions_pfa", "visitagsettings_pfa", "vvversion", "id",
+]
+
+
+class PredictionInputError(ValueError):
+    """The input cannot be used with the selected model (a client error)."""
+
+
+class ModelUnavailableError(RuntimeError):
+    """The selected model's artifact failed to load."""
 
 
 def _feature_names(model) -> list[str]:
@@ -51,10 +56,32 @@ def _feature_names(model) -> list[str]:
     return [str(name).strip() for name in names]
 
 
-# Models were trained on different column sets (k_nearest uses the raw columns, the
-# others the combined ones), so each is aligned to its own list.
-for _info in MODEL_MAP.values():
-    _info["features"] = _feature_names(_info["model"])
+def _has_raw_subcolumns(columns) -> bool:
+    return any(_RAW_SUBCOLUMN.fullmatch(str(column)) for column in columns)
+
+
+def _load_models() -> dict[str, dict]:
+    """Load each artifact independently so one bad file only disables that model."""
+    models = {}
+    for name, spec in MODEL_SPECS.items():
+        try:
+            model = joblib.load(MODEL_DIR / spec["file"])
+            features = _feature_names(model)
+        except Exception:
+            logger.exception("Could not load model %r from %s", name, spec["file"])
+            continue
+        models[name] = {
+            **spec,
+            "model": model,
+            # Models were trained on different column sets: k_nearest on the raw columns,
+            # the others on the combined ones. Each is aligned to its own list.
+            "features": features,
+            "raw_input": _has_raw_subcolumns(features),
+        }
+    return models
+
+
+MODEL_MAP = _load_models()
 
 # Adjust these values later
 SUCCESS_THRESHOLD = 0.5
@@ -71,6 +98,20 @@ def _result(probability: float, model_version: str) -> AnalysisResult:
         outcomeDefinition=OUTCOME_DEFINITION,
         modelVersion=model_version,
     )
+
+def _combine_raw_columns(row: pd.DataFrame) -> pd.DataFrame:
+    """Reproduce clean_data.py: OR each named column with the v-columns that follow it."""
+    X = row.drop(columns=_DROPPED_BEFORE_COMBINING, errors="ignore")
+    X = X.apply(pd.to_numeric, errors="coerce").fillna(0)
+    groups, current = [], None
+    for column in X.columns:
+        # Same rule as clean_data.py: a column not starting with "v" opens a new group.
+        if str(column)[0] != "v" or current is None:
+            current = column
+        groups.append(current)
+    combined = (X != 0).T.groupby(groups, sort=False).any().T.astype(int)
+    return combined
+
 
 def _prepare_features(row: pd.DataFrame, features: list[str]) -> pd.DataFrame:
     """Align the uploaded single-row DataFrame to the model's `features`.
@@ -94,17 +135,32 @@ def _prepare_features(row: pd.DataFrame, features: list[str]) -> pd.DataFrame:
         X[col] = pd.to_numeric(X[col], errors="coerce").fillna(0)
     return X
 
-def _predict_sklearn(model, row: pd.DataFrame) -> int:
+def _predict_sklearn(model, row: pd.DataFrame) -> float:
     # Calculate Probability of a 0 for recur (which is a successful operation)
     return model.predict_proba(row)[0][0]
 
-def _predict_xgb(model, row: pd.DataFrame) -> int:
+def _predict_xgb(model, row: pd.DataFrame) -> float:
     # Calculate Probability of a 0 for recur (which is a successful operation)
     return 1 - model.predict(DMatrix(row))[0]
 
+def _model_info(model_name: ModelName) -> dict:
+    if model_name not in MODEL_MAP:
+        raise ModelUnavailableError(f"The {model_name} model is not available on this server.")
+    return MODEL_MAP[model_name]
+
+
 def predict_from_file(row: pd.DataFrame, model_name: ModelName = "logistic") -> AnalysisResult:
-    """Predict from one parsed procedure row."""
-    model_info = MODEL_MAP[model_name]
+    """Predict from one parsed procedure row (raw data.csv or combined columns)."""
+    model_info = _model_info(model_name)
+    row = row.rename(columns=lambda column: str(column).strip())
+    row_is_raw = _has_raw_subcolumns(row.columns)
+    if model_info["raw_input"] and not row_is_raw:
+        raise PredictionInputError(
+            f"The {model_name} model needs the raw data.csv columns (including the v-columns). "
+            "This file only has the combined columns."
+        )
+    if row_is_raw and not model_info["raw_input"]:
+        row = _combine_raw_columns(row)
     prepared_row = _prepare_features(row, model_info["features"])
     prob_of_success = None
     match model_info["type"]:
@@ -114,12 +170,12 @@ def predict_from_file(row: pd.DataFrame, model_name: ModelName = "logistic") -> 
             prob_of_success = _predict_xgb(model_info["model"], prepared_row)
         case _:
             raise Exception("Invalid Model Type")
-    return _result(prob_of_success, model_info["version"])
+    return _result(float(prob_of_success), model_info["version"])
 
 
 def predict_from_manual(request: ManualAnalysisRequest, model_name: ModelName = "logistic") -> AnalysisResult:
     """Predict from manually entered catheter measurements."""
     # TODO(ML team): Map catheters to model features and call the model.
-    model_info = MODEL_MAP[model_name]
+    model_info = _model_info(model_name)
     return _result(0.5, model_info["version"])
 

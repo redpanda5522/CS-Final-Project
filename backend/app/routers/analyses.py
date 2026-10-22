@@ -5,6 +5,7 @@ and parsing work, in its threadpool.
 """
 
 import json
+import logging
 from typing import Annotated, Any, Literal
 
 from fastapi import APIRouter, Depends, Form, HTTPException, Query, UploadFile
@@ -22,6 +23,8 @@ from app.schemas import (
 )
 from app.services import analysis_store, predictor
 from app.services.file_parser import MAX_UPLOAD_BYTES, FileParseError, parse_procedure_file
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/analyses", tags=["analyses"])
 
@@ -41,7 +44,7 @@ def analyze_file(
         row = parse_procedure_file(file.filename, content)
     except FileParseError as error:
         raise HTTPException(status_code=error.status_code, detail=error.detail) from error
-    result = predictor.predict_from_file(row, model_name)
+    result = _predict(predictor.predict_from_file, row, model_name)
     # to_json converts NaN to null and NumPy scalars to plain JSON values.
     input_data = json.loads(row.to_json(orient="records"))[0]
     _save(session, result, "file", file.filename or "Uploaded file", input_data)
@@ -51,7 +54,7 @@ def analyze_file(
 @router.post("/manual", response_model_exclude_none=True)
 def analyze_manual(request: ManualAnalysisRequest, session: SessionDep) -> AnalysisResult:
     """Analyze one procedure from manually entered catheter measurements."""
-    result = predictor.predict_from_manual(request, request.model_name)
+    result = _predict(predictor.predict_from_manual, request, request.model_name)
     _save(session, result, "manual", "Manual entry", request.model_dump(mode="json"))
     return result
 
@@ -73,6 +76,21 @@ def get_analysis(analysis_id: str, session: SessionDep) -> AnalysisDetail:
     if analysis is None:
         raise HTTPException(status_code=404, detail="Analysis not found.")
     return analysis
+
+
+def _predict(predict, data, model_name: ModelName) -> AnalysisResult:
+    """Run a predictor, turning failures into JSON errors the frontend can display."""
+    try:
+        return predict(data, model_name)
+    except predictor.PredictionInputError as error:
+        raise HTTPException(status_code=422, detail=str(error)) from error
+    except predictor.ModelUnavailableError as error:
+        raise HTTPException(status_code=503, detail=str(error)) from error
+    except Exception as error:
+        logger.exception("Prediction failed with the %s model", model_name)
+        raise HTTPException(
+            status_code=500, detail=f"The {model_name} model could not process this input."
+        ) from error
 
 
 def _save(
