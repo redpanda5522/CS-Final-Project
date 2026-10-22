@@ -84,8 +84,10 @@ These implement the frontend contract in
 - `POST /api/analyses/manual`: JSON catheter measurements (1 to 4 catheters) plus an
   optional `model_name`. Units of `unspecified` default to `C` for temperature and `g`
   (contact force) for pressure.
-- `POST /api/analyses/file`: multipart fields `file`, containing one procedure as `.csv`,
-  `.json`, or `.xlsx` (10 MiB maximum), and an optional `model_name`. The `id`, `recur`, and
+- `POST /api/analyses/file`: multipart fields `file` (`.csv`, `.json`, or `.xlsx`, 10 MiB
+  maximum), an optional `model_name`, and an optional `row_index`. A file with several rows
+  needs `row_index` (0-based, blank rows not counted), and only that row is analyzed and
+  saved, with the file name stored as e.g. `data.csv (row 3)`. The `id`, `recur`, and
   `redo` columns are dropped.
 - `GET /api/analyses?limit=50&offset=0`: saved analyses, newest first, in the frontend's
   `AnalysisRecord` shape plus `modelName`. The frontend does not call this yet.

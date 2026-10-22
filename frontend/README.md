@@ -88,7 +88,7 @@ Both endpoints currently expect:
 - `src/api/analysis.ts`, `src/styles.css`, `src/pages/Help.tsx`: API types, styling and instructions.
 - `package.json` / lockfile: Papa Parse added for CSV parsing.
 
-Routes: `/` dashboard; `/analyses/new` submission; `/analyses` session history; `/analyses/:analysisId` result details; `/help` instructions. Drafts survive navigation. History and drafts live in memory; refresh clears new entries. No patient data is saved in localStorage. Production hosting must serve index.html for frontend routes and keep `/api` routed to the backend.
+Routes: `/` dashboard; `/analyses/new` submission; `/analyses` session history; `/analyses/:analysisId` result details; `/help` instructions. Drafts survive navigation. History and drafts live in memory; refresh clears new entries. No patient data is saved in localStorage. In live mode the backend separately saves each submission (result, model, file name, and submitted values) to its database. Production hosting must serve index.html for frontend routes and keep `/api` routed to the backend.
 
 ## Apply changes to your repository
 

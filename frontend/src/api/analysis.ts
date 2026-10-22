@@ -50,11 +50,13 @@ async function demoResult(modelName: ModelName): Promise<AnalysisResult> {
   }
 }
 
-export async function analyzeFile(file: File, modelName: ModelName): Promise<AnalysisResult> {
+// rowIndex is the 0-based CSV row chosen in the preview; the backend requires it for multi-row files.
+export async function analyzeFile(file: File, modelName: ModelName, rowIndex?: number): Promise<AnalysisResult> {
   if (mockMode) return demoResult(modelName)
   const form = new FormData()
   form.append('file', file, file.name)
   form.append('model_name', modelName)
+  if (rowIndex !== undefined) form.append('row_index', String(rowIndex))
   // Do not set Content-Type: the browser adds the multipart boundary.
   return readResult(await fetch('/api/analyses/file', { method: 'POST', body: form }))
 }

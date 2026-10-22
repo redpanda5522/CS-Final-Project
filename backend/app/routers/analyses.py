@@ -36,18 +36,23 @@ def analyze_file(
     file: UploadFile,
     session: SessionDep,
     model_name: Annotated[ModelName, Form()] = DEFAULT_MODEL,
+    # 0-based row to analyze; required when the file has more than one row.
+    row_index: Annotated[int | None, Form(ge=0)] = None,
 ) -> AnalysisResult:
     """Analyze one procedure from an uploaded .csv, .json, or .xlsx file."""
     # Read one byte past the limit so an oversized upload is detected without reading all of it.
     content = file.file.read(MAX_UPLOAD_BYTES + 1)
     try:
-        row = parse_procedure_file(file.filename, content)
+        row, row_count = parse_procedure_file(file.filename, content, row_index)
     except FileParseError as error:
         raise HTTPException(status_code=error.status_code, detail=error.detail) from error
     result = _predict(predictor.predict_from_file, row, model_name)
     # to_json converts NaN to null and NumPy scalars to plain JSON values.
     input_data = json.loads(row.to_json(orient="records"))[0]
-    _save(session, result, "file", model_name, file.filename or "Uploaded file", input_data)
+    source_name = file.filename or "Uploaded file"
+    if row_count > 1:
+        source_name += f" (row {(row_index or 0) + 1})"
+    _save(session, result, "file", model_name, source_name, input_data)
     return result
 
 

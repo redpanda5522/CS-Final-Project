@@ -179,3 +179,57 @@ def test_catalog_ids_are_exactly_the_accepted_model_names():
     from app.schemas import ModelName
 
     assert list(predictor.MODEL_SPECS) == list(get_args(ModelName))
+
+
+def _multi_row_csv() -> tuple[bytes, pd.DataFrame]:
+    """Three raw rows with different flags, plus a blank line the parser must skip."""
+    rows = pd.concat([_raw_row()] * 3, ignore_index=True)
+    rows.iloc[1, :] = 0
+    rows.iloc[2, :60] = 1
+    text = _csv(rows).decode()
+    header, *lines = text.splitlines()
+    return "\n".join([header, lines[0], "", lines[1], lines[2]]).encode(), rows
+
+
+def test_multi_row_file_requires_a_row(client):
+    content, _ = _multi_row_csv()
+    response = _upload(client, content, "logistic")
+    assert response.status_code == 422
+    assert "contains 3 rows" in response.json()["detail"]
+
+
+@pytest.mark.parametrize("row_index", [0, 1, 2])
+def test_row_index_selects_that_row(client, row_index):
+    content, rows = _multi_row_csv()
+    data = {"model_name": "random_forest", "row_index": str(row_index)}
+    chosen = client.post("/api/analyses/file", files={"file": ("p.csv", content)}, data=data)
+    alone = _upload(client, _csv(rows.iloc[[row_index]]), "random_forest")
+    assert chosen.status_code == 200
+    assert chosen.json()["probability"] == pytest.approx(alone.json()["probability"])
+
+
+@pytest.mark.parametrize("row_index", ["3", "-1", "x"])
+def test_invalid_row_index_is_rejected(client, row_index):
+    content, _ = _multi_row_csv()
+    data = {"model_name": "logistic", "row_index": row_index}
+    response = client.post("/api/analyses/file", files={"file": ("p.csv", content)}, data=data)
+    assert response.status_code == 422
+
+
+def test_saved_source_name_includes_row(monkeypatch):
+    saved = []
+
+    class CapturingSession(NoopSession):
+        def add(self, analysis):
+            saved.append(analysis)
+
+    app.dependency_overrides[get_session] = CapturingSession
+    try:
+        content, _ = _multi_row_csv()
+        response = TestClient(app).post(
+            "/api/analyses/file", files={"file": ("p.csv", content)}, data={"row_index": "1"}
+        )
+    finally:
+        app.dependency_overrides.clear()
+    assert response.status_code == 200
+    assert saved[0].source_name == "p.csv (row 2)"

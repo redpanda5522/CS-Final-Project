@@ -23,8 +23,14 @@ class FileParseError(ValueError):
         self.status_code = status_code
 
 
-def parse_procedure_file(filename: str | None, content: bytes) -> pd.DataFrame:
-    """Return exactly one procedure row, with excluded columns removed."""
+def parse_procedure_file(
+    filename: str | None, content: bytes, row_index: int | None = None
+) -> tuple[pd.DataFrame, int]:
+    """Return one procedure row, with excluded columns removed, and the file's row count.
+
+    A file with several rows needs `row_index` (0-based, counting only non-empty rows,
+    the same way the frontend's CSV preview numbers them).
+    """
     if not content:
         raise FileParseError("The uploaded file is empty.", 400)
     if len(content) > MAX_UPLOAD_BYTES:
@@ -45,13 +51,23 @@ def parse_procedure_file(filename: str | None, content: bytes) -> pd.DataFrame:
     frame = frame.dropna(how="all")
     if frame.empty or len(frame.columns) == 0:
         raise FileParseError("The uploaded file contains no data rows.")
-    if len(frame) != 1:
+    row_count = len(frame)
+    if row_index is None:
+        if row_count != 1:
+            raise FileParseError(
+                f"The uploaded file contains {row_count} rows. Choose a row in the CSV preview, "
+                "or upload one procedure per file."
+            )
+        row_index = 0
+    elif row_index >= row_count:
         raise FileParseError(
-            f"The uploaded file contains {len(frame)} rows. Upload one procedure per file."
+            f"Row {row_index + 1} does not exist; the uploaded file has {row_count} "
+            f"row{'' if row_count == 1 else 's'}."
         )
 
-    frame.columns = [str(column).strip() for column in frame.columns]
-    return frame.drop(columns=list(EXCLUDED_COLUMNS), errors="ignore").reset_index(drop=True)
+    row = frame.iloc[[row_index]].reset_index(drop=True)
+    row.columns = [str(column).strip() for column in row.columns]
+    return row.drop(columns=list(EXCLUDED_COLUMNS), errors="ignore"), row_count
 
 
 def _read_csv(content: bytes) -> pd.DataFrame:

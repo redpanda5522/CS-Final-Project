@@ -11,7 +11,7 @@ This is the current **proposed v1 HTTP contract** implemented by the frontend. T
 
 ## File submission
 
-`POST /api/analyses/file` with `multipart/form-data`. The **`file`** field contains the original uploaded bytes and filename. The **`model_name`** text field holds the model ID chosen in the dropdown (see Model list below). The browser does not send its CSV preview, chosen preview row, region summary, or a converted feature vector. Do not require any of those fields from this endpoint.
+`POST /api/analyses/file` with `multipart/form-data`. The **`file`** field contains the original uploaded bytes and filename. The **`model_name`** text field holds the model ID chosen in the dropdown (see Model list below). For a `.csv`, the **`row_index`** text field carries the 0-based row chosen in the preview (blank lines are not counted). The backend requires it when a file has more than one row and analyzes only that row; a single-row file needs no `row_index`. The browser does not send its CSV preview, region summary, or a converted feature vector.
 
 The UI accepts `.csv`, `.json`, and `.xlsx`, with nonempty files up to **10 MiB (10,485,760 bytes)**. This is a provisional product limit; the backend must enforce its own size and content checks. A file's extension alone does not prove its format. If a format or shape is unsupported by the model pipeline, return a clear 4xx error.
 
@@ -83,7 +83,7 @@ For a validation or processing failure, return an appropriate 4xx/5xx status and
 ## Decisions to settle with the ML team
 
 - Define `success` and `failure`, follow-up period, threshold for `predictedOutcome`, and whether `probability` is calibrated.
-- Decide whether one file means **one procedure** or a **batch of rows**. The current UI and response support one prediction per upload. A batch requires a different response and result screen.
+- Decide whether a multi-row file should ever produce a **batch** of predictions. Today one upload gives one prediction: the CSV row chosen in the preview. A batch requires a different response and result screen.
 - Specify accepted CSV/JSON/XLSX schemas and whether `id`, `recur`, or `redo` are permitted in uploaded data. The CSV preview only summarizes region flags; it is not the model parser.
 - Define how manual region IDs and optional measurements map to trained features. The frontend cannot infer thousands of raw `V` flags or invent missing features. [`src/config/column-groups.json`](../src/config/column-groups.json) is a grouping reference, not a validated feature specification.
 - Resolve missing measurement and unspecified-unit policies, and whether force and pressure need separate model fields.
