@@ -66,25 +66,53 @@ For a server without development reload:
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
+## Tests
+
+```bash
+python -m pip install -e '.[dev]'
+pytest
+```
+
+The tests need neither Postgres nor patient data: they replace the database session and
+build input rows from the columns each model was trained on.
+
 ## Analysis endpoints
 
 These implement the frontend contract in
 [`frontend/docs/backend-handoff.md`](../frontend/docs/backend-handoff.md).
 
-- `POST /api/analyses/manual`: JSON catheter measurements (1 to 4 catheters). Units of
-  `unspecified` default to `C` for temperature and `g` (contact force) for pressure.
-- `POST /api/analyses/file`: multipart field `file` containing one procedure as `.csv`,
-  `.json`, or `.xlsx` (10 MiB maximum). The `id`, `recur`, and `redo` columns are dropped.
+- `POST /api/analyses/manual`: JSON catheter measurements (1 to 4 catheters) plus an
+  optional `model_name`. Units of `unspecified` default to `C` for temperature and `g`
+  (contact force) for pressure.
+- `POST /api/analyses/file`: multipart fields `file`, containing one procedure as `.csv`,
+  `.json`, or `.xlsx` (10 MiB maximum), and an optional `model_name`. The `id`, `recur`, and
+  `redo` columns are dropped.
 - `GET /api/analyses?limit=50&offset=0`: saved analyses, newest first, in the frontend's
-  `AnalysisRecord` shape. The frontend does not call this yet.
+  `AnalysisRecord` shape plus `modelName`. The frontend does not call this yet.
 - `GET /api/analyses/{analysisId}`: one saved analysis, plus its submitted `input`.
 
 Each prediction is saved to the `analyses` table with its input: the validated manual
 request, or the parsed file row. If the save fails, the API returns 503 rather than an
 unsaved prediction.
 
-Predictions are currently a **stub** (`probability` 0.5, `modelVersion` `stub-v0`). See the
-TODOs in `app/services/predictor.py` for where the trained model plugs in.
+### Model selection
+
+`model_name` is `logistic` (the default), `random_forest`, `xgboost`, or `k_nearest`. The
+frontend dropdown offers the first three. An unknown name returns 422; a model whose
+artifact failed to load at startup returns 503, and the other models keep working.
+
+Artifacts live in `app/services/models/`. Each model is aligned to the columns it was
+trained on:
+
+- `logistic`, `random_forest`, and `xgboost` use the combined columns from
+  `clean_data.py`. A raw `data.csv`-style upload is combined the same way first, so both
+  file formats give the same prediction.
+- `k_nearest` uses the raw columns, including the `v` columns. It rejects a combined-column
+  file with 422, because the raw columns cannot be recovered from it.
+
+File uploads use the trained models. Manual entry still returns a placeholder probability
+of 0.5, because catheter regions do not yet map to model features (see the TODO in
+`app/services/predictor.py`).
 
 To use the real backend from the Vite dev server, set `VITE_USE_MOCK_API=false` in
 `frontend/.env.local` and run both servers. Vite proxies `/api` to port 8000.
@@ -108,6 +136,7 @@ app/
     file_parser.py     # Upload validation and CSV/JSON/XLSX parsing
     predictor.py       # Prediction stub (TODO: trained model)
 migrations/            # Alembic migrations
+tests/                 # pytest suite
 alembic.ini
 Dockerfile
 pyproject.toml         # Package metadata, dependencies, and FastAPI entry point
