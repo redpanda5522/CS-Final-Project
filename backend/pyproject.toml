@@ -15,9 +15,10 @@ dependencies = [
     "pandas>=2.2",
     "psycopg[binary]>=3.2",
     "sqlalchemy>=2.0",
-    "xgboost>=3.2",
+    # Capped so rebuilds stay compatible with the pickled artifacts in app/services/models.
+    "xgboost>=3.2,<3.3",
     "joblib>=1.6",
-    "scikit-learn>=1.9",
+    "scikit-learn>=1.9,<1.10",
 ]
 
 [tool.setuptools.packages.find]
