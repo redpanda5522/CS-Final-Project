@@ -66,6 +66,19 @@ class AnalysisResult(BaseModel):
     outcomeDefinition: Annotated[str, Field(min_length=1)]
     modelVersion: str | None = None
 
+# Result of training a classification model
+class ModelTrainingResult(BaseModel):
+    modelName: Annotated[str, Field(min_length=1)]
+    modelVersion: str
+    targetColumn: Annotated[str, Field(min_length=1)]
+    classificationType: Literal["binary", "multiclass"]
+    classLabels: Annotated[list[str], Field(min_length=2)]
+    compatibleWithOutcomeAnalysis: bool
+    rowsTrained: Annotated[int, Field(ge=1)]
+    featureCount: Annotated[int, Field(ge=1)]
+    validationRows: Annotated[int, Field(ge=1)]
+    accuracy: Annotated[float, Field(ge=0, le=1, allow_inf_nan=False)]
+
 
 class ModelOption(BaseModel):
     id: ModelName

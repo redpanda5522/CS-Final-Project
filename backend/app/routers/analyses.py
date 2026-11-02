@@ -19,10 +19,16 @@ from app.schemas import (
     AnalysisRecord,
     AnalysisResult,
     ManualAnalysisRequest,
+    ModelTrainingResult,
     ModelName,
 )
-from app.services import analysis_store, predictor
-from app.services.file_parser import MAX_UPLOAD_BYTES, FileParseError, parse_procedure_file
+from app.services import analysis_store, predictor, training
+from app.services.file_parser import (
+    MAX_UPLOAD_BYTES,
+    FileParseError,
+    parse_procedure_file,
+    parse_train_file,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -55,6 +61,49 @@ def analyze_file(
     _save(session, result, "file", model_name, source_name, input_data)
     return result
 
+'''
+    Train a model using uploaded training data
+    @param file: The uploaded training data file
+    @param target_column: The column to predict
+    @param model_name: The name of the model to train
+    @return: The result of the training
+'''
+@router.post("/train", response_model=ModelTrainingResult)
+def train_model(
+    file: UploadFile,
+    target_column: Annotated[str, Form(min_length=1)],
+    model_name: Annotated[ModelName, Form()],
+) -> ModelTrainingResult:
+    
+    # Read one byte past the limit so an oversized upload is detected without reading all of it.
+    content = file.file.read(MAX_UPLOAD_BYTES + 1)
+    try:
+        frame = parse_train_file(file.filename, content, target_column)
+    except FileParseError as error:
+        raise HTTPException(status_code=error.status_code, detail=error.detail) from error
+    try:
+        outcome = training.train_xgboost(frame, target_column)
+    except training.TrainingDataError as error:
+        raise HTTPException(status_code=422, detail=str(error)) from error
+    except OSError as error:
+        raise HTTPException(
+            status_code=503, detail="The trained model could not be saved."
+        ) from error
+    except Exception as error:
+        logger.exception("Model training failed")
+        raise HTTPException(status_code=500, detail="Model training failed.") from error
+    return ModelTrainingResult(
+        modelName=model_name,
+        modelVersion=predictor.MODEL_SPECS[model_name]["version"],
+        targetColumn=target_column.strip(),
+        classificationType=outcome.classification_type,
+        classLabels=list(outcome.class_labels),
+        compatibleWithOutcomeAnalysis=outcome.compatible_with_outcome_analysis,
+        rowsTrained=outcome.rows_trained,
+        featureCount=outcome.feature_count,
+        validationRows=outcome.validation_rows,
+        accuracy=outcome.accuracy,
+    )
 
 @router.post("/manual", response_model_exclude_none=True)
 def analyze_manual(request: ManualAnalysisRequest, session: SessionDep) -> AnalysisResult:

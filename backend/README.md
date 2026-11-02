@@ -89,6 +89,18 @@ These implement the frontend contract in
   needs `row_index` (0-based, blank rows not counted), and only that row is analyzed and
   saved, with the file name stored as e.g. `data.csv (row 3)`. The `id`, `recur`, and
   `redo` columns are dropped.
+- `POST /api/analyses/train`: multipart fields `file` (`.csv`, `.json`, or `.xlsx`, 10 MiB
+  maximum), `target_column` (defaults to `recur`), and `model_name` (`xgboost`). The
+  target can contain numeric or categorical labels and must have at least two classes,
+  with at least two rows per class for stratified validation. The endpoint automatically
+  selects binary logistic or multiclass soft-probability XGBoost and calculates held-out
+  accuracy. Each run is saved to a uniquely timestamped file in
+  `app/services/models/`; the API loads the newest timestamped model on startup and
+  retains earlier model files. Its
+  response includes classification type and class labels. Only a binary model with
+  labels `0` and `1` is compatible with the existing success/failure outcome-analysis
+  endpoint; other classifiers are saved and guarded from being interpreted as that
+  binary outcome.
 - `GET /api/analyses?limit=50&offset=0`: saved analyses, newest first, in the frontend's
   `AnalysisRecord` shape plus `modelName`. The frontend does not call this yet.
 - `GET /api/analyses/{analysisId}`: one saved analysis, plus its submitted `input`.

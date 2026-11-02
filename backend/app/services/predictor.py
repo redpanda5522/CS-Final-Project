@@ -9,6 +9,7 @@ TODO(ML team): Replace the stub below with the trained model. Still to decide
   - The policy for missing measurements, and whether force and pressure need separate fields.
 """
 
+import json
 import logging
 import re
 from pathlib import Path
@@ -58,6 +59,17 @@ def _feature_names(model) -> list[str]:
     return [str(name).strip() for name in names]
 
 
+def _get_class_labels(model) -> list[str]:
+    """Return labels stored with trained models; old artifacts are binary 0/1."""
+    labels = model.attr("class_labels")
+    if labels is None:
+        return ["0", "1"]
+    parsed = json.loads(labels)
+    if not isinstance(parsed, list) or not all(isinstance(label, str) for label in parsed):
+        raise ValueError("The artifact has invalid class-label metadata.")
+    return parsed
+
+
 def _has_raw_subcolumns(columns) -> bool:
     return any(_RAW_SUBCOLUMN.fullmatch(str(column)) for column in columns)
 
@@ -69,6 +81,7 @@ def _load_models() -> dict[str, dict]:
         try:
             model = joblib.load(MODEL_DIR / spec["file"])
             features = _feature_names(model)
+            class_labels = _get_class_labels(model)
         except Exception:
             logger.exception("Could not load model %r from %s", name, spec["file"])
             continue
@@ -79,11 +92,33 @@ def _load_models() -> dict[str, dict]:
             # the others on the combined ones. Each is aligned to its own list.
             "features": features,
             "raw_input": _has_raw_subcolumns(features),
+            "class_labels": class_labels,
         }
     return models
 
 
 MODEL_MAP = _load_models()
+
+'''
+    Register a newly trained model for use in predictions.
+    @param model_name: The name of the model to register
+    @param model: The trained model
+'''
+def register_trained_model(model_name: ModelName, model) -> None:
+    """Make a newly trained in-process model available for subsequent predictions."""
+    if model_name not in MODEL_SPECS:
+        raise ValueError(f"Unknown model: {model_name}")
+    features = _feature_names(model)
+    if not features:
+        raise ValueError(f"The {model_name} model has no feature names.")
+    MODEL_MAP[model_name] = {
+        **MODEL_SPECS[model_name],
+        "model": model,
+        "features": features,
+        "raw_input": _has_raw_subcolumns(features),
+        "class_labels": _get_class_labels(model),
+    }
+
 
 # Adjust these values later
 SUCCESS_THRESHOLD = 0.5
@@ -165,6 +200,13 @@ def list_models() -> list[ModelOption]:
 def predict_from_file(row: pd.DataFrame, model_name: ModelName = "logistic") -> AnalysisResult:
     """Predict from one parsed procedure row (raw data.csv or combined columns)."""
     model_info = _model_info(model_name)
+    # TODO: Remove after Multi-Class Classification is supported for analysis outcomes
+    if model_info["class_labels"] != ["0", "1"]:
+        labels = ", ".join(model_info["class_labels"])
+        raise PredictionInputError(
+            "The active model is trained for classes "
+            f"[{labels}], but outcome analysis requires binary target labels 0 and 1."
+        )
     row = row.rename(columns=lambda column: str(column).strip())
     row_is_raw = _has_raw_subcolumns(row.columns)
     if model_info["raw_input"] and not row_is_raw:
@@ -191,4 +233,3 @@ def predict_from_manual(request: ManualAnalysisRequest, model_name: ModelName = 
     # TODO(ML team): Map catheters to model features and call the model.
     model_info = _model_info(model_name)
     return _result(0.5, model_info["version"])
-
