@@ -1,5 +1,6 @@
 import pandas as pd
 import warnings
+import joblib
 
 from sklearn.model_selection import train_test_split
 from sklearn.pipeline import Pipeline
@@ -42,6 +43,7 @@ pipeline = Pipeline([
 ])
 pipeline.fit(X_train, y_train)
 
+joblib.dump(pipeline, "./models/knc_model.joblib")
 
 y_pred = pipeline.predict(X_test)
 y_prob = pipeline.predict_proba(X_test)[:, 1]
