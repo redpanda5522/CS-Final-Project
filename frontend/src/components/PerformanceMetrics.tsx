@@ -29,7 +29,7 @@ export default function PerformanceMetrics({ metrics, isDemo }: { metrics?: Metr
   const available = metrics && Object.keys(metrics).length > 0
   return <section className="work-card card-body performance-section" aria-labelledby="performance-heading">
     <h2 id="performance-heading">Model performance</h2>
-    <p className="performance-intro">Evaluation metrics describe how the model performed across a test dataset. They do not measure the certainty of this procedure’s prediction.</p>
+    <p className="performance-intro">Evaluation metrics describe performance across held-out rows from model training. They do not measure the certainty of this procedure’s prediction.</p>
     {!available && <p className="performance-notice">{isDemo ? 'Performance metrics are not included in this demo.' : 'Performance metrics have not been provided by the backend for this model.'}</p>}
     {groups.map(group => <div className="performance-group" key={group.title}>
       <h3>{group.title}</h3>

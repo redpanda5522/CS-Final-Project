@@ -60,6 +60,7 @@ This **replaces the earlier coordinate-based and binary-feature manual schemas**
 The model dropdown is built from `GET /api/models` and sends the chosen ID as `model_name` for both input methods. If that list cannot be loaded, and in demo mode, the built-in list in `src/config/models.ts` is used. Demo mode labels the selection but returns the same illustrative result.
 
 The New model page submits a dataset, target column, and model ID to `POST /api/analyses/train` in live mode. The result reports the trained model version and validation details.
+For a binary `0`/`1` target, the backend also returns held-out evaluation metrics for the trained XGBoost model. Analyses run with that model version display the same measured metrics; older model artifacts without stored metrics continue to show unavailable values. Apply backend database migration `0003` before saving analyses with metrics.
 
 The backend owns authoritative validation, formatting, missing-value policy, feature ordering, and ML invocation. `src/data/regionGrouping.ts` supplies the preview grouping logic; `column-groups.json` supplies the complete named-to-V mapping for a backend implementation. The frontend does not assume region data already matches the trained model.
 

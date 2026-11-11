@@ -97,8 +97,8 @@ These implement the frontend contract in
   accuracy. Each run is saved to a uniquely timestamped file in
   `app/services/models/`; the API loads the newest timestamped model on startup and
   retains earlier model files. Its
-  response includes classification type and class labels. Only a binary model with
-  labels `0` and `1` is compatible with the existing success/failure outcome-analysis
+  response includes classification type and class labels. Only a binary model trained
+  on the `recur` target with labels `0` and `1` is compatible with the existing success/failure outcome-analysis
   endpoint; other classifiers are saved and guarded from being interpreted as that
   binary outcome.
 - `GET /api/analyses?limit=50&offset=0`: saved analyses, newest first, in the frontend's

@@ -30,5 +30,6 @@ class Analysis(Base):
     probability: Mapped[float] = mapped_column(Float)
     outcome_definition: Mapped[str] = mapped_column(Text)
     model_version: Mapped[str | None] = mapped_column(String(64))
+    performance_metrics: Mapped[dict[str, float] | None] = mapped_column(JSONB)
     # The model the client selected. Empty for rows saved before model selection existed.
     model_name: Mapped[str | None] = mapped_column(String(32))

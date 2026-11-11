@@ -46,6 +46,7 @@ export type ModelTrainingResult = {
   featureCount: number
   validationRows: number
   accuracy: number
+  performanceMetrics?: PerformanceMetrics
 }
 
 async function readResponse(response: Response): Promise<unknown> {
@@ -100,7 +101,8 @@ async function readTrainingResult(response: Response): Promise<ModelTrainingResu
       typeof data.featureCount !== 'number' || !Number.isInteger(data.featureCount) || data.featureCount < 1 ||
       typeof data.validationRows !== 'number' || !Number.isInteger(data.validationRows) || data.validationRows < 1 ||
       typeof data.accuracy !== 'number' || !Number.isFinite(data.accuracy) ||
-      data.accuracy < 0 || data.accuracy > 1) {
+      data.accuracy < 0 || data.accuracy > 1 ||
+      (data.performanceMetrics !== undefined && !validMetrics(data.performanceMetrics))) {
     throw new Error('The server response does not match the agreed training format.')
   }
   return data as ModelTrainingResult
@@ -137,6 +139,7 @@ export async function analyzeFile(file: File, modelName: ModelName, rowIndex?: n
  * @returns A promise resolving to the training result.
  */
 export async function trainModel(file: File, targetColumn: string, modelName: ModelName): Promise<ModelTrainingResult> {
+  if (mockMode) throw new Error('Live API mode is required to train a model and view measured performance metrics.')
   const form = new FormData()
   form.append('file', file, file.name)
   form.append('target_column', targetColumn)
