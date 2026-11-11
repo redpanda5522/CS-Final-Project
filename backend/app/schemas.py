@@ -14,6 +14,9 @@ GROUPING_VERSION = "left-named-column-v1"
 MAX_CATHETERS = 4
 
 RegionId = Literal["la", "ra", "lspv", "lipv", "rspv", "ripv", "svc", "ivc"]
+# The frontend dropdown is built from GET /api/models.
+ModelName = Literal["logistic", "random_forest", "xgboost", "k_nearest"]
+DEFAULT_MODEL: ModelName = "logistic"
 TemperatureUnit = Literal["unspecified", "C", "F"]
 PressureUnit = Literal["unspecified", "g", "mmHg", "kPa"]
 
@@ -47,6 +50,8 @@ class Catheter(StrictModel):
 
 
 class ManualAnalysisRequest(StrictModel):
+    # snake_case to match the frontend's request body.
+    model_name: ModelName = DEFAULT_MODEL
     schemaVersion: Literal["catheter-regions-v2"]
     groupingVersion: Literal["left-named-column-v1"]
     units: Units
@@ -61,11 +66,39 @@ class AnalysisResult(BaseModel):
     outcomeDefinition: Annotated[str, Field(min_length=1)]
     modelVersion: str | None = None
 
+# Result of training a classification model
+class ModelTrainingResult(BaseModel):
+    modelName: Annotated[str, Field(min_length=1)]
+    modelVersion: str
+    targetColumn: Annotated[str, Field(min_length=1)]
+    classificationType: Literal["binary", "multiclass"]
+    classLabels: Annotated[list[str], Field(min_length=2)]
+    compatibleWithOutcomeAnalysis: bool
+    rowsTrained: Annotated[int, Field(ge=1)]
+    featureCount: Annotated[int, Field(ge=1)]
+    validationRows: Annotated[int, Field(ge=1)]
+    accuracy: Annotated[float, Field(ge=0, le=1, allow_inf_nan=False)]
+
+
+class ModelOption(BaseModel):
+    id: ModelName
+    label: str
+    # False when the artifact failed to load; selecting it returns 503.
+    available: bool
+    # File formats the model accepts: raw data.csv columns and/or the combined columns.
+    inputFormats: list[Literal["raw", "combined"]]
+
+
+class ModelCatalog(BaseModel):
+    defaultModel: ModelName
+    models: list[ModelOption]
+
 
 class AnalysisRecord(AnalysisResult):
     """A saved analysis, matching the frontend's AnalysisRecord type."""
 
     inputMode: Literal["file", "manual"]
+    modelName: ModelName | None = None
     sourceName: str
     createdAt: datetime
     isDemo: Literal[False] = False

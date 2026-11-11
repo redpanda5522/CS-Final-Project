@@ -23,8 +23,62 @@ class FileParseError(ValueError):
         self.status_code = status_code
 
 
-def parse_procedure_file(filename: str | None, content: bytes) -> pd.DataFrame:
-    """Return exactly one procedure row, with excluded columns removed."""
+def parse_procedure_file(
+    filename: str | None, content: bytes, row_index: int | None = None
+) -> tuple[pd.DataFrame, int]:
+    """Return one procedure row, with excluded columns removed, and the file's row count.
+
+    A file with several rows needs `row_index` (0-based, counting only non-empty rows,
+    the same way the frontend's CSV preview numbers them).
+    """
+    frame = _read_upload(filename, content)
+    row_count = len(frame)
+    if row_index is None:
+        if row_count != 1:
+            raise FileParseError(
+                f"The uploaded file contains {row_count} rows. Choose a row in the CSV preview, "
+                "or upload one procedure per file."
+            )
+        row_index = 0
+    elif row_index >= row_count:
+        raise FileParseError(
+            f"Row {row_index + 1} does not exist; the uploaded file has {row_count} "
+            f"row{'' if row_count == 1 else 's'}."
+        )
+
+    row = frame.iloc[[row_index]].reset_index(drop=True)
+    row.columns = [str(column).strip() for column in row.columns]
+    return row.drop(columns=list(EXCLUDED_COLUMNS), errors="ignore"), row_count
+
+'''
+    Parse a training file into a DataFrame.
+    @param filename: The name of the uploaded file
+    @param content: The content of the uploaded file
+    @param target_column: The column to predict
+    @return: A DataFrame containing the training data
+'''
+def parse_train_file(
+    filename: str | None, content: bytes, target_column: str = "recur"
+) -> pd.DataFrame:
+    """Return all non-empty rows, preserving the requested target column."""
+    frame = _read_upload(filename, content)
+    normalized_columns = [str(column).strip() for column in frame.columns]
+    normalized_keys = [column.casefold() for column in normalized_columns]
+    target_key = target_column.strip().casefold()
+    if any(not column for column in normalized_columns):
+        raise FileParseError("The training file contains an empty column name.")
+    if len(set(normalized_keys)) != len(normalized_keys):
+        raise FileParseError("The training file contains duplicate column names.")
+    if not target_key:
+        raise FileParseError("The target column name must not be empty.")
+    frame.columns = normalized_columns
+    if target_key not in normalized_keys:
+        raise FileParseError(f"The training file must contain the '{target_column.strip()}' target column.")
+    return frame.reset_index(drop=True)
+
+
+def _read_upload(filename: str | None, content: bytes) -> pd.DataFrame:
+    """Read and validate a complete supported upload."""
     if not content:
         raise FileParseError("The uploaded file is empty.", 400)
     if len(content) > MAX_UPLOAD_BYTES:
@@ -45,13 +99,8 @@ def parse_procedure_file(filename: str | None, content: bytes) -> pd.DataFrame:
     frame = frame.dropna(how="all")
     if frame.empty or len(frame.columns) == 0:
         raise FileParseError("The uploaded file contains no data rows.")
-    if len(frame) != 1:
-        raise FileParseError(
-            f"The uploaded file contains {len(frame)} rows. Upload one procedure per file."
-        )
-
     frame.columns = [str(column).strip() for column in frame.columns]
-    return frame.drop(columns=list(EXCLUDED_COLUMNS), errors="ignore").reset_index(drop=True)
+    return frame
 
 
 def _read_csv(content: bytes) -> pd.DataFrame:

@@ -66,25 +66,80 @@ For a server without development reload:
 uvicorn app.main:app --host 127.0.0.1 --port 8000
 ```
 
+## Tests
+
+```bash
+python -m pip install -e '.[dev]'
+pytest
+```
+
+The tests need neither Postgres nor patient data: they replace the database session and
+build input rows from the columns each model was trained on.
+
 ## Analysis endpoints
 
 These implement the frontend contract in
 [`frontend/docs/backend-handoff.md`](../frontend/docs/backend-handoff.md).
 
-- `POST /api/analyses/manual`: JSON catheter measurements (1 to 4 catheters). Units of
-  `unspecified` default to `C` for temperature and `g` (contact force) for pressure.
-- `POST /api/analyses/file`: multipart field `file` containing one procedure as `.csv`,
-  `.json`, or `.xlsx` (10 MiB maximum). The `id`, `recur`, and `redo` columns are dropped.
+- `POST /api/analyses/manual`: JSON catheter measurements (1 to 4 catheters) plus an
+  optional `model_name`. Units of `unspecified` default to `C` for temperature and `g`
+  (contact force) for pressure.
+- `POST /api/analyses/file`: multipart fields `file` (`.csv`, `.json`, or `.xlsx`, 10 MiB
+  maximum), an optional `model_name`, and an optional `row_index`. A file with several rows
+  needs `row_index` (0-based, blank rows not counted), and only that row is analyzed and
+  saved, with the file name stored as e.g. `data.csv (row 3)`. The `id`, `recur`, and
+  `redo` columns are dropped.
+- `POST /api/analyses/train`: multipart fields `file` (`.csv`, `.json`, or `.xlsx`, 10 MiB
+  maximum), `target_column` (defaults to `recur`), and `model_name` (`xgboost`). The
+  target can contain numeric or categorical labels and must have at least two classes,
+  with at least two rows per class for stratified validation. The endpoint automatically
+  selects binary logistic or multiclass soft-probability XGBoost and calculates held-out
+  accuracy. Each run is saved to a uniquely timestamped file in
+  `app/services/models/`; the API loads the newest timestamped model on startup and
+  retains earlier model files. Its
+  response includes classification type and class labels. Only a binary model with
+  labels `0` and `1` is compatible with the existing success/failure outcome-analysis
+  endpoint; other classifiers are saved and guarded from being interpreted as that
+  binary outcome.
 - `GET /api/analyses?limit=50&offset=0`: saved analyses, newest first, in the frontend's
-  `AnalysisRecord` shape. The frontend does not call this yet.
+  `AnalysisRecord` shape plus `modelName`. The frontend does not call this yet.
 - `GET /api/analyses/{analysisId}`: one saved analysis, plus its submitted `input`.
 
 Each prediction is saved to the `analyses` table with its input: the validated manual
 request, or the parsed file row. If the save fails, the API returns 503 rather than an
 unsaved prediction.
 
-Predictions are currently a **stub** (`probability` 0.5, `modelVersion` `stub-v0`). See the
-TODOs in `app/services/predictor.py` for where the trained model plugs in.
+### Model selection
+
+`model_name` is `logistic` (the default), `random_forest`, `xgboost`, or `k_nearest`
+(labelled "Nearest centroid": `knc.py` trains a `NearestCentroid` classifier). An unknown
+name returns 422; a model whose artifact failed to load at startup returns 503, and the
+other models keep working.
+
+The frontend builds its dropdown from `GET /api/models`, which lists every model with its
+label, whether it loaded, and which file formats it accepts:
+
+```json
+{"defaultModel": "logistic", "models": [
+  {"id": "k_nearest", "label": "Nearest centroid", "available": true, "inputFormats": ["raw"]}
+]}
+```
+
+To add a model, add it to `MODEL_SPECS` in `app/services/predictor.py` and to `ModelName`
+in `app/schemas.py` (a test checks they match). The frontend picks it up automatically.
+
+Artifacts live in `app/services/models/`. Each model is aligned to the columns it was
+trained on:
+
+- `logistic`, `random_forest`, and `xgboost` use the combined columns from
+  `clean_data.py`. A raw `data.csv`-style upload is combined the same way first, so both
+  file formats give the same prediction.
+- `k_nearest` uses the raw columns, including the `v` columns. It rejects a combined-column
+  file with 422, because the raw columns cannot be recovered from it.
+
+File uploads use the trained models. Manual entry still returns a placeholder probability
+of 0.5, because catheter regions do not yet map to model features (see the TODO in
+`app/services/predictor.py`).
 
 To use the real backend from the Vite dev server, set `VITE_USE_MOCK_API=false` in
 `frontend/.env.local` and run both servers. Vite proxies `/api` to port 8000.
@@ -102,12 +157,14 @@ app/
     __init__.py
     health.py          # GET /health
     analyses.py        # POST /api/analyses/file and /api/analyses/manual
+    model_catalog.py   # GET /api/models (the frontend's model dropdown)
   services/
     __init__.py
     analysis_store.py  # Save and load analyses
     file_parser.py     # Upload validation and CSV/JSON/XLSX parsing
     predictor.py       # Prediction stub (TODO: trained model)
 migrations/            # Alembic migrations
+tests/                 # pytest suite
 alembic.ini
 Dockerfile
 pyproject.toml         # Package metadata, dependencies, and FastAPI entry point
