@@ -19,7 +19,7 @@ import joblib
 import pandas as pd
 from xgboost import DMatrix
 
-from app.schemas import AnalysisResult, ManualAnalysisRequest, ModelName, ModelOption
+from app.schemas import AnalysisResult, ManualAnalysisRequest, ModelName, ModelOption, PerformanceMetrics
 
 MODEL_DIR = Path(__file__).resolve().parent / "models"
 logger = logging.getLogger(__name__)
@@ -61,13 +61,31 @@ def _feature_names(model) -> list[str]:
 
 def _get_class_labels(model) -> list[str]:
     """Return labels stored with trained models; old artifacts are binary 0/1."""
-    labels = model.attr("class_labels")
+    labels = model.attr("class_labels") if hasattr(model, "attr") else None
     if labels is None:
         return ["0", "1"]
     parsed = json.loads(labels)
     if not isinstance(parsed, list) or not all(isinstance(label, str) for label in parsed):
         raise ValueError("The artifact has invalid class-label metadata.")
     return parsed
+
+
+def _model_artifact_path(name: str, spec: dict) -> Path:
+    """Use the newest trained artifact, falling back to the bundled model."""
+    base = MODEL_DIR / spec["file"]
+    versions = sorted(MODEL_DIR.glob(f"{base.stem}_20*{base.suffix}"))
+    return versions[-1] if versions else base
+
+
+def _model_metadata(model, spec: dict) -> tuple[str, PerformanceMetrics | None]:
+    """Read evaluation values stored in the exact model artifact in use."""
+    if not hasattr(model, "attr"):
+        return spec["version"], None
+    version = model.attr("model_version") or spec["version"]
+    raw_metrics = model.attr("performance_metrics")
+    if raw_metrics is None:
+        return version, None
+    return version, PerformanceMetrics.model_validate(json.loads(raw_metrics))
 
 
 def _has_raw_subcolumns(columns) -> bool:
@@ -79,9 +97,11 @@ def _load_models() -> dict[str, dict]:
     models = {}
     for name, spec in MODEL_SPECS.items():
         try:
-            model = joblib.load(MODEL_DIR / spec["file"])
+            model = joblib.load(_model_artifact_path(name, spec))
             features = _feature_names(model)
             class_labels = _get_class_labels(model)
+            version, metrics = _model_metadata(model, spec)
+            target_column = model.attr("target_column") if hasattr(model, "attr") else None
         except Exception:
             logger.exception("Could not load model %r from %s", name, spec["file"])
             continue
@@ -93,6 +113,9 @@ def _load_models() -> dict[str, dict]:
             "features": features,
             "raw_input": _has_raw_subcolumns(features),
             "class_labels": class_labels,
+            "target_column": target_column or "recur",
+            "version": version,
+            "performance_metrics": metrics,
         }
     return models
 
@@ -111,12 +134,16 @@ def register_trained_model(model_name: ModelName, model) -> None:
     features = _feature_names(model)
     if not features:
         raise ValueError(f"The {model_name} model has no feature names.")
+    version, metrics = _model_metadata(model, MODEL_SPECS[model_name])
     MODEL_MAP[model_name] = {
         **MODEL_SPECS[model_name],
         "model": model,
         "features": features,
         "raw_input": _has_raw_subcolumns(features),
         "class_labels": _get_class_labels(model),
+        "target_column": model.attr("target_column") if hasattr(model, "attr") else "recur",
+        "version": version,
+        "performance_metrics": metrics,
     }
 
 
@@ -127,13 +154,14 @@ OUTCOME_DEFINITION = (
     f"that treatment was successful. Failure: Greater than {SUCCESS_THRESHOLD * 100}% "
     f"predicted chance that treatment was unsuccessful."
 )
-def _result(probability: float, model_version: str) -> AnalysisResult:
+def _result(probability: float, model_info: dict) -> AnalysisResult:
     return AnalysisResult(
         analysisId=f"analysis-{uuid4()}",
         predictedOutcome="success" if probability >= SUCCESS_THRESHOLD else "failure",
         probability=probability,
         outcomeDefinition=OUTCOME_DEFINITION,
-        modelVersion=model_version,
+        modelVersion=model_info["version"],
+        performanceMetrics=model_info.get("performance_metrics"),
     )
 
 def _combine_raw_columns(row: pd.DataFrame) -> pd.DataFrame:
@@ -200,6 +228,10 @@ def list_models() -> list[ModelOption]:
 def predict_from_file(row: pd.DataFrame, model_name: ModelName = "logistic") -> AnalysisResult:
     """Predict from one parsed procedure row (raw data.csv or combined columns)."""
     model_info = _model_info(model_name)
+    if model_info.get("target_column", "recur") != "recur":
+        raise PredictionInputError(
+            "The selected model was trained for a different target and cannot be used for ablation outcome analysis."
+        )
     # TODO: Remove after Multi-Class Classification is supported for analysis outcomes
     if model_info["class_labels"] != ["0", "1"]:
         labels = ", ".join(model_info["class_labels"])
@@ -225,11 +257,12 @@ def predict_from_file(row: pd.DataFrame, model_name: ModelName = "logistic") -> 
             prob_of_success = _predict_xgb(model_info["model"], prepared_row)
         case _:
             raise Exception("Invalid Model Type")
-    return _result(float(prob_of_success), model_info["version"])
+    return _result(float(prob_of_success), model_info)
 
 
 def predict_from_manual(request: ManualAnalysisRequest, model_name: ModelName = "logistic") -> AnalysisResult:
     """Predict from manually entered catheter measurements."""
     # TODO(ML team): Map catheters to model features and call the model.
     model_info = _model_info(model_name)
-    return _result(0.5, model_info["version"])
+    # The manual path is still a placeholder, so do not imply it was evaluated.
+    return _result(0.5, {**model_info, "performance_metrics": None})

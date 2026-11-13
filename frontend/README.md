@@ -37,9 +37,9 @@ CSV upload previews collapse binary values per row, show recognized region flags
 
 ## Backend contract
 
-**Start with [the backend handoff guide](docs/backend-handoff.md)** for exact requests, responses, error handling, local integration steps, and unresolved ML decisions. The current browser flow expects one synchronous prediction per submission; a multirow file workflow still needs agreement.
+**Start with [the backend handoff guide](docs/backend-handoff.md)** for exact requests, responses, error handling, local integration steps, and unresolved ML decisions. The current browser flow expects one synchronous prediction per submission. For a multirow CSV, the user selects one row; a batch workflow still needs agreement.
 
-**File:** `POST /api/analyses/file`, multipart fields `file` and `model_name`, containing the original CSV/JSON/XLSX file, unchanged, and the selected model ID. The browser's region preview never replaces the uploaded file. Current size limit: 10 MB.
+**File:** `POST /api/analyses/file`, multipart fields `file` and `model_name`, containing the original CSV/JSON/XLSX file, unchanged, and the selected model ID. CSV submissions also include `row_index` for the selected row. The browser's region preview never replaces the uploaded file. Current size limit: 10 MB.
 
 **Manual:** `POST /api/analyses/manual`, JSON:
 
@@ -59,6 +59,9 @@ This **replaces the earlier coordinate-based and binary-feature manual schemas**
 
 The model dropdown is built from `GET /api/models` and sends the chosen ID as `model_name` for both input methods. If that list cannot be loaded, and in demo mode, the built-in list in `src/config/models.ts` is used. Demo mode labels the selection but returns the same illustrative result.
 
+The New model page submits a dataset, target column, and model ID to `POST /api/analyses/train` in live mode. The result reports the trained model version and validation details.
+For a binary `0`/`1` target, the backend also returns held-out evaluation metrics for the trained XGBoost model. Analyses run with that model version display the same measured metrics; older model artifacts without stored metrics continue to show unavailable values. Apply backend database migration `0003` before saving analyses with metrics.
+
 The backend owns authoritative validation, formatting, missing-value policy, feature ordering, and ML invocation. `src/data/regionGrouping.ts` supplies the preview grouping logic; `column-groups.json` supplies the complete named-to-V mapping for a backend implementation. The frontend does not assume region data already matches the trained model.
 
 Both endpoints currently expect:
@@ -73,7 +76,11 @@ Both endpoints currently expect:
 }
 ```
 
-`probability` is P(success), from 0 to 1. Define the clinical target, follow-up period, decision threshold, accepted files, and one-versus-many predictions before live integration. Account/authentication and permanent history are not implemented.
+`probability` is P(success), from 0 to 1. Define the clinical target, follow-up period, decision threshold, accepted files, and one-versus-many predictions before live integration. Backend account authentication and permanent history are not implemented.
+
+## Account preview
+
+The dashboard has **Create account** and **Sign in** buttons. Creating an account accepts a name, email, optional organization, and password; sign in checks accounts created in the same browser tab session. The profile page shows account details and a **Sign out** button. These accounts and the signed-in state live only in memory and disappear on refresh. Passwords are not sent to the backend or saved in browser storage. This is a UI prototype: accounts do not control access to analyses, and backend authentication, persistence, and recovery are still required.
 
 ## Files and pages
 
@@ -85,10 +92,11 @@ Both endpoints currently expect:
 - `src/data/regionGrouping.ts`: CSV parsing, left-column grouping, binary collapse and region presence summaries.
 - `src/types/procedure.ts`: manual state, cap/measurement validation, new payload.
 - `src/pages/NewAnalysis.tsx`: input/review/result flow and API handoff.
+- `src/pages/Account.tsx`, `src/account/demoAccounts.ts`: temporary account creation, sign in, profile and sign out flow.
 - `src/api/analysis.ts`, `src/styles.css`, `src/pages/Help.tsx`: API types, styling and instructions.
 - `package.json` / lockfile: Papa Parse added for CSV parsing.
 
-Routes: `/` dashboard; `/analyses/new` submission; `/analyses` session history; `/analyses/:analysisId` result details; `/help` instructions. Drafts survive navigation. History and drafts live in memory; refresh clears new entries. No patient data is saved in localStorage. In live mode the backend separately saves each submission (result, model, file name, and submitted values) to its database. Production hosting must serve index.html for frontend routes and keep `/api` routed to the backend.
+Routes: `/` dashboard; `/analyses/new` submission; `/models/new` model training; `/analyses` session history; `/analyses/:analysisId` result details; `/account/create` account creation; `/account/sign-in` sign in; `/account` profile; `/help` instructions. Drafts survive navigation. History and drafts live in memory; refresh clears new entries. No patient data is saved in localStorage. In live mode the backend separately saves each analysis submission (result, model, file name, and submitted values) to its database. Production hosting must serve index.html for frontend routes and keep `/api` routed to the backend.
 
 ## Apply changes to your repository
 

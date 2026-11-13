@@ -68,13 +68,15 @@ def analyze_file(
     @param model_name: The name of the model to train
     @return: The result of the training
 '''
-@router.post("/train", response_model=ModelTrainingResult)
+@router.post("/train", response_model=ModelTrainingResult, response_model_exclude_none=True)
 def train_model(
     file: UploadFile,
     target_column: Annotated[str, Form(min_length=1)],
     model_name: Annotated[ModelName, Form()],
 ) -> ModelTrainingResult:
-    
+    if model_name != "xgboost":
+        raise HTTPException(status_code=422, detail="Only XGBoost training is supported.")
+
     # Read one byte past the limit so an oversized upload is detected without reading all of it.
     content = file.file.read(MAX_UPLOAD_BYTES + 1)
     try:
@@ -94,7 +96,7 @@ def train_model(
         raise HTTPException(status_code=500, detail="Model training failed.") from error
     return ModelTrainingResult(
         modelName=model_name,
-        modelVersion=predictor.MODEL_SPECS[model_name]["version"],
+        modelVersion=predictor.MODEL_MAP[model_name]["version"],
         targetColumn=target_column.strip(),
         classificationType=outcome.classification_type,
         classLabels=list(outcome.class_labels),
@@ -103,6 +105,7 @@ def train_model(
         featureCount=outcome.feature_count,
         validationRows=outcome.validation_rows,
         accuracy=outcome.accuracy,
+        performanceMetrics=outcome.performance_metrics,
     )
 
 @router.post("/manual", response_model_exclude_none=True)

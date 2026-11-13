@@ -1,6 +1,7 @@
 """Model training services."""
 
 import json
+import hashlib
 import logging
 import math
 import os
@@ -11,12 +12,18 @@ from pathlib import Path
 from typing import Literal
 
 import joblib
+import numpy as np
 import pandas as pd
 import xgboost as xgb
 from xgboost import Booster
-from sklearn.metrics import accuracy_score
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    accuracy_score, average_precision_score, brier_score_loss, f1_score,
+    log_loss, precision_score, recall_score, roc_auc_score,
+)
 from sklearn.model_selection import train_test_split
 
+from app.schemas import PerformanceMetrics
 from app.services import predictor
 
 logger = logging.getLogger(__name__)
@@ -35,6 +42,7 @@ class TrainingOutcome:
     feature_count: int
     validation_rows: int
     accuracy: float
+    performance_metrics: PerformanceMetrics | None = None
     classification_type: Literal["binary", "multiclass"] = "binary"
     class_labels: tuple[str, ...] = ("0", "1")
     compatible_with_outcome_analysis: bool = True
@@ -50,6 +58,9 @@ def train_xgboost(frame: pd.DataFrame, target_column: str = "recur") -> Training
     features, labels, class_labels = _split_training_data(frame, target_column)
     class_count = len(class_labels)
     classification_type = "binary" if class_count == 2 else "multiclass"
+    compatible_with_outcome_analysis = (
+        class_labels == ("0", "1") and target_column.strip().casefold() == "recur"
+    )
     class_counts = labels.value_counts()
     if class_counts.min() < 2:
         raise TrainingDataError(
@@ -73,9 +84,29 @@ def train_xgboost(frame: pd.DataFrame, target_column: str = "recur") -> Training
         validation_model, validation_features, class_count
     )
     validation_accuracy = float(accuracy_score(validation_labels, validation_predictions))
+    performance_metrics = None
+    if compatible_with_outcome_analysis:
+        # The analysis API calls recur=0 a success, so use class 0 as positive.
+        failure_probabilities = validation_model.predict(xgb.DMatrix(validation_features))
+        performance_metrics = _binary_metrics(
+            (validation_labels == 0).astype(int).to_numpy(),
+            (validation_predictions == 0).astype(int).to_numpy(),
+            1 - failure_probabilities,
+        )
 
     # Save the final model
     model = _fit_xgboost(features, labels, class_count, class_labels)
+    model.set_attr(target_column=target_column.strip().casefold())
+    if performance_metrics is not None:
+        model.set_attr(
+            performance_metrics=json.dumps(performance_metrics.model_dump(exclude_none=True)),
+            evaluation_dataset_sha256=hashlib.sha256(
+                frame.to_csv(index=False).encode("utf-8")
+            ).hexdigest(),
+            evaluation_rows=str(len(validation_features)),
+            evaluation_positive_class="0",
+            evaluation_method="stratified 20% held-out split, random_state=42",
+        )
     artifact = predictor.MODEL_DIR / predictor.MODEL_SPECS["xgboost"]["file"]
     _save_model(model, artifact)
     predictor.register_trained_model("xgboost", model)
@@ -85,10 +116,44 @@ def train_xgboost(frame: pd.DataFrame, target_column: str = "recur") -> Training
         feature_count=features.shape[1],
         validation_rows=len(validation_features),
         accuracy=validation_accuracy,
+        performance_metrics=performance_metrics,
         classification_type=classification_type,
         class_labels=class_labels,
-        compatible_with_outcome_analysis=class_labels == ("0", "1"),
+        compatible_with_outcome_analysis=compatible_with_outcome_analysis,
     )
+
+
+def _binary_metrics(y_true, y_pred, success_probability) -> PerformanceMetrics:
+    """Evaluate success on held-out rows; never use an analyzed procedure as a label."""
+    probabilities = np.clip(np.asarray(success_probability, dtype=float), 1e-15, 1 - 1e-15)
+    labels = np.asarray(y_true, dtype=int)
+    predictions = np.asarray(y_pred, dtype=int)
+    prevalence = float(np.mean(labels))
+    brier = float(brier_score_loss(labels, probabilities))
+    baseline_brier = prevalence * (1 - prevalence)
+    expected = float(np.sum(probabilities))
+    values = {
+        "accuracy": float(accuracy_score(labels, predictions)),
+        "precision": float(precision_score(labels, predictions, zero_division=0)),
+        "recall": float(recall_score(labels, predictions, zero_division=0)),
+        "f1": float(f1_score(labels, predictions, zero_division=0)),
+        "auroc": float(roc_auc_score(labels, probabilities)),
+        "auprc": float(average_precision_score(labels, probabilities)),
+        "logLoss": float(log_loss(labels, probabilities)),
+        "brierScore": brier,
+        "observedExpectedRatio": float(np.sum(labels) / expected) if expected > 0 else None,
+        "scaledBrierScore": float(1 - brier / baseline_brier) if baseline_brier > 0 else None,
+    }
+    logits = np.log(probabilities / (1 - probabilities))
+    try:
+        calibration = LogisticRegression(penalty=None, solver="lbfgs")
+        calibration.fit(logits.reshape(-1, 1), labels)
+        values["calibrationIntercept"] = float(calibration.intercept_[0])
+        values["calibrationSlope"] = float(calibration.coef_[0][0])
+    except ValueError:
+        # A degenerate validation sample cannot support calibration fitting.
+        pass
+    return PerformanceMetrics.model_validate(values)
 
 '''
     Fits an XGBoost model to the provided data.
@@ -235,6 +300,9 @@ def _save_model(model: Booster, artifact: Path) -> Path:
     while versioned_artifact.exists():
         versioned_artifact = artifact.with_name(f"{artifact.stem}_{timestamp}_{counter}{artifact.suffix}")
         counter += 1
+
+    if isinstance(model, Booster):
+        model.set_attr(model_version=versioned_artifact.stem)
 
     temporary_path: Path | None = None
     try:
