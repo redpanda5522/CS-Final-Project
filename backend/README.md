@@ -18,6 +18,16 @@ Migrations run automatically when the backend container starts. Data persists in
 `postgres-data` volume; `docker-compose down -v` deletes it. To change the credentials or
 the Postgres host port, copy `.env.example` to `.env` in the repository root.
 
+Models trained through `POST /api/analyses/train` are saved in the `model-artifacts`
+volume, so they survive restarts and rebuilds. The volume starts as a copy of the models
+bundled in `app/services/models/`. If the bundled models change, or to discard trained
+models, stop the stack and delete the volume:
+
+```bash
+docker-compose down
+docker volume rm seniorproject_model-artifacts
+```
+
 ## Setup
 
 Use Python 3.11 or newer. Run these commands from this directory:
