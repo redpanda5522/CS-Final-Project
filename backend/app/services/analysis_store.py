@@ -27,6 +27,8 @@ def save_analysis(
         probability=result.probability,
         outcome_definition=result.outcomeDefinition,
         model_version=result.modelVersion,
+        performance_metrics=(result.performanceMetrics.model_dump(exclude_none=True)
+                             if result.performanceMetrics else None),
     )
     session.add(analysis)
     session.commit()
@@ -57,6 +59,7 @@ def to_record(row: Analysis) -> AnalysisRecord:
         probability=row.probability,
         outcomeDefinition=row.outcome_definition,
         modelVersion=row.model_version,
+        performanceMetrics=row.performance_metrics,
         inputMode=row.input_mode,
         modelName=row.model_name,
         sourceName=row.source_name,

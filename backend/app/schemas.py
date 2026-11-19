@@ -58,6 +58,23 @@ class ManualAnalysisRequest(StrictModel):
     catheters: Annotated[list[Catheter], Field(min_length=1, max_length=MAX_CATHETERS)]
 
 
+class PerformanceMetrics(StrictModel):
+    """Held-out evaluation metrics for the model, with success (recur=0) positive."""
+
+    accuracy: Annotated[float, Field(ge=0, le=1)] | None = None
+    precision: Annotated[float, Field(ge=0, le=1)] | None = None
+    recall: Annotated[float, Field(ge=0, le=1)] | None = None
+    f1: Annotated[float, Field(ge=0, le=1)] | None = None
+    auroc: Annotated[float, Field(ge=0, le=1)] | None = None
+    auprc: Annotated[float, Field(ge=0, le=1)] | None = None
+    logLoss: Annotated[float, Field(ge=0)] | None = None
+    brierScore: Annotated[float, Field(ge=0, le=1)] | None = None
+    scaledBrierScore: float | None = None
+    calibrationIntercept: float | None = None
+    calibrationSlope: float | None = None
+    observedExpectedRatio: Annotated[float, Field(ge=0)] | None = None
+
+
 class AnalysisResult(BaseModel):
     analysisId: Annotated[str, Field(min_length=1)]
     predictedOutcome: Literal["success", "failure"]
@@ -65,6 +82,21 @@ class AnalysisResult(BaseModel):
     probability: Annotated[float, Field(ge=0, le=1, allow_inf_nan=False)]
     outcomeDefinition: Annotated[str, Field(min_length=1)]
     modelVersion: str | None = None
+    performanceMetrics: PerformanceMetrics | None = None
+
+# Result of training a classification model
+class ModelTrainingResult(BaseModel):
+    modelName: Annotated[str, Field(min_length=1)]
+    modelVersion: str
+    targetColumn: Annotated[str, Field(min_length=1)]
+    classificationType: Literal["binary", "multiclass"]
+    classLabels: Annotated[list[str], Field(min_length=2)]
+    compatibleWithOutcomeAnalysis: bool
+    rowsTrained: Annotated[int, Field(ge=1)]
+    featureCount: Annotated[int, Field(ge=1)]
+    validationRows: Annotated[int, Field(ge=1)]
+    accuracy: Annotated[float, Field(ge=0, le=1, allow_inf_nan=False)]
+    performanceMetrics: PerformanceMetrics | None = None
 
 
 class ModelOption(BaseModel):

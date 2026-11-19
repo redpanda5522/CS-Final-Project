@@ -5,7 +5,7 @@ This is the current **proposed v1 HTTP contract** implemented by the frontend. T
 ## What runs where
 
 - The frontend owns input controls, basic validation, loading/error UI, and rendering the returned prediction. Its request code is in [`src/api/analysis.ts`](../src/api/analysis.ts); its manual serializer is in [`src/types/procedure.ts`](../src/types/procedure.ts).
-- The backend owns both `/api/analyses/*` endpoints, authoritative validation, file parsing, feature construction in the trained model's exact order, model invocation, and response generation.
+- The backend owns the `/api/analyses/*` endpoints, authoritative validation, file parsing, feature construction in the trained model's exact order, model invocation, training, and response generation.
 - GitHub shares the code and this contract. At runtime the browser sends an HTTP request to the backend; no input data is sent through GitHub.
 - The frontend currently expects a **synchronous JSON result** for each request. There is no job polling, authentication, or persistent history API. Analyses shown in the UI exist only until page refresh.
 
@@ -70,6 +70,8 @@ Both endpoints return HTTP `200` and one JSON object:
 
 `analysisId` and `outcomeDefinition` must be nonempty strings. `predictedOutcome` is exactly `success` or `failure`; `probability` is a finite number in `[0, 1]` and means **P(success)**, not confidence that the predicted class is correct. `modelVersion` is optional and, when present, a string. Return `Content-Type: application/json`. The UI rejects malformed responses.
 
+The results UI accepts an optional `performanceMetrics` object with numeric fields `accuracy`, `precision`, `recall`, `f1`, `auroc`, `auprc`, `logLoss`, `brierScore`, `scaledBrierScore`, `calibrationIntercept`, `calibrationSlope`, and `observedExpectedRatio`. Each field may be omitted. Rates and AUC values are fractions in `[0, 1]`; `brierScore` is also in `[0, 1]`. The remaining values are shown as decimals. These are **model evaluation metrics across held-out rows**, not metrics for one procedure. For a binary XGBoost model trained on the `recur` target with labels `0` and `1`, training computes them with success (`recur=0`) as the positive class on a stratified validation split, then refits the final model on all rows. The timestamped artifact stores the metrics, target, validation method, row count, and SHA-256 fingerprint of the training dataset. Later file analyses return the metrics with that model version. Models trained for another target are rejected by the ablation analysis endpoint, even when their labels are `0` and `1`. The training response includes metrics for compatible models too. The manual analysis path is still a placeholder, so it does not return model metrics. Older model artifacts have no stored evaluation metrics, so their UI fields remain unavailable until those artifacts are evaluated on a documented held-out dataset. The current bundled `test_data.csv` has only one row and cannot support these aggregate metrics. Apply database migration `0003` to retain metrics in saved analyses.
+
 For a validation or processing failure, return an appropriate 4xx/5xx status and a JSON `detail` string, for example `{"detail":"Unsupported file format"}`. FastAPI's standard `detail` array with `msg` fields is also displayed. Do not return a successful-looking prediction if parsing or feature construction fails. The frontend keeps the user on the review step and displays the error.
 
 ## Local integration check
@@ -87,5 +89,6 @@ For a validation or processing failure, return an appropriate 4xx/5xx status and
 - Specify accepted CSV/JSON/XLSX schemas and whether `id`, `recur`, or `redo` are permitted in uploaded data. The CSV preview only summarizes region flags; it is not the model parser.
 - Define how manual region IDs and optional measurements map to trained features. The frontend cannot infer thousands of raw `V` flags or invent missing features. [`src/config/column-groups.json`](../src/config/column-groups.json) is a grouping reference, not a validated feature specification.
 - Resolve missing measurement and unspecified-unit policies, and whether force and pressure need separate model fields.
+- Validate `model_name` against the IDs exposed by `GET /api/models` and return a clear 4xx error for an unknown or unavailable model. The catalog reports artifact availability; training and deployment determine which models can run.
 
 Until these decisions are made, a fixed backend test response proves the transport and UI integration only; it does not validate the clinical or ML prediction pipeline.

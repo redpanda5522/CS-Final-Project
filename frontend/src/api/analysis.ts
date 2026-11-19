@@ -3,15 +3,53 @@ import type { ModelName } from '../config/models'
 
 export type ManualInput = ManualAnalysisRequest
 
+export type PerformanceMetrics = Partial<Record<
+  'accuracy' | 'precision' | 'recall' | 'f1' | 'auroc' | 'auprc' |
+  'logLoss' | 'brierScore' | 'scaledBrierScore' | 'calibrationIntercept' |
+  'calibrationSlope' | 'observedExpectedRatio', number
+>>
+
 export type AnalysisResult = {
   analysisId: string
   predictedOutcome: 'success' | 'failure'
   probability: number // P(success), 0..1; not a calibrated clinical confidence score.
   outcomeDefinition: string
   modelVersion?: string
+  performanceMetrics?: PerformanceMetrics
 }
 
-async function readResult(response: Response): Promise<AnalysisResult> {
+const metricNames: (keyof PerformanceMetrics)[] = [
+  'accuracy', 'precision', 'recall', 'f1', 'auroc', 'auprc', 'logLoss',
+  'brierScore', 'scaledBrierScore', 'calibrationIntercept',
+  'calibrationSlope', 'observedExpectedRatio',
+]
+
+function validMetrics(value: unknown): value is PerformanceMetrics {
+  if (!value || typeof value !== 'object' || Array.isArray(value)) return false
+  return Object.entries(value).every(([key, metric]) =>
+    metricNames.includes(key as keyof PerformanceMetrics) &&
+    typeof metric === 'number' && Number.isFinite(metric) &&
+    (!['accuracy', 'precision', 'recall', 'f1', 'auroc', 'auprc', 'brierScore'].includes(key) || (metric >= 0 && metric <= 1)) &&
+    (key !== 'logLoss' || metric >= 0) &&
+    (key !== 'observedExpectedRatio' || metric >= 0),
+  )
+}
+
+export type ModelTrainingResult = {
+  modelName: string
+  modelVersion: string
+  targetColumn: string
+  classificationType: 'binary' | 'multiclass'
+  classLabels: string[]
+  compatibleWithOutcomeAnalysis: boolean
+  rowsTrained: number
+  featureCount: number
+  validationRows: number
+  accuracy: number
+  performanceMetrics?: PerformanceMetrics
+}
+
+async function readResponse(response: Response): Promise<unknown> {
   if (!response.ok) {
     let message = `The server returned ${response.status}. Please try again.`
     try {
@@ -24,7 +62,11 @@ async function readResult(response: Response): Promise<AnalysisResult> {
     } catch { /* Use the HTTP status message. */ }
     throw new Error(message)
   }
-  const result: unknown = await response.json()
+  return response.json()
+}
+
+async function readResult(response: Response): Promise<AnalysisResult> {
+  const result = await readResponse(response)
   if (!result || typeof result !== 'object') throw new Error('The server returned an invalid result.')
   const data = result as Partial<AnalysisResult>
   if (typeof data.analysisId !== 'string' || !data.analysisId.trim() ||
@@ -32,10 +74,38 @@ async function readResult(response: Response): Promise<AnalysisResult> {
       typeof data.probability !== 'number' || !Number.isFinite(data.probability) ||
       data.probability < 0 || data.probability > 1 ||
       typeof data.outcomeDefinition !== 'string' || !data.outcomeDefinition.trim() ||
-      (data.modelVersion !== undefined && typeof data.modelVersion !== 'string')) {
+      (data.modelVersion !== undefined && typeof data.modelVersion !== 'string') ||
+      (data.performanceMetrics !== undefined && !validMetrics(data.performanceMetrics))) {
     throw new Error('The server response does not match the agreed analysis format.')
   }
   return data as AnalysisResult
+}
+
+/**
+ * Reads the training result from the API response.
+ * @param response: The API response object.
+ * @returns A promise resolving to the training result.
+ */
+async function readTrainingResult(response: Response): Promise<ModelTrainingResult> {
+  const result = await readResponse(response)
+  if (!result || typeof result !== 'object') throw new Error('The server returned an invalid training result.')
+  const data = result as Partial<ModelTrainingResult>
+  if (typeof data.modelName !== 'string' ||
+      typeof data.modelVersion !== 'string' || !data.modelVersion.trim() ||
+      typeof data.targetColumn !== 'string' || !data.targetColumn.trim() ||
+      (data.classificationType !== 'binary' && data.classificationType !== 'multiclass') ||
+      !Array.isArray(data.classLabels) || data.classLabels.length < 2 ||
+      !data.classLabels.every(label => typeof label === 'string') ||
+      typeof data.compatibleWithOutcomeAnalysis !== 'boolean' ||
+      typeof data.rowsTrained !== 'number' || !Number.isInteger(data.rowsTrained) || data.rowsTrained < 1 ||
+      typeof data.featureCount !== 'number' || !Number.isInteger(data.featureCount) || data.featureCount < 1 ||
+      typeof data.validationRows !== 'number' || !Number.isInteger(data.validationRows) || data.validationRows < 1 ||
+      typeof data.accuracy !== 'number' || !Number.isFinite(data.accuracy) ||
+      data.accuracy < 0 || data.accuracy > 1 ||
+      (data.performanceMetrics !== undefined && !validMetrics(data.performanceMetrics))) {
+    throw new Error('The server response does not match the agreed training format.')
+  }
+  return data as ModelTrainingResult
 }
 
 const mockMode = import.meta.env.VITE_USE_MOCK_API !== 'false'
@@ -59,6 +129,23 @@ export async function analyzeFile(file: File, modelName: ModelName, rowIndex?: n
   if (rowIndex !== undefined) form.append('row_index', String(rowIndex))
   // Do not set Content-Type: the browser adds the multipart boundary.
   return readResult(await fetch('/api/analyses/file', { method: 'POST', body: form }))
+}
+
+/**
+ * Calls the API to train a model on the provided file and target column.
+ * @param file: The file to train the model on.
+ * @param targetColumn: The column to use as the target variable.
+ * @param modelName: The name of the model to train.
+ * @returns A promise resolving to the training result.
+ */
+export async function trainModel(file: File, targetColumn: string, modelName: ModelName): Promise<ModelTrainingResult> {
+  if (mockMode) throw new Error('Live API mode is required to train a model and view measured performance metrics.')
+  const form = new FormData()
+  form.append('file', file, file.name)
+  form.append('target_column', targetColumn)
+  form.append('model_name', modelName)
+  // Do not set Content-Type: the browser adds the multipart boundary.
+  return readTrainingResult(await fetch('/api/analyses/train', { method: 'POST', body: form }))
 }
 
 export async function analyzeManual(input: ManualInput, modelName: ModelName): Promise<AnalysisResult> {

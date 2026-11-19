@@ -13,6 +13,7 @@ from fastapi.testclient import TestClient
 from app.db import get_session
 from app.main import app
 from app.services import predictor
+from app.schemas import PerformanceMetrics
 
 SELECTABLE_MODELS = ["logistic", "random_forest", "xgboost", "k_nearest"]
 COMBINED_MODELS = ["logistic", "random_forest", "xgboost"]
@@ -91,6 +92,33 @@ def test_manual_defaults_to_logistic(client):
     response = client.post("/api/analyses/manual", json=MANUAL_REQUEST)
     assert response.status_code == 200
     assert response.json()["modelVersion"] == "logistic_regression_v1"
+
+
+def test_file_analysis_returns_measured_metrics_for_selected_artifact(client, monkeypatch):
+    info = {
+        **predictor.MODEL_MAP["logistic"],
+        "version": "logistic_evaluated_v2",
+        "performance_metrics": PerformanceMetrics(accuracy=0.8, auroc=0.85),
+    }
+    monkeypatch.setitem(predictor.MODEL_MAP, "logistic", info)
+
+    response = _upload(client, _csv(_raw_row()), "logistic")
+
+    assert response.status_code == 200
+    assert response.json()["modelVersion"] == "logistic_evaluated_v2"
+    assert response.json()["performanceMetrics"] == {"accuracy": 0.8, "auroc": 0.85}
+
+
+def test_manual_placeholder_does_not_claim_model_metrics(client, monkeypatch):
+    info = {
+        **predictor.MODEL_MAP["logistic"],
+        "performance_metrics": PerformanceMetrics(accuracy=0.8),
+    }
+    monkeypatch.setitem(predictor.MODEL_MAP, "logistic", info)
+    response = client.post("/api/analyses/manual", json=MANUAL_REQUEST)
+
+    assert response.status_code == 200
+    assert "performanceMetrics" not in response.json()
 
 
 @pytest.mark.parametrize("model_name", SELECTABLE_MODELS)
