@@ -12,6 +12,7 @@ import AccountPage from './pages/Account'
 import Help from './pages/Help'
 import NewAnalysis from './pages/NewAnalysis'
 import NewModel from './pages/NewModel'
+import HeartDisease from './pages/HeartDisease'
 
 function Workspace() {
   const [records, setRecords] = useState<AnalysisRecord[]>(isDemoMode ? DEMO_RECORDS : [])
@@ -20,6 +21,7 @@ function Workspace() {
   const title = pathname === '/' ? 'Dashboard'
     : pathname === '/analyses/new' ? 'New analysis'
     : pathname === '/models/new' ? 'New model'
+    : pathname === '/heart-disease' ? 'Heart disease detection'
     : pathname === '/analyses' ? 'Analyses'
     : pathname === '/help' ? 'Help & workflow'
     : pathname === '/account/create' ? 'Create account'
@@ -38,6 +40,7 @@ function Workspace() {
     { path: '/', label: 'Dashboard', icon: LayoutDashboard },
     { path: '/analyses/new', label: 'New analysis', icon: Activity },
     { path: '/models/new', label: 'New model', icon: Cog },
+    { path: '/heart-disease', label: 'Heart disease detection', icon: HeartPulse },
     { path: '/analyses', label: 'Analyses', icon: ClipboardList },
     { path: '/help', label: 'Help & workflow', icon: CircleHelp },
     { path: account ? '/account' : '/account/create', label: account ? 'My account' : 'Create account', icon: UserRound },
@@ -50,7 +53,7 @@ function Workspace() {
       <div className="sidebar-bottom"><Link to={account ? '/account' : '/account/create'} className="user-card"><span className="avatar">{account ? account.name.charAt(0).toUpperCase() : 'R'}</span><span>{account?.name || 'Research workspace'}<small>{account ? 'Tab session account' : 'Create a preview account'}</small></span></Link></div>
     </aside>
     <div className="main-column">
-      <header className="topbar"><span className="breadcrumb">Workspace <span>/</span><strong>{title}</strong></span><span className="top-status"><span className="status-dot"/>{isDemoMode ? 'Demo mode' : 'Live API mode'}</span></header>
+      <header className="topbar"><span className="breadcrumb">Workspace <span>/</span><strong>{title}</strong></span><span className="top-status"><span className="status-dot"/>{pathname === '/heart-disease' ? 'Live model API' : isDemoMode ? 'Demo mode' : 'Live API mode'}</span></header>
       <main id="main-content">
         {/* Retain the active draft when navigating to other workspace pages. */}
         <div hidden={pathname !== '/analyses/new'}><NewAnalysis onComplete={recordCompleted}/></div>
@@ -60,6 +63,7 @@ function Workspace() {
           <Route path="/analyses" element={<Analyses records={records}/>}/>
           <Route path="/analyses/new" element={null}/>
           <Route path="/models/new" element={null}/>
+          <Route path="/heart-disease" element={<HeartDisease/>}/>
           <Route path="/analyses/:analysisId" element={<AnalysisDetail records={records}/>}/>
           <Route path="/account/create" element={<AccountPage key="create" mode="create" account={account} onAuthenticated={setAccount} onSignOut={() => setAccount(null)}/>}/>
           <Route path="/account/sign-in" element={<AccountPage key="sign-in" mode="sign-in" account={account} onAuthenticated={setAccount} onSignOut={() => setAccount(null)}/>}/>
