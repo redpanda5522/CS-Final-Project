@@ -14,7 +14,9 @@ RUN pip install .
 COPY alembic.ini ./
 COPY migrations ./migrations
 
-RUN useradd --create-home --uid 10001 appuser
+# Training saves new model artifacts in app/services/models, so the app user must own it.
+RUN useradd --create-home --uid 10001 appuser \
+    && chown appuser:appuser app/services/models
 USER appuser
 
 EXPOSE 8000

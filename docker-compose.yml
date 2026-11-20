@@ -24,6 +24,10 @@ services:
     build: ./backend
     environment:
       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-senior_project}
+    volumes:
+      # Keeps trained models across container restarts and rebuilds. The volume starts as a
+      # copy of the bundled models; delete it to go back to them after the image changes them.
+      - model-artifacts:/app/app/services/models
     depends_on:
       db:
         condition: service_healthy
@@ -39,3 +43,4 @@ services:
 
 volumes:
   postgres-data:
+  model-artifacts:
