@@ -8,13 +8,14 @@ export default function HeartDisease() {
   const [result, setResult] = useState<HeartDiseaseResult | null>(null)
   const [error, setError] = useState('')
   const [loading, setLoading] = useState(false)
+  const [retry, setRetry] = useState(0)
 
   useEffect(() => {
     let active = true
     fetchHeartDiseaseModel().then(data => { if (active) setModel(data) })
       .catch(cause => { if (active) setError(cause instanceof Error ? cause.message : 'Could not load the model configuration.') })
     return () => { active = false }
-  }, [])
+  }, [retry])
 
   async function submit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault()
@@ -53,7 +54,7 @@ export default function HeartDisease() {
           : <input id={`heart-${field.name}`} type="number" step="any" required min={field.min} max={field.max} value={values[field.name] ?? ''} onChange={event => { setValues(current => ({ ...current, [field.name]: event.target.value })); setResult(null); setError('') }}/>}</div>)}</div>
         {error && <p className="error-message" role="alert">{error}</p>}
         <div className="card-actions"><span>All fields are required</span><button className="primary-button" type="submit" disabled={loading}>{loading ? 'Running prediction…' : 'Run prediction'}</button></div></form>}
-      {error && !model?.available && <p className="error-message" role="alert">{error}</p>}
+      {error && !model?.available && <><p className="error-message" role="alert">{error}</p><button type="button" className="text-button" onClick={() => { setError(''); setModel(null); setRetry(current => current + 1) }}>Retry connection</button></>}
       {result && <div className="heart-result" aria-live="polite"><span className="result-label">MODEL PREDICTION</span><div className="result-outcome">{result.predictedClass === 'positive' ? 'Positive' : 'Negative'}</div><p>Estimated probability of the model’s positive class: <strong>{(result.positiveClassProbability * 100).toFixed(1)}%</strong></p><p>Model version: {result.modelVersion}</p><button className="text-button" type="button" onClick={() => { setValues({}); setResult(null); setError('') }}><RotateCcw size={16}/> Clear inputs</button></div>}
     </div></section><aside className="right-rail"><div className="rail-card"><div className="rail-icon"><HeartPulse size={21}/></div><h3>About this model</h3><p className="schema-note">The model supplies its exact input fields and the meaning of its positive class through the backend configuration. Results appear only after a connected model responds.</p></div></aside></div>
   </>

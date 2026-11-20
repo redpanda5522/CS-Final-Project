@@ -31,7 +31,10 @@ async function errorMessage(response: Response): Promise<string> {
 }
 
 export async function fetchHeartDiseaseModel(): Promise<HeartDiseaseModel> {
-  const response = await fetch('/api/heart-disease/model')
+  let response: Response
+  try { response = await fetch('/api/heart-disease/model') }
+  catch { throw new Error('Could not reach the heart disease model service.') }
+  if (response.status === 404) throw new Error('The heart disease model service is not connected yet.')
   if (!response.ok) throw new Error(await errorMessage(response))
   const value: unknown = await response.json()
   if (!value || typeof value !== 'object') throw new Error('Invalid model configuration response.')
