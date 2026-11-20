@@ -1,80 +1,104 @@
-import pandas as pd
+import json
 import warnings
-import numpy as np
-import matplotlib.pyplot as plt
+from datetime import datetime
+from pathlib import Path
 
-from sklearn.model_selection import train_test_split, StratifiedKFold, cross_validate
-from sklearn.pipeline import Pipeline
-from sklearn.neighbors import NearestCentroid
-from sklearn.metrics import (
-    accuracy_score, classification_report, confusion_matrix, 
-    roc_auc_score, average_precision_score, log_loss, brier_score_loss
-)
-from sklearn.linear_model import LogisticRegression
+import joblib
+import numpy as np
+import pandas as pd
+from scipy.special import expit, logit
 from sklearn.feature_selection import VarianceThreshold
 from sklearn.inspection import permutation_importance
-from scipy.special import expit, logit
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import (
+    accuracy_score,
+    average_precision_score,
+    brier_score_loss,
+    classification_report,
+    confusion_matrix,
+    f1_score,
+    log_loss,
+    precision_score,
+    recall_score,
+    roc_auc_score,
+)
+from sklearn.model_selection import (
+    StratifiedKFold,
+    cross_validate,
+    train_test_split,
+)
+from sklearn.neighbors import NearestCentroid
+from sklearn.pipeline import Pipeline
 
-warnings.filterwarnings('ignore')
+warnings.filterwarnings("ignore")
 
 RANDOM_SEED = 45
 N_SPLITS = 5
 
+SCRIPT_DIR = Path(__file__).resolve().parent
+DATA_PATH = SCRIPT_DIR / "data_combined.csv"
+PROJECT_ROOT = SCRIPT_DIR.parents[1]
+MODEL_DIR = PROJECT_ROOT / "backend" / "app" / "services" / "models"
+
 # Load data
-ablation_data = pd.read_csv('data.csv')
-ablation_data = ablation_data.dropna(subset=['recur'])
+ablation_data = pd.read_csv(DATA_PATH)
+ablation_data = ablation_data.dropna(subset=["recur"])
 
 cols_to_drop = [
-    'ablationdata_pfa', 'applications_pfa', 'detectorsversion',
-    'grids_pfa', 'rawpositions_pfa', 'sites_pfa',
-    'visitagsessions_pfa', 'visitagsettings_pfa', 'vvversion', 'id'
+    "ablationdata_pfa",
+    "applications_pfa",
+    "detectorsversion",
+    "grids_pfa",
+    "rawpositions_pfa",
+    "sites_pfa",
+    "visitagsessions_pfa",
+    "visitagsettings_pfa",
+    "vvversion",
+    "id",
 ]
 
 ablation_data = ablation_data.drop(
-    columns=cols_to_drop, errors='ignore'
+    columns=cols_to_drop,
+    errors="ignore",
 )
 
 print(ablation_data.describe())
 
-# Separate features and target
-X = ablation_data.drop(columns=['recur'])
-y = ablation_data['recur']
+X = ablation_data.drop(columns=["recur"])
+y = ablation_data["recur"]
 
-# Keep numeric features only
-X = X.select_dtypes(include=['number'])
+# Keep numeric features only.
+X = X.select_dtypes(include=["number"])
 
-# Split into training and independent test sets
 X_train, X_test, y_train, y_test = train_test_split(
     X,
     y,
     test_size=0.2,
     random_state=RANDOM_SEED,
-    stratify=y
+    stratify=y,
 )
 
-# Build pipeline
+# Standard sklearn pipeline. This is portable for Docker/unpickling.
 pipeline = Pipeline([
     ("var", VarianceThreshold(threshold=0.05)),
     ("model", NearestCentroid(
         metric="euclidean",
-        shrink_threshold=0.3
-    ))
+        shrink_threshold=0.3,
+    )),
 ])
 
-# Define stratified 5-fold cross-validation
 cv = StratifiedKFold(
     n_splits=N_SPLITS,
     shuffle=True,
-    random_state=RANDOM_SEED
+    random_state=RANDOM_SEED,
 )
 
-# Cross-validate using the training set only
 scoring = {
     "accuracy": "accuracy",
     "precision": "precision_weighted",
     "recall": "recall_weighted",
     "f1": "f1_weighted",
-    "roc_auc": "roc_auc"
+    "roc_auc": "roc_auc",
 }
 
 cv_results = cross_validate(
@@ -84,10 +108,9 @@ cv_results = cross_validate(
     cv=cv,
     scoring=scoring,
     return_train_score=False,
-    error_score="raise"
+    error_score="raise",
 )
 
-# Display cross-validation results
 print("\n===== 5-Fold Cross-Validation Results =====")
 
 for metric in scoring:
@@ -97,108 +120,212 @@ for metric in scoring:
         f"{scores.mean():.4f} +/- {scores.std():.4f}"
     )
 
-# Fit the model on the complete training set
 pipeline.fit(X_train, y_train)
 
-# Evaluate on the independent test set
 y_pred = pipeline.predict(X_test)
 
-# NearestCentroid has no predict_proba().
-# Use decision scores for binary ROC AUC.
+# Convert NearestCentroid's decision score into success probability.
 y_score = pipeline.decision_function(X_test)
+probability_of_failure = expit(y_score)
+y_prob_success = np.clip(
+    1 - probability_of_failure,
+    1e-15,
+    1 - 1e-15,
+)
 
-# Convert decision scores to probabilities [0, 1] using sigmoid
-y_prob = expit(y_score)
+# recur=0 represents successful treatment.
+y_true_success = (y_test.to_numpy() == 0).astype(int)
+y_pred_success = (y_pred == 0).astype(int)
 
 print("\n===== Independent Test Set Results =====")
-print("Accuracy:", accuracy_score(y_test, y_pred))
-
+print(
+    "Accuracy:",
+    accuracy_score(y_true_success, y_pred_success),
+)
 print(
     "\nClassification Report:\n",
-    classification_report(y_test, y_pred, zero_division=0)
+    classification_report(
+        y_true_success,
+        y_pred_success,
+        zero_division=0,
+    ),
+)
+print(
+    "\nConfusion Matrix:\n",
+    confusion_matrix(
+        y_true_success,
+        y_pred_success,
+    ),
+)
+
+print("\n===== Advanced Performance & Calibration Metrics =====")
+
+accuracy = accuracy_score(
+    y_true_success,
+    y_pred_success,
+)
+precision = precision_score(
+    y_true_success,
+    y_pred_success,
+    zero_division=0,
+)
+recall = recall_score(
+    y_true_success,
+    y_pred_success,
+    zero_division=0,
+)
+f1 = f1_score(
+    y_true_success,
+    y_pred_success,
+    zero_division=0,
+)
+
+logloss = log_loss(
+    y_true_success,
+    y_prob_success,
+)
+auc_score = roc_auc_score(
+    y_true_success,
+    y_prob_success,
+)
+auprc = average_precision_score(
+    y_true_success,
+    y_prob_success,
+)
+brier = brier_score_loss(
+    y_true_success,
+    y_prob_success,
+)
+
+print(f"Accuracy: {accuracy:.4f}")
+print(f"Log Loss: {logloss:.4f}")
+print(f"ROC AUC: {auc_score:.4f}")
+print(f"AUPRC: {auprc:.4f}")
+print(f"Brier Score: {brier:.4f}")
+
+p_prevalence = np.mean(y_true_success)
+brier_ref = p_prevalence * (1 - p_prevalence)
+
+scaled_brier = (
+    1 - (brier / brier_ref)
+    if brier_ref > 0
+    else 0.0
+)
+
+print(f"Scaled Brier Score: {scaled_brier:.4f}")
+
+log_odds = logit(y_prob_success)
+
+try:
+    calib_model = LogisticRegression(
+        penalty=None,
+        solver="lbfgs",
+    )
+    calib_model.fit(
+        log_odds.reshape(-1, 1),
+        y_true_success,
+    )
+
+    calibration_slope = float(calib_model.coef_[0][0])
+    calibration_intercept = float(
+        calib_model.intercept_[0]
+    )
+except ValueError:
+    calibration_slope = None
+    calibration_intercept = None
+
+if calibration_intercept is not None:
+    print(
+        "Calibration-in-the-large (Intercept): "
+        f"{calibration_intercept:.4f}"
+    )
+else:
+    print("Calibration-in-the-large (Intercept): unavailable")
+
+if calibration_slope is not None:
+    print(
+        "Calibration Slope: "
+        f"{calibration_slope:.4f}"
+    )
+else:
+    print("Calibration Slope: unavailable")
+
+observed_events = float(np.sum(y_true_success))
+expected_events = float(np.sum(y_prob_success))
+
+oe_ratio = (
+    observed_events / expected_events
+    if expected_events > 0
+    else 1.0
 )
 
 print(
-    "\nConfusion Matrix:\n",
-    confusion_matrix(y_test, y_pred)
+    "Observed/Expected (O/E) Ratio: "
+    f"{oe_ratio:.4f}"
 )
 
-# --- Compute Additional Metrics ---
-print("\n===== Advanced Performance & Calibration Metrics =====")
+performance_metrics = {
+    "accuracy": float(accuracy),
+    "precision": float(precision),
+    "recall": float(recall),
+    "f1": float(f1),
+    "auroc": float(auc_score),
+    "auprc": float(auprc),
+    "logLoss": float(logloss),
+    "brierScore": float(brier),
+    "scaledBrierScore": float(scaled_brier),
+    "calibrationIntercept": calibration_intercept,
+    "calibrationSlope": calibration_slope,
+    "observedExpectedRatio": float(oe_ratio),
+}
 
-# 1. Log Loss
-logloss = log_loss(y_test, y_prob)
-print(f"Log Loss: {logloss:.4f}")
+print("\n===== Performance Metrics Dictionary =====")
+print(performance_metrics)
 
-# 2. AUROC
-if len(pipeline.classes_) == 2:
-    positive_class_index = list(pipeline.classes_).index(
-        sorted(pipeline.classes_)[-1]
+# Attach metadata read by predictor.py.
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+model_version = f"k_nearest_{timestamp}"
+
+metadata = {
+    "performance_metrics": json.dumps(performance_metrics),
+    "model_version": model_version,
+    "class_labels": json.dumps(["0", "1"]),
+    "target_column": "recur",
+}
+
+pipeline.attr = metadata.get
+
+MODEL_DIR.mkdir(parents=True, exist_ok=True)
+artifact_path = MODEL_DIR / f"knc_model_{timestamp}.joblib"
+
+joblib.dump(pipeline, artifact_path)
+
+print(
+    "\nSaved model artifact with embedded metrics to:"
+    f" {artifact_path}"
+)
+
+# Permutation importance
+
+calc_importance = False
+if calc_importance:
+    perm_result = permutation_importance(
+        pipeline,
+        X_test,
+        y_test,
+        scoring="roc_auc",
+        n_repeats=10,
+        random_state=RANDOM_SEED,
     )
-    if y_score.ndim == 1:
-        auc_score = roc_auc_score(
-            y_test,
-            y_score if positive_class_index == 1 else -y_score
-        )
-    else:
-        auc_score = roc_auc_score(
-            y_test,
-            y_score[:, positive_class_index]
-        )
-    print(f"ROC AUC: {auc_score:.4f}")
-else:
-    print("ROC AUC is reported only for binary classification in this example.")
 
-# 3. AUPRC (Area Under Precision-Recall Curve)
-auprc = average_precision_score(y_test, y_prob)
-print(f"AUPRC: {auprc:.4f}")
+    feature_importances = pd.DataFrame({
+        "feature": X_test.columns,
+        "importance_mean": perm_result.importances_mean,
+        "importance_std": perm_result.importances_std,
+    }).sort_values(
+        by="importance_mean",
+        ascending=False,
+    )
 
-# 4. Brier Score
-brier = brier_score_loss(y_test, y_prob)
-print(f"Brier Score: {brier:.4f}")
-
-# 5. Scaled Brier Score (1 - Brier / Brier_reference)
-p_prevalence = y_test.mean()
-brier_ref = p_prevalence * (1 - p_prevalence)
-scaled_brier = 1 - (brier / brier_ref) if brier_ref > 0 else 0.0
-print(f"Scaled Brier Score: {scaled_brier:.4f}")
-
-# 6 & 7. Calibration Intercept (Calibration-in-the-large) & Calibration Slope
-eps = 1e-15
-y_prob_clipped = np.clip(y_prob, eps, 1 - eps)
-log_odds = logit(y_prob_clipped)
-
-calib_model = LogisticRegression(solver='lbfgs')
-calib_model.fit(log_odds.reshape(-1, 1), y_test)
-calibration_slope = calib_model.coef_[0][0]
-calibration_intercept = calib_model.intercept_[0]
-
-print(f"Calibration-in-the-large (Intercept): {calibration_intercept:.4f}")
-print(f"Calibration Slope: {calibration_slope:.4f}")
-
-# 8. Observed / Expected (O/E) Ratio
-observed_events = y_test.sum()
-expected_events = y_prob.sum()
-oe_ratio = observed_events / expected_events if expected_events > 0 else float('nan')
-print(f"Observed/Expected (O/E) Ratio: {oe_ratio:.4f}")
-
-
-# Compute permutation importance on the test set
-perm_result = permutation_importance(
-    pipeline, 
-    X_test, 
-    y_test, 
-    scoring="roc_auc", 
-    n_repeats=10, 
-    random_state=RANDOM_SEED
-)
-
-# Organize results into a DataFrame
-feature_importances = pd.DataFrame({
-    "feature": X_test.columns,
-    "importance_mean": perm_result.importances_mean,
-    "importance_std": perm_result.importances_std
-}).sort_values(by="importance_mean", ascending=False)
-
-print("\n===== Top 10 Features by Permutation Importance =====")
-print(feature_importances.head(10))
+    print("\n===== Top 10 Features by Permutation Importance =====")
+    print(feature_importances.head(10))

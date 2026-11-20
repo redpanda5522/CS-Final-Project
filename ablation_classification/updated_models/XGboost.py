@@ -1,209 +1,331 @@
-import pandas as pd
-import numpy as np
+import json
 import re
 import warnings
+from datetime import datetime
+from pathlib import Path
 
-from sklearn.pipeline import Pipeline
-from xgboost import XGBClassifier
-from sklearn.model_selection import GridSearchCV
-from sklearn.model_selection import train_test_split
+import joblib
+import numpy as np
+import pandas as pd
+from scipy.special import logit
+from sklearn.feature_selection import VarianceThreshold
+from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import (
     accuracy_score,
     average_precision_score,
     brier_score_loss,
     classification_report,
     confusion_matrix,
+    f1_score,
     log_loss,
+    precision_score,
+    recall_score,
     roc_auc_score,
 )
-from sklearn.linear_model import LogisticRegression
-from sklearn.feature_selection import VarianceThreshold
-from sklearn.preprocessing import StandardScaler
-from sklearn.inspection import permutation_importance
-from scipy.special import logit
+from sklearn.model_selection import train_test_split
+from sklearn.pipeline import Pipeline
+from xgboost import XGBClassifier
 
-warnings.filterwarnings('ignore')
+warnings.filterwarnings("ignore")
 
-def build_features(X):
+RANDOM_SEED = 45
+SCRIPT_DIR = Path(__file__).resolve().parent
+DATA_PATH = SCRIPT_DIR / "data_combined.csv"
+PROJECT_ROOT = SCRIPT_DIR.parents[1]
+MODEL_DIR = PROJECT_ROOT / "backend" / "app" / "services" / "models"
+
+COLS_TO_DROP = [
+    "ablationdata_pfa",
+    "applications_pfa",
+    "detectorsversion",
+    "grids_pfa",
+    "rawpositions_pfa",
+    "sites_pfa",
+    "visitagsessions_pfa",
+    "visitagsettings_pfa",
+    "vvversion",
+    "id",
+]
+
+
+def build_features(frame):
     out = {}
-    # per-site contact force columns, e.g. la_p1477_contactforce -> region 'la'
-    cf = [c for c in X.columns if re.match(r'^[a-z0-9]+_p\d+_contactforce$', c)]
-    for region in {c.split('_p')[0] for c in cf}:
-        cols = [c for c in cf if c.startswith(region + '_p')]
-        sub = X[cols]
-        out[f'{region}_cf_n_sites'] = (sub > 0).sum(axis=1)
-        out[f'{region}_cf_mean'] = sub.where(sub > 0).mean(axis=1)
-        out[f'{region}_cf_max'] = sub.max(axis=1)
-    # RF application columns
-    for kind in ['rf_', 'temperaturesinrf_', 'contactforceinrf_']:
-        cols = [c for c in X.columns if c.startswith(kind)]
-        out[f'{kind}total'] = X[cols].sum(axis=1)
-        out[f'{kind}n_nonzero'] = (X[cols] > 0).sum(axis=1)
-    # the remaining non-per-site columns (the *_car, *_ecg_export, etc.)
-    rest = [c for c in X.columns if not re.match(r'^[a-z0-9]+_p\d+_contactforce$', c)
-            and not c.startswith(('rf_', 'temperaturesinrf_', 'contactforceinrf_'))]
-    return pd.concat([pd.DataFrame(out), X[rest]], axis=1)
+    cf_columns = [
+        column for column in frame.columns
+        if re.match(r"^[a-z0-9]+_p\d+_contactforce$", column)
+    ]
 
-def _create_pipeline():
-    return Pipeline([
-        ("var", VarianceThreshold(threshold=0.02)),
-        # ("scaler", StandardScaler()),
-        ("clf", XGBClassifier(
-            eval_metric='auc',
-            random_state=45,
-            learning_rate=0.1,
-            max_depth=3,
-            n_estimators=50,
-            subsample=1.0,
-            colsample_bytree=1.0,
-        )),
-    ])
-
-
-def predictTest_grid(trainFeatures, trainLabels, testFeatures):
-
-    pipeline = Pipeline([
-        ("var", VarianceThreshold(threshold=0.02)),
-        ("scaler", StandardScaler()),
-        # ("sel", SelectKBest(k=50, score_func=chi2)),
-        ("clf", XGBClassifier(
-            eval_metric='auc',
-            random_state=45,
-        ))
-    ])
-
-    # Define hyperparameter grid
-    param_grid = {
-        # 'sel__k': [25, 50, 100],
-        'clf__n_estimators': [30, 50, 70],
-        'clf__learning_rate': [0.05, 0.1, 0.15],
-        'clf__max_depth': [2, 3, 4],
-        'clf__subsample': [0.6, 0.8, 1.0],
-        'clf__colsample_bytree': [0.6, 0.8, 1.0]
+    regions = {
+        column.split("_p")[0]
+        for column in cf_columns
     }
 
-    # Setup GridSearchCV
-    grid_search = GridSearchCV(
-        estimator=pipeline,
-        param_grid=param_grid,
-        cv=5,               # 5-fold cross-validation
-        scoring='roc_auc',  # Use AUC for evaluation
-        n_jobs=-1
-    )
+    for region in regions:
+        columns = [
+            column for column in cf_columns
+            if column.startswith(region + "_p")
+        ]
+        region_frame = frame[columns]
+        out[f"{region}_cf_n_sites"] = (
+            region_frame > 0
+        ).sum(axis=1)
+        out[f"{region}_cf_mean"] = (
+            region_frame.where(region_frame > 0).mean(axis=1)
+        )
+        out[f"{region}_cf_max"] = region_frame.max(axis=1)
 
-    # Fit GridSearchCV
-    grid_search.fit(trainFeatures, trainLabels)
-
-    # Best model
-    best_model = grid_search.best_estimator_
-
-    # Predict probabilities for the positive class
-    testOutputs = best_model.predict(testFeatures)
-    y_prob = best_model.predict_proba(testFeatures)[:, 1]
-
-    # Optionally, print the best parameters
-    print("Best parameters found:", grid_search.best_params_)
-
-    return testOutputs, y_prob
-
-def predictTest(trainFeatures, trainLabels, testFeatures):
-    pipe = _create_pipeline()
-    pipe.fit(trainFeatures, trainLabels)
-    testOutputs = pipe.predict(testFeatures)
-    y_prob = pipe.predict_proba(testFeatures)[:, 1]
-
-    '''
-    var_step = pipe.named_steps["var"]
-    mask = var_step.get_support()
-
-    print("Before:", len(mask))
-    print("Kept:", mask.sum())
-    print("Removed:", (~mask).sum())
-    '''
-    return testOutputs, y_prob
-
-
-if __name__ == "__main__":
-    RANDOM_SEED = 45
-    ablation_data = pd.read_csv('data.csv')
-    ablation_data = ablation_data.dropna(subset=['recur'])
-
-    cols_to_drop = [
-        'ablationdata_pfa', 'applications_pfa', 'detectorsversion',
-        'grids_pfa', 'rawpositions_pfa', 'sites_pfa',
-        'visitagsessions_pfa', 'visitagsettings_pfa', 'vvversion', 'id'
+    rf_kinds = [
+        "rf_",
+        "temperaturesinrf_",
+        "contactforceinrf_",
     ]
-    ablation_data = ablation_data.drop(columns=cols_to_drop, errors='ignore')
 
-    X = ablation_data.drop(columns=['recur'])
-    y = ablation_data['recur']
-    # X_feat = build_features(X)
-    # print(X.shape, "->", X_feat.shape)
+    for kind in rf_kinds:
+        columns = [
+            column for column in frame.columns
+            if column.startswith(kind)
+        ]
+        out[f"{kind}total"] = frame[columns].sum(axis=1)
+        out[f"{kind}n_nonzero"] = (
+            frame[columns] > 0
+        ).sum(axis=1)
 
-    X_train, X_test, y_train, y_test = train_test_split(
-        X, y, test_size=0.2, random_state=RANDOM_SEED, stratify=y
+    rest = [
+        column for column in frame.columns
+        if not re.match(
+            r"^[a-z0-9]+_p\d+_contactforce$",
+            column,
+        )
+        and not column.startswith(tuple(rf_kinds))
+    ]
+
+    return pd.concat(
+        [pd.DataFrame(out), frame[rest]],
+        axis=1,
     )
 
-    y_pred, y_prob = predictTest(X_train, y_train, X_test)
 
-    print("===== Basic Performance Metrics =====")
-    print("Accuracy:", accuracy_score(y_test, y_pred))
-    print("\nClassification Report:\n", classification_report(y_test, y_pred))
-    print("\nConfusion Matrix:\n", confusion_matrix(y_test, y_pred))
-
-    # Ground truth values
-    y_true = y_test.values
-
-    print("\n===== Advanced Performance & Calibration Metrics =====")
-
-    # 1. Log Loss
-    ll = log_loss(y_true, y_prob)
-    print(f"Log Loss                 : {ll:.4f}")
-
-    # 2. AUROC
-    auroc = roc_auc_score(y_true, y_prob)
-    print(f"AUROC                    : {auroc:.4f}")
-
-    # 3. AUPRC
-    auprc = average_precision_score(y_true, y_prob)
-    print(f"AUPRC                    : {auprc:.4f}")
-
-    # 4. Brier Score
-    brier = brier_score_loss(y_true, y_prob)
-    print(f"Brier Score              : {brier:.4f}")
-
-    # 5. Scaled Brier
-    p_prev = np.mean(y_true)
-    brier_ref = p_prev * (1 - p_prev)
-    scaled_brier = 1 - (brier / brier_ref) if brier_ref > 0 else 0.0
-    print(f"Scaled Brier             : {scaled_brier:.4f}")
-
-    # 6 & 7. Calibration Intercept & Calibration Slope (via unregularized scikit-learn LogisticRegression)
-    eps = 1e-15
-    y_prob_clipped = np.clip(y_prob, eps, 1 - eps)
-    log_odds = logit(y_prob_clipped)
-
-    calib_model = LogisticRegression(penalty=None, solver='lbfgs')
-    calib_model.fit(log_odds.reshape(-1, 1), y_true)
-
-    calib_intercept = calib_model.intercept_[0]
-    calib_slope = calib_model.coef_[0][0]
-
-    print(f"Calibration Intercept    : {calib_intercept:.4f}")
-    print(f"Calibration Slope        : {calib_slope:.4f}")
-
-    # 8. Observed / Expected (O/E) Ratio
-    expected_events = np.sum(y_prob)
-    oe_ratio = np.sum(y_true) / expected_events if expected_events > 0 else np.nan
-    print(f"O/E Ratio                : {oe_ratio:.4f}")
-
-    
+def create_pipeline():
+    return Pipeline([
+        (
+            "var",
+            VarianceThreshold(threshold=0.02),
+        ),
+        (
+            "clf",
+            XGBClassifier(
+                eval_metric="auc",
+                random_state=RANDOM_SEED,
+                learning_rate=0.1,
+                max_depth=3,
+                n_estimators=50,
+                subsample=1.0,
+                colsample_bytree=1.0,
+            ),
+        ),
+    ])
 
 
+# Load data
+ablation_data = pd.read_csv(DATA_PATH)
+ablation_data = ablation_data.dropna(subset=["recur"])
+ablation_data = ablation_data.drop(
+    columns=COLS_TO_DROP,
+    errors="ignore",
+)
 
+X = ablation_data.drop(columns=["recur"])
+y = ablation_data["recur"]
 
+X = X.select_dtypes(include=["number"])
 
+X_train, X_test, y_train, y_test = train_test_split(
+    X,
+    y,
+    test_size=0.2,
+    random_state=RANDOM_SEED,
+    stratify=y,
+)
 
+pipeline = create_pipeline()
+pipeline.fit(X_train, y_train)
 
+y_pred = pipeline.predict(X_test)
+failure_probability = pipeline.predict_proba(X_test)[:, 1]
+y_prob_success = np.clip(
+    1 - failure_probability,
+    1e-15,
+    1 - 1e-15,
+)
 
+# recur=0 represents successful treatment.
+y_true_success = (y_test.to_numpy() == 0).astype(int)
+y_pred_success = (y_pred == 0).astype(int)
 
+print("===== Basic Performance Metrics =====")
+print(
+    "Accuracy:",
+    accuracy_score(y_true_success, y_pred_success),
+)
+print(
+    "\nClassification Report:\n",
+    classification_report(
+        y_true_success,
+        y_pred_success,
+        zero_division=0,
+    ),
+)
+print(
+    "\nConfusion Matrix:\n",
+    confusion_matrix(y_true_success, y_pred_success),
+)
+
+print("\n===== Advanced Performance & Calibration Metrics =====")
+
+accuracy = accuracy_score(
+    y_true_success,
+    y_pred_success,
+)
+precision = precision_score(
+    y_true_success,
+    y_pred_success,
+    zero_division=0,
+)
+recall = recall_score(
+    y_true_success,
+    y_pred_success,
+    zero_division=0,
+)
+f1 = f1_score(
+    y_true_success,
+    y_pred_success,
+    zero_division=0,
+)
+
+ll = log_loss(
+    y_true_success,
+    y_prob_success,
+)
+auroc = roc_auc_score(
+    y_true_success,
+    y_prob_success,
+)
+auprc = average_precision_score(
+    y_true_success,
+    y_prob_success,
+)
+brier = brier_score_loss(
+    y_true_success,
+    y_prob_success,
+)
+
+print(f"Accuracy                 : {accuracy:.4f}")
+print(f"Log Loss                 : {ll:.4f}")
+print(f"AUROC                    : {auroc:.4f}")
+print(f"AUPRC                    : {auprc:.4f}")
+print(f"Brier Score              : {brier:.4f}")
+
+p_prevalence = np.mean(y_true_success)
+brier_ref = p_prevalence * (1 - p_prevalence)
+
+if brier_ref > 0:
+    scaled_brier = 1 - (brier / brier_ref)
+else:
+    scaled_brier = 0.0
+
+print(f"Scaled Brier             : {scaled_brier:.4f}")
+
+log_odds = logit(y_prob_success)
+
+try:
+    calib_model = LogisticRegression(
+        penalty=None,
+        solver="lbfgs",
+    )
+    calib_model.fit(
+        log_odds.reshape(-1, 1),
+        y_true_success,
+    )
+    calib_intercept = float(calib_model.intercept_[0])
+    calib_slope = float(calib_model.coef_[0][0])
+except ValueError:
+    calib_intercept = None
+    calib_slope = None
+
+if calib_intercept is not None:
+    print(
+        "Calibration Intercept    :"
+        f" {calib_intercept:.4f}"
+    )
+else:
+    print("Calibration Intercept    : unavailable")
+
+if calib_slope is not None:
+    print(
+        "Calibration Slope        :"
+        f" {calib_slope:.4f}"
+    )
+else:
+    print("Calibration Slope        : unavailable")
+
+observed_events = float(np.sum(y_true_success))
+expected_events = float(np.sum(y_prob_success))
+
+if expected_events > 0:
+    oe_ratio = observed_events / expected_events
+else:
+    oe_ratio = 1.0
+
+print(f"O/E Ratio                : {oe_ratio:.4f}")
+
+performance_metrics = {
+    "accuracy": float(accuracy),
+    "precision": float(precision),
+    "recall": float(recall),
+    "f1": float(f1),
+    "auroc": float(auroc),
+    "auprc": float(auprc),
+    "logLoss": float(ll),
+    "brierScore": float(brier),
+    "scaledBrierScore": float(scaled_brier),
+    "calibrationIntercept": calib_intercept,
+    "calibrationSlope": calib_slope,
+    "observedExpectedRatio": float(oe_ratio),
+}
+
+print("\n===== Performance Metrics Dictionary =====")
+print(performance_metrics)
+
+# Save the underlying Booster because the backend predicts with
+# xgboost.DMatrix and expects type "xgb".
+variance_step = pipeline.named_steps["var"]
+kept_features = list(
+    X_train.columns[
+        variance_step.get_support()
+    ]
+)
+
+booster = pipeline.named_steps["clf"].get_booster()
+booster.feature_names = kept_features
+
+timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+model_version = f"xgboost_{timestamp}"
+
+booster.set_attr(
+    performance_metrics=json.dumps(performance_metrics),
+    model_version=model_version,
+    class_labels=json.dumps(["0", "1"]),
+    target_column="recur",
+)
+
+MODEL_DIR.mkdir(parents=True, exist_ok=True)
+artifact_path = (
+    MODEL_DIR / f"xgboost_model_{timestamp}.joblib"
+)
+
+joblib.dump(booster, artifact_path)
+
+print(
+    "\nSaved model artifact with embedded metrics to:"
+    f" {artifact_path}"
+)

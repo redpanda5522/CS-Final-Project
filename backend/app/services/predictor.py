@@ -18,6 +18,7 @@ from uuid import uuid4
 import joblib
 import pandas as pd
 from xgboost import DMatrix
+import numpy as np
 
 from app.schemas import AnalysisResult, ManualAnalysisRequest, ModelName, ModelOption, PerformanceMetrics
 
@@ -205,8 +206,14 @@ def _prepare_features(row: pd.DataFrame, features: list[str]) -> pd.DataFrame:
     return X
 
 def _predict_sklearn(model, row: pd.DataFrame) -> float:
-    # Calculate Probability of a 0 for recur (which is a successful operation)
-    return model.predict_proba(row)[0][0]
+    if hasattr(model, "predict_proba"):
+        probabilities = model.predict_proba(row)[0]
+        classes = list(model.classes_)
+        return float(probabilities[classes.index(0)])
+
+    score = float(model.decision_function(row)[0])
+    probability_of_failure = 1 / (1 + np.exp(-score))
+    return 1 - probability_of_failure
 
 def _predict_xgb(model, row: pd.DataFrame) -> float:
     # Calculate Probability of a 0 for recur (which is a successful operation)
