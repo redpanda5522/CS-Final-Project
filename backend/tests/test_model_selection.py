@@ -79,21 +79,6 @@ def _upload(client, content: bytes, model_name: str | None):
     return client.post("/api/analyses/file", files={"file": ("procedure.csv", content)}, data=data)
 
 
-@pytest.mark.parametrize("model_name", SELECTABLE_MODELS)
-def test_manual_uses_selected_model(client, model_name):
-    response = client.post("/api/analyses/manual", json={**MANUAL_REQUEST, "model_name": model_name})
-    assert response.status_code == 200
-    body = response.json()
-    assert body["modelVersion"] == predictor.MODEL_SPECS[model_name]["version"]
-    assert 0 <= body["probability"] <= 1
-
-
-def test_manual_defaults_to_logistic(client):
-    response = client.post("/api/analyses/manual", json=MANUAL_REQUEST)
-    assert response.status_code == 200
-    assert response.json()["modelVersion"] == "logistic_regression_v1"
-
-
 def test_file_analysis_returns_measured_metrics_for_selected_artifact(client, monkeypatch):
     info = {
         **predictor.MODEL_MAP["logistic"],
@@ -109,16 +94,29 @@ def test_file_analysis_returns_measured_metrics_for_selected_artifact(client, mo
     assert response.json()["performanceMetrics"] == {"accuracy": 0.8, "auroc": 0.85}
 
 
-def test_manual_placeholder_does_not_claim_model_metrics(client, monkeypatch):
-    info = {
-        **predictor.MODEL_MAP["logistic"],
-        "performance_metrics": PerformanceMetrics(accuracy=0.8),
-    }
-    monkeypatch.setitem(predictor.MODEL_MAP, "logistic", info)
-    response = client.post("/api/analyses/manual", json=MANUAL_REQUEST)
+@pytest.mark.parametrize("model_name", [None, *SELECTABLE_MODELS])
+def test_manual_is_refused_and_not_saved(model_name):
+    saved = []
 
-    assert response.status_code == 200
-    assert "performanceMetrics" not in response.json()
+    class CapturingSession(NoopSession):
+        def add(self, analysis):
+            saved.append(analysis)
+
+    app.dependency_overrides[get_session] = CapturingSession
+    body = MANUAL_REQUEST if model_name is None else {**MANUAL_REQUEST, "model_name": model_name}
+    try:
+        response = TestClient(app).post("/api/analyses/manual", json=body)
+    finally:
+        app.dependency_overrides.clear()
+    assert response.status_code == 501
+    assert "Upload a procedure file" in response.json()["detail"]
+    assert saved == []
+
+
+def test_manual_with_unavailable_model_returns_503(client, monkeypatch):
+    monkeypatch.delitem(predictor.MODEL_MAP, "xgboost")
+    response = client.post("/api/analyses/manual", json={**MANUAL_REQUEST, "model_name": "xgboost"})
+    assert response.status_code == 503
 
 
 @pytest.mark.parametrize("model_name", SELECTABLE_MODELS)

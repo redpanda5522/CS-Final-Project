@@ -11,6 +11,8 @@ import PerformanceMetrics from '../components/PerformanceMetrics'
 import { FALLBACK_CATALOG, type ModelCatalog, type ModelName } from '../config/models'
 import { fetchModelCatalog } from '../api/models'
 
+// The trained models take recorded-data flags, not catheter measurements (backend returns 501).
+const MANUAL_UNSUPPORTED = 'Manual entry is not supported by the trained models yet. Upload a procedure file instead.'
 type Mode = 'file' | 'manual'
 type Stage = 'input' | 'review' | 'result'
 const MAX_SIZE = 10 * 1024 * 1024 // Provisional limit; align with backend.
@@ -69,6 +71,7 @@ function NewAnalysis({ onComplete }: Props) {
 
   function next() {
     if (mode === 'file' && !file) { setError('Choose a procedure data file to continue.'); return }
+    if (mode === 'manual' && !isDemoMode) { setError(MANUAL_UNSUPPORTED); return }
     if (mode === 'manual') { const issue = validateProcedure(procedure); if (issue) { setError(issue); return } }
     if (selectedModel && !selectedModel.available) { setError(`The ${selectedModel.label} model is not available right now. Choose another model.`); return }
     setError(''); setStage('review')
@@ -99,6 +102,7 @@ function NewAnalysis({ onComplete }: Props) {
           <div className="stepper"><div className={`step ${stage === 'input' ? 'current' : 'done'}`}><span>{stage === 'input' ? '1' : <Check size={15}/>}</span> Provide data</div><div className="step-line"/><div className={`step ${stage === 'review' ? 'current' : stage === 'result' ? 'done' : ''}`}><span>{stage === 'result' ? <Check size={15}/> : '2'}</span> Review</div><div className="step-line"/><div className={`step ${stage === 'result' ? 'current' : ''}`}><span>3</span> Result</div></div>
           {stage === 'input' && <div className="card-body"><div className="section-title"><span className="icon-box"><ClipboardList size={20}/></span><div><h2>Procedure data</h2><p>Choose how you would like to provide procedure data.</p></div></div>
             <div className="tabs" role="tablist" aria-label="Input method"><button type="button" role="tab" aria-selected={mode === 'file'} className={mode === 'file' ? 'active' : ''} onClick={() => { setMode('file'); setError('') }}><CloudUpload size={17}/> Upload file</button><button type="button" role="tab" aria-selected={mode === 'manual'} className={mode === 'manual' ? 'active' : ''} onClick={() => { setMode('manual'); setError('') }}><ClipboardList size={17}/> Enter manually</button></div>
+            {mode === 'manual' && !isDemoMode && <div className="demo-notice" role="status">{MANUAL_UNSUPPORTED}</div>}
             {mode === 'file' ? <div className="entry-area"><label className="field-label">Procedure data file <span>*</span></label><div className={`dropzone ${dragging ? 'dragging' : ''}`} onDragOver={event => { event.preventDefault(); setDragging(true) }} onDragLeave={() => setDragging(false)} onDrop={handleDrop}><input ref={fileInput} className="visually-hidden" type="file" accept=".csv,.json,.xlsx" onChange={handleFileChange} aria-label="Upload procedure data file"/><div className="upload-icon"><CloudUpload size={28}/></div><strong>Drag and drop your file here</strong><span>or choose a file from your device</span><button type="button" className="secondary-button" onClick={() => fileInput.current?.click()}>Browse files</button><small>CSV, JSON, or XLSX · Maximum 10 MB</small></div>
               {file && <div className="selected-file"><FileSpreadsheet size={22}/><div><strong>{file.name}</strong><span>{(file.size / 1024).toFixed(1)} KB · Ready to submit</span></div><button type="button" aria-label="Remove selected file" onClick={() => setFile(null)}><X size={18}/></button></div>}
               {file && <DatasetPreview file={file} rowIndex={previewRow} onRowChange={setPreviewRow}/>}</div>

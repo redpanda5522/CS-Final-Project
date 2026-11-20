@@ -51,6 +51,10 @@ class ModelUnavailableError(RuntimeError):
     """The selected model's artifact failed to load."""
 
 
+class PredictionNotSupportedError(RuntimeError):
+    """The trained models cannot make this kind of prediction yet."""
+
+
 def _feature_names(model) -> list[str]:
     """Columns the model was trained on, in training order."""
     names = getattr(model, "feature_names_in_", None)  # sklearn estimators and pipelines
@@ -261,8 +265,14 @@ def predict_from_file(row: pd.DataFrame, model_name: ModelName = "logistic") -> 
 
 
 def predict_from_manual(request: ManualAnalysisRequest, model_name: ModelName = "logistic") -> AnalysisResult:
-    """Predict from manually entered catheter measurements."""
-    # TODO(ML team): Map catheters to model features and call the model.
-    model_info = _model_info(model_name)
-    # The manual path is still a placeholder, so do not imply it was evaluated.
-    return _result(0.5, {**model_info, "performance_metrics": None})
+    """Manual entry cannot be predicted yet, so this refuses instead of returning a guess.
+
+    The models' features are binary flags for which data was recorded in each column
+    group. Catheter temperature and pressure are not features, and which flags a catheter
+    region implies has not been validated (frontend/docs/backend-handoff.md).
+    TODO(ML team): Train on manual-entry features, or define that mapping, then predict here.
+    """
+    _model_info(model_name)  # An unavailable model still reports 503 first.
+    raise PredictionNotSupportedError(
+        "Manual entry is not supported by the trained models yet. Upload a procedure file instead."
+    )

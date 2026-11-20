@@ -110,7 +110,11 @@ def train_model(
 
 @router.post("/manual", response_model_exclude_none=True)
 def analyze_manual(request: ManualAnalysisRequest, session: SessionDep) -> AnalysisResult:
-    """Analyze one procedure from manually entered catheter measurements."""
+    """Analyze one procedure from manually entered catheter measurements.
+
+    Returns 501 for now: the trained models take recorded-data flags, not catheter
+    measurements (see predictor.predict_from_manual), so nothing is predicted or saved.
+    """
     result = _predict(predictor.predict_from_manual, request, request.model_name)
     # model_name is stored in its own column, not with the procedure input.
     input_data = request.model_dump(mode="json", exclude={"model_name"})
@@ -145,6 +149,8 @@ def _predict(predict, data, model_name: ModelName) -> AnalysisResult:
         raise HTTPException(status_code=422, detail=str(error)) from error
     except predictor.ModelUnavailableError as error:
         raise HTTPException(status_code=503, detail=str(error)) from error
+    except predictor.PredictionNotSupportedError as error:
+        raise HTTPException(status_code=501, detail=str(error)) from error
     except Exception as error:
         logger.exception("Prediction failed with the %s model", model_name)
         raise HTTPException(

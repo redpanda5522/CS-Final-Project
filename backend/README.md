@@ -92,8 +92,9 @@ These implement the frontend contract in
 [`frontend/docs/backend-handoff.md`](../frontend/docs/backend-handoff.md).
 
 - `POST /api/analyses/manual`: JSON catheter measurements (1 to 4 catheters) plus an
-  optional `model_name`. Units of `unspecified` default to `C` for temperature and `g`
-  (contact force) for pressure.
+  optional `model_name`. The request is validated, then refused with 501 and not saved:
+  the trained models take recorded-data flags, not catheter measurements (see the TODO in
+  `predict_from_manual`). Units of `unspecified` default to `C` and `g` (contact force).
 - `POST /api/analyses/file`: multipart fields `file` (`.csv`, `.json`, or `.xlsx`, 10 MiB
   maximum), an optional `model_name`, and an optional `row_index`. A file with several rows
   needs `row_index` (0-based, blank rows not counted), and only that row is analyzed and
@@ -147,9 +148,8 @@ trained on:
 - `k_nearest` uses the raw columns, including the `v` columns. It rejects a combined-column
   file with 422, because the raw columns cannot be recovered from it.
 
-File uploads use the trained models. Manual entry still returns a placeholder probability
-of 0.5, because catheter regions do not yet map to model features (see the TODO in
-`app/services/predictor.py`).
+File uploads use the trained models. Manual entry returns 501 until catheter
+measurements map to model features.
 
 ## Heart disease detection
 
