@@ -126,3 +126,38 @@ class AnalysisRecord(AnalysisResult):
 class AnalysisDetail(AnalysisRecord):
     # Manual: the validated request. File: the parsed procedure row.
     input: dict[str, Any]
+
+
+# Heart disease detection (the HeartDisease page).
+class HeartDiseaseOption(BaseModel):
+    value: int
+    label: str
+
+
+class HeartDiseaseField(BaseModel):
+    name: str
+    label: str
+    type: Literal["number", "select"]
+    unit: str | None = None
+    min: float | None = None
+    max: float | None = None
+    options: list[HeartDiseaseOption] | None = None
+
+
+class HeartDiseaseModel(BaseModel):
+    available: bool
+    reason: str | None
+    modelVersion: str | None
+    fields: list[HeartDiseaseField]
+
+
+class HeartDiseaseRequest(StrictModel):
+    # Values are checked against the field list in app/services/heart_disease.py.
+    features: dict[str, float]
+
+
+class HeartDiseaseResult(BaseModel):
+    predictedClass: Literal["positive", "negative"]
+    # P(heart disease present).
+    positiveClassProbability: Annotated[float, Field(ge=0, le=1)]
+    modelVersion: str

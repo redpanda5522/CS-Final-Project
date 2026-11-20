@@ -151,6 +151,18 @@ File uploads use the trained models. Manual entry still returns a placeholder pr
 of 0.5, because catheter regions do not yet map to model features (see the TODO in
 `app/services/predictor.py`).
 
+## Heart disease detection
+
+`GET /api/heart-disease/model` lists the input fields for the frontend's Heart Disease
+page, and `POST /api/heart-disease/predict` takes `{"features": {...}}` with every field
+and returns `predictedClass` (`positive` means heart disease present),
+`positiveClassProbability`, and `modelVersion`. Out-of-range or unknown values return
+422. Predictions are not saved.
+
+The model is a copy of `cardiodisease_detection/models/xgboost_model.joblib` (trained by
+`cardiodisease_detection/XGboost.py` on the UCI Heart Disease dataset) in
+`app/services/heart_disease_models/`. Copy it again after retraining.
+
 To use the real backend from the Vite dev server, set `VITE_USE_MOCK_API=false` in
 `frontend/.env.local` and run both servers. Vite proxies `/api` to port 8000.
 
@@ -168,11 +180,14 @@ app/
     health.py          # GET /health
     analyses.py        # POST /api/analyses/file and /api/analyses/manual
     model_catalog.py   # GET /api/models (the frontend's model dropdown)
+    heart_disease.py   # /api/heart-disease: field list and prediction
   services/
     __init__.py
     analysis_store.py  # Save and load analyses
     file_parser.py     # Upload validation and CSV/JSON/XLSX parsing
-    predictor.py       # Prediction stub (TODO: trained model)
+    heart_disease.py   # Heart disease model and its input fields
+    predictor.py       # Ablation outcome models
+    training.py        # XGBoost training
 migrations/            # Alembic migrations
 tests/                 # pytest suite
 alembic.ini
