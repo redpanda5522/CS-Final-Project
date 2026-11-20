@@ -3,7 +3,9 @@ import pandas as pd
 import pytest
 from fastapi.testclient import TestClient
 
+from app.auth import require_user
 from app.main import app
+from app.models import User
 from app.schemas import PerformanceMetrics
 
 from app.services import predictor
@@ -93,12 +95,26 @@ def test_trained_model_keeps_metrics_with_its_version(tmp_path, monkeypatch):
     assert analysis.performanceMetrics == outcome.performance_metrics
 
 
-def test_training_rejects_a_model_other_than_xgboost():
-    response = TestClient(app).post(
+def _train_request(model_name: str):
+    return TestClient(app).post(
         "/api/analyses/train",
-        data={"target_column": "recur", "model_name": "logistic"},
+        data={"target_column": "recur", "model_name": model_name},
         files={"file": ("data.csv", b"signal,recur\n1,0\n2,1\n")},
     )
+
+
+def test_training_requires_sign_in():
+    response = _train_request("xgboost")
+    assert response.status_code == 401
+    assert response.json()["detail"] == "Sign in to continue."
+
+
+def test_training_rejects_a_model_other_than_xgboost():
+    app.dependency_overrides[require_user] = lambda: User(user_id="u1", email="a@b.co", name="A")
+    try:
+        response = _train_request("logistic")
+    finally:
+        app.dependency_overrides.clear()
     assert response.status_code == 422
     assert response.json()["detail"] == "Only XGBoost training is supported."
 

@@ -7,7 +7,7 @@ from datetime import datetime
 from typing import Annotated, Any, Literal
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field, model_validator
+from pydantic import BaseModel, ConfigDict, Field, field_validator, model_validator
 
 SCHEMA_VERSION = "catheter-regions-v2"
 GROUPING_VERSION = "left-named-column-v1"
@@ -126,6 +126,58 @@ class AnalysisRecord(AnalysisResult):
 class AnalysisDetail(AnalysisRecord):
     # Manual: the validated request. File: the parsed procedure row.
     input: dict[str, Any]
+
+
+# Accounts. Emails use the same simple check as the frontend form.
+EMAIL_PATTERN = r"^[^\s@]+@[^\s@]+\.[^\s@]+$"
+NewPassword = Annotated[str, Field(min_length=8, max_length=256)]
+
+
+class AccountCreate(StrictModel):
+    name: Annotated[str, Field(min_length=1, max_length=100)]
+    email: Annotated[str, Field(max_length=254, pattern=EMAIL_PATTERN)]
+    organization: Annotated[str, Field(max_length=120)] = ""
+    # The upper bound keeps one request from making password hashing expensive.
+    password: NewPassword
+
+    # Strip before the length and email checks. Not the password: spaces count there.
+    @field_validator("name", "email", "organization", mode="before")
+    @classmethod
+    def strip(cls, value):
+        return value.strip() if isinstance(value, str) else value
+
+    @field_validator("email")
+    @classmethod
+    def lowercase_email(cls, value: str) -> str:
+        return value.lower()
+
+
+class SignInRequest(StrictModel):
+    email: Annotated[str, Field(max_length=254)]
+    password: Annotated[str, Field(max_length=256)]
+
+
+class PasswordChange(StrictModel):
+    currentPassword: Annotated[str, Field(max_length=256)]
+    newPassword: NewPassword
+
+
+class PasswordResetRequest(StrictModel):
+    email: Annotated[str, Field(max_length=254)]
+
+
+class PasswordResetConfirm(StrictModel):
+    token: Annotated[str, Field(min_length=1, max_length=128)]
+    newPassword: NewPassword
+
+
+class Account(BaseModel):
+    """Matches the frontend's Account type."""
+
+    id: str
+    name: str
+    email: str
+    organization: str
 
 
 # Heart disease detection (the HeartDisease page).

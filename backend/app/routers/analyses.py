@@ -12,7 +12,9 @@ from fastapi import APIRouter, Depends, Form, HTTPException, Query, UploadFile
 from sqlalchemy.exc import SQLAlchemyError
 from sqlalchemy.orm import Session
 
+from app.auth import CurrentUser, OptionalUser
 from app.db import get_session
+from app.models import User
 from app.schemas import (
     DEFAULT_MODEL,
     AnalysisDetail,
@@ -41,6 +43,7 @@ SessionDep = Annotated[Session, Depends(get_session)]
 def analyze_file(
     file: UploadFile,
     session: SessionDep,
+    user: OptionalUser,
     model_name: Annotated[ModelName, Form()] = DEFAULT_MODEL,
     # 0-based row to analyze; required when the file has more than one row.
     row_index: Annotated[int | None, Form(ge=0)] = None,
@@ -58,7 +61,7 @@ def analyze_file(
     source_name = file.filename or "Uploaded file"
     if row_count > 1:
         source_name += f" (row {(row_index or 0) + 1})"
-    _save(session, result, "file", model_name, source_name, input_data)
+    _save(session, result, "file", model_name, source_name, input_data, user)
     return result
 
 '''
@@ -73,6 +76,8 @@ def train_model(
     file: UploadFile,
     target_column: Annotated[str, Form(min_length=1)],
     model_name: Annotated[ModelName, Form()],
+    # Training replaces the model every user's analyses run on, so it needs an account.
+    _user: CurrentUser,
 ) -> ModelTrainingResult:
     if model_name != "xgboost":
         raise HTTPException(status_code=422, detail="Only XGBoost training is supported.")
@@ -109,7 +114,9 @@ def train_model(
     )
 
 @router.post("/manual", response_model_exclude_none=True)
-def analyze_manual(request: ManualAnalysisRequest, session: SessionDep) -> AnalysisResult:
+def analyze_manual(
+    request: ManualAnalysisRequest, session: SessionDep, user: OptionalUser
+) -> AnalysisResult:
     """Analyze one procedure from manually entered catheter measurements.
 
     Returns 501 for now: the trained models take recorded-data flags, not catheter
@@ -118,24 +125,26 @@ def analyze_manual(request: ManualAnalysisRequest, session: SessionDep) -> Analy
     result = _predict(predictor.predict_from_manual, request, request.model_name)
     # model_name is stored in its own column, not with the procedure input.
     input_data = request.model_dump(mode="json", exclude={"model_name"})
-    _save(session, result, "manual", request.model_name, "Manual entry", input_data)
+    _save(session, result, "manual", request.model_name, "Manual entry", input_data, user)
     return result
 
 
 @router.get("", response_model_exclude_none=True)
 def list_analyses(
     session: SessionDep,
+    user: CurrentUser,
     limit: Annotated[int, Query(ge=1, le=200)] = 50,
     offset: Annotated[int, Query(ge=0)] = 0,
 ) -> list[AnalysisRecord]:
-    """List saved analyses, newest first."""
-    return analysis_store.list_analyses(session, limit, offset)
+    """The signed-in account's saved analyses, newest first."""
+    return analysis_store.list_analyses(session, user.user_id, limit, offset)
 
 
 @router.get("/{analysis_id}", response_model_exclude_none=True)
-def get_analysis(analysis_id: str, session: SessionDep) -> AnalysisDetail:
-    """Return one saved analysis, including its submitted input."""
-    analysis = analysis_store.get_analysis(session, analysis_id)
+def get_analysis(analysis_id: str, session: SessionDep, user: CurrentUser) -> AnalysisDetail:
+    """One of the signed-in account's analyses, including its submitted input. Another
+    account's analysis returns 404, the same as a missing one."""
+    analysis = analysis_store.get_analysis(session, user.user_id, analysis_id)
     if analysis is None:
         raise HTTPException(status_code=404, detail="Analysis not found.")
     return analysis
@@ -165,11 +174,14 @@ def _save(
     model_name: ModelName,
     source_name: str,
     input_data: dict[str, Any],
+    user: User | None,
 ) -> None:
-    # Do not return a prediction the user cannot find again later.
+    # Do not return a prediction the user cannot find again later. Signed-out analyses
+    # are saved without an owner, so no account can list them.
     try:
         analysis_store.save_analysis(
-            session, result, input_mode, model_name, source_name, input_data
+            session, result, input_mode, model_name, source_name, input_data,
+            user.user_id if user else None,
         )
     except SQLAlchemyError as error:
         session.rollback()

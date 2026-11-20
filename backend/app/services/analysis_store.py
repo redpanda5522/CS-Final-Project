@@ -16,8 +16,10 @@ def save_analysis(
     model_name: ModelName,
     source_name: str,
     input_data: dict[str, Any],
+    user_id: str | None,
 ) -> Analysis:
     analysis = Analysis(
+        user_id=user_id,
         analysis_id=result.analysisId,
         input_mode=input_mode,
         model_name=model_name,
@@ -35,9 +37,10 @@ def save_analysis(
     return analysis
 
 
-def list_analyses(session: Session, limit: int, offset: int) -> list[AnalysisRecord]:
+def list_analyses(session: Session, user_id: str, limit: int, offset: int) -> list[AnalysisRecord]:
     rows = session.scalars(
         select(Analysis)
+        .where(Analysis.user_id == user_id)
         .order_by(Analysis.created_at.desc(), Analysis.analysis_id)
         .limit(limit)
         .offset(offset)
@@ -45,9 +48,10 @@ def list_analyses(session: Session, limit: int, offset: int) -> list[AnalysisRec
     return [to_record(row) for row in rows]
 
 
-def get_analysis(session: Session, analysis_id: str) -> AnalysisDetail | None:
+def get_analysis(session: Session, user_id: str, analysis_id: str) -> AnalysisDetail | None:
+    """The analysis, or None if it does not exist or belongs to someone else."""
     row = session.get(Analysis, analysis_id)
-    if row is None:
+    if row is None or row.user_id != user_id:
         return None
     return AnalysisDetail(**to_record(row).model_dump(), input=row.input_data)
 

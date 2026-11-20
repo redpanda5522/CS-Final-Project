@@ -24,6 +24,15 @@ services:
     build: ./backend
     environment:
       DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@db:5432/${POSTGRES_DB:-senior_project}
+      # Password reset links point here. Without SMTP_HOST, links are written to the backend
+      # log instead of emailed (local development only).
+      APP_URL: ${APP_URL:-http://localhost:8080}
+      SMTP_HOST: ${SMTP_HOST:-}
+      SMTP_PORT: ${SMTP_PORT:-587}
+      SMTP_USERNAME: ${SMTP_USERNAME:-}
+      SMTP_PASSWORD: ${SMTP_PASSWORD:-}
+      SMTP_FROM: ${SMTP_FROM:-}
+      COOKIE_SECURE: ${COOKIE_SECURE:-false}
     volumes:
       # Keeps trained models across container restarts and rebuilds. The volume starts as a
       # copy of the bundled models; delete it to go back to them after the image changes them.

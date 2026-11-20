@@ -100,7 +100,7 @@ These implement the frontend contract in
   needs `row_index` (0-based, blank rows not counted), and only that row is analyzed and
   saved, with the file name stored as e.g. `data.csv (row 3)`. The `id`, `recur`, and
   `redo` columns are dropped.
-- `POST /api/analyses/train`: multipart fields `file` (`.csv`, `.json`, or `.xlsx`, 10 MiB
+- `POST /api/analyses/train` (requires sign-in, otherwise 401): multipart fields `file` (`.csv`, `.json`, or `.xlsx`, 10 MiB
   maximum), `target_column` (defaults to `recur`), and `model_name` (`xgboost`). The
   target can contain numeric or categorical labels and must have at least two classes,
   with at least two rows per class for stratified validation. The endpoint automatically
@@ -112,9 +112,11 @@ These implement the frontend contract in
   on the `recur` target with labels `0` and `1` is compatible with the existing success/failure outcome-analysis
   endpoint; other classifiers are saved and guarded from being interpreted as that
   binary outcome.
-- `GET /api/analyses?limit=50&offset=0`: saved analyses, newest first, in the frontend's
-  `AnalysisRecord` shape plus `modelName`. The frontend does not call this yet.
-- `GET /api/analyses/{analysisId}`: one saved analysis, plus its submitted `input`.
+- `GET /api/analyses?limit=50&offset=0` (requires sign-in): the account's saved analyses,
+  newest first, in the frontend's `AnalysisRecord` shape plus `modelName`. The frontend
+  loads it after sign-in.
+- `GET /api/analyses/{analysisId}` (requires sign-in): one of the account's analyses, plus
+  its submitted `input`.
 
 Each prediction is saved to the `analyses` table with its input: the validated manual
 request, or the parsed file row. If the save fails, the API returns 503 rather than an
@@ -151,6 +153,44 @@ trained on:
 File uploads use the trained models. Manual entry returns 501 until catheter
 measurements map to model features.
 
+## Accounts
+
+Accounts are stored in the `users` table. Passwords are kept only as salted scrypt
+hashes. Signing in creates a row in `user_sessions` and sets an httpOnly, SameSite=Strict
+`session` cookie holding a random token; only the token's SHA-256 is stored. Sessions last
+7 days. Set `COOKIE_SECURE=true` when the app is served over HTTPS.
+
+- `POST /api/accounts`: JSON `name`, `email`, `organization` (optional), `password`
+  (8 to 256 characters). Creates the account, signs it in, and returns 201. A used email
+  returns 409.
+- `POST /api/accounts/sign-in`: JSON `email`, `password`. Wrong details return 401. After
+  5 wrong passwords in a row the account is locked for 15 minutes: every attempt, even
+  with the right password, returns 429 with `Retry-After`. A successful sign-in or a
+  password reset clears the count.
+- `POST /api/accounts/sign-out`: ends the session (204).
+- `GET /api/accounts/me`: the signed-in account, or 401.
+- `POST /api/accounts/password` (signed in): JSON `currentPassword`, `newPassword`. A wrong
+  current password returns 403. Other sessions for the account are signed out.
+- `POST /api/accounts/password-reset`: JSON `email`. Always returns 202 with the same
+  message, so it does not reveal which emails have accounts. For a real account it sends
+  a single-use link to `APP_URL/account/reset?token=...` that expires in 30 minutes, at
+  most once a minute; a new link replaces the old one.
+- `POST /api/accounts/password-reset/confirm`: JSON `token`, `newPassword`. An invalid,
+  used, or expired token returns 400. Every session for the account is signed out.
+
+Reset links are emailed through SMTP when `SMTP_HOST` is set (see `.env.example` for
+`SMTP_PORT`, `SMTP_USERNAME`, `SMTP_PASSWORD`, `SMTP_FROM`). Without it the link is
+written to the backend log, for local development:
+
+```bash
+docker-compose logs backend | grep "reset link"
+```
+
+Analyses run while signed in are saved with the account's `user_id`.
+`GET /api/analyses` and `GET /api/analyses/{analysisId}` require sign-in and return only
+that account's analyses (another account's analysis is a 404). Analyses run while signed
+out are saved without an owner and cannot be listed.
+
 ## Heart disease detection
 
 `GET /api/heart-disease/model` lists the input fields for the frontend's Heart Disease
@@ -178,14 +218,18 @@ app/
   routers/
     __init__.py
     health.py          # GET /health
-    analyses.py        # POST /api/analyses/file and /api/analyses/manual
+    analyses.py        # /api/analyses: file, manual, train, list, detail
     model_catalog.py   # GET /api/models (the frontend's model dropdown)
+    accounts.py        # /api/accounts: create, sign in, sign out, current account
     heart_disease.py   # /api/heart-disease: field list and prediction
+  auth.py              # Session cookie and the signed-in-user dependency
   services/
     __init__.py
+    accounts.py        # Password hashing, users, sessions, lockout, resets
     analysis_store.py  # Save and load analyses
     file_parser.py     # Upload validation and CSV/JSON/XLSX parsing
     heart_disease.py   # Heart disease model and its input fields
+    mailer.py          # Password reset emails (or log lines without SMTP)
     predictor.py       # Ablation outcome models
     training.py        # XGBoost training
 migrations/            # Alembic migrations
@@ -203,7 +247,8 @@ alembic upgrade head
 ```
 
 Add endpoint modules under `app/routers/`, then register each router with
-`app.include_router(...)` in `app/main.py`. There is no authentication yet.
+`app.include_router(...)` in `app/main.py`. To require sign-in on an endpoint, add a
+`CurrentUser` parameter (from `app.auth`).
 
 `/health` checks application liveness only. It does not check external services.
 Local environment files and virtual environments are ignored by Git.
