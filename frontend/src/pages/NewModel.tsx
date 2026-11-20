@@ -1,4 +1,6 @@
 import { useRef, useState, type ChangeEvent, type DragEvent } from 'react'
+import { Link } from 'react-router-dom'
+import type { Account } from '../account/accounts'
 import { ArrowLeft, ArrowRight, Check, ClipboardList, CloudUpload, FileSpreadsheet, HeartPulse, RotateCcw, ShieldCheck, X } from 'lucide-react'
 import { trainModel, isDemoMode, type ModelTrainingResult } from '../api/analysis'
 import { FALLBACK_CATALOG, type ModelName } from '../config/models'
@@ -8,7 +10,7 @@ type Stage = 'input' | 'review' | 'result'
 const MAX_SIZE = 10 * 1024 * 1024 // Provisional limit; align with backend.
 const ALLOWED = ['csv', 'json', 'xlsx']
 
-function NewModel() {
+function NewModel({ account }: { account: Account | null }) {
   const [stage, setStage] = useState<Stage>('input')
   const [file, setFile] = useState<File | null>(null)
   const [targetColumn, setTargetColumn] = useState('')
@@ -38,7 +40,10 @@ function NewModel() {
     selectFile(event.target.files?.[0]); event.target.value = ''
   }
 
+  const needsSignIn = !isDemoMode && !account
+
   function next() {
+    if (needsSignIn) { setError('Sign in to train a model.'); return }
     if (!file) { setError('Choose a data file to continue.'); return }
     if (!targetColumn.trim()) { setError('Enter the target column name to continue.'); return }
     if (!modelName) { setError('Select a model to continue.'); return }
@@ -67,6 +72,7 @@ function NewModel() {
         <div className="content-grid"><section className="work-card">
           <div className="stepper"><div className={`step ${stage === 'input' ? 'current' : 'done'}`}><span>{stage === 'input' ? '1' : <Check size={15}/>}</span> Provide data</div><div className="step-line"/><div className={`step ${stage === 'review' ? 'current' : stage === 'result' ? 'done' : ''}`}><span>{stage === 'result' ? <Check size={15}/> : '2'}</span> Review</div><div className="step-line"/><div className={`step ${stage === 'result' ? 'current' : ''}`}><span>3</span> Result</div></div>
           {stage === 'input' && <div className="card-body"><div className="section-title"><span className="icon-box"><ClipboardList size={20}/></span><div><h2>Model Training</h2><p>Upload a dataset and choose its target column.</p></div></div>
+            {needsSignIn && <div className="demo-notice" role="status">Training replaces the model used for everyone's analyses, so it requires an account. <Link to="/account/sign-in">Sign in</Link> or <Link to="/account/create">create an account</Link>.</div>}
             <div className="entry-area"><label className="field-label">Dataset File Upload <span>*</span></label><div className={`dropzone ${dragging ? 'dragging' : ''}`} onDragOver={event => { event.preventDefault(); setDragging(true) }} onDragLeave={() => setDragging(false)} onDrop={handleDrop}><input ref={fileInput} className="visually-hidden" type="file" accept=".csv,.json,.xlsx" onChange={handleFileChange} aria-label="Upload Dataset File"/><div className="upload-icon"><CloudUpload size={28}/></div><strong>Drag and drop your file here</strong><span>or choose a file from your device</span><button type="button" className="secondary-button" onClick={() => fileInput.current?.click()}>Browse files</button><small>CSV, JSON, or XLSX · Maximum 10 MB</small></div>
               {file && <div className="selected-file"><FileSpreadsheet size={22}/><div><strong>{file.name}</strong><span>{(file.size / 1024).toFixed(1)} KB · Ready to submit</span></div><button type="button" aria-label="Remove selected file" onClick={() => setFile(null)}><X size={18}/></button></div>}
             </div>

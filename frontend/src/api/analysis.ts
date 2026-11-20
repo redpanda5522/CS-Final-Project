@@ -1,5 +1,6 @@
 import type { ManualAnalysisRequest } from '../types/procedure'
 import type { ModelName } from '../config/models'
+import type { AnalysisRecord } from '../types/records'
 
 export type ManualInput = ManualAnalysisRequest
 
@@ -153,4 +154,19 @@ export async function analyzeManual(input: ManualInput, modelName: ModelName): P
   return readResult(await fetch('/api/analyses/manual', {
     method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ ...input, model_name: modelName }),
   }))
+}
+
+/** The signed-in account's saved analyses, newest first (live mode only). */
+export async function fetchAnalyses(): Promise<AnalysisRecord[]> {
+  const value = await readResponse(await fetch('/api/analyses?limit=200'))
+  if (!Array.isArray(value)) throw new Error('The server returned an invalid analysis list.')
+  return value.filter((item): item is AnalysisRecord => {
+    const record = item as Partial<AnalysisRecord> | null
+    return !!record && typeof record.analysisId === 'string' &&
+      (record.predictedOutcome === 'success' || record.predictedOutcome === 'failure') &&
+      typeof record.probability === 'number' && typeof record.outcomeDefinition === 'string' &&
+      (record.inputMode === 'file' || record.inputMode === 'manual') &&
+      typeof record.sourceName === 'string' && typeof record.createdAt === 'string' &&
+      (record.performanceMetrics === undefined || validMetrics(record.performanceMetrics))
+  }).map(record => ({ ...record, isDemo: false }))
 }

@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react'
 import { BrowserRouter, Link, NavLink, Route, Routes, useLocation } from 'react-router-dom'
 import { Activity, CircleHelp, ClipboardList, Cog, HeartPulse, LayoutDashboard, UserRound } from 'lucide-react'
-import { isDemoMode, type AnalysisResult } from './api/analysis'
-import type { Account } from './account/demoAccounts'
+import { fetchAnalyses, isDemoMode, type AnalysisResult } from './api/analysis'
+import { accountsAreSaved, fetchCurrentAccount, signOut, type Account } from './account/accounts'
 import { DEMO_RECORDS } from './data/demoRecords'
 import type { AnalysisRecord } from './types/records'
 import Dashboard from './pages/Dashboard'
 import Analyses from './pages/Analyses'
 import AnalysisDetail from './pages/AnalysisDetail'
 import AccountPage from './pages/Account'
+import { ForgotPassword, ResetPassword } from './pages/AccountPassword'
 import Help from './pages/Help'
 import NewAnalysis from './pages/NewAnalysis'
 import NewModel from './pages/NewModel'
@@ -18,6 +19,34 @@ function Workspace() {
   const [records, setRecords] = useState<AnalysisRecord[]>(isDemoMode ? DEMO_RECORDS : [])
   const [account, setAccount] = useState<Account | null>(null)
   const { pathname } = useLocation()
+
+  // Restore the session cookie's account after a refresh.
+  useEffect(() => {
+    let active = true
+    fetchCurrentAccount().then(current => { if (active && current) setAccount(current) }).catch(() => { /* Stay signed out. */ })
+    return () => { active = false }
+  }, [])
+
+  // Signed in (live mode), the history is the account's saved analyses.
+  const accountId = account?.id
+  useEffect(() => {
+    if (isDemoMode || !accountId) return
+    let active = true
+    fetchAnalyses().then(list => { if (active) setRecords(list) }).catch(() => { /* Keep this visit's records. */ })
+    return () => { active = false }
+  }, [accountId])
+
+  // Forget the account and its history in this browser. The backend session is ended
+  // by signOut, or already ended by a password reset.
+  function clearAccount() {
+    setAccount(null)
+    if (!isDemoMode) setRecords([])
+  }
+
+  function handleSignOut() {
+    signOut().catch(() => { /* The cookie expires on its own. */ })
+    clearAccount()
+  }
   const title = pathname === '/' ? 'Dashboard'
     : pathname === '/analyses/new' ? 'New analysis'
     : pathname === '/models/new' ? 'New model'
@@ -26,6 +55,8 @@ function Workspace() {
     : pathname === '/help' ? 'Help & workflow'
     : pathname === '/account/create' ? 'Create account'
     : pathname === '/account/sign-in' ? 'Sign in'
+    : pathname === '/account/forgot' ? 'Reset password'
+    : pathname === '/account/reset' ? 'Choose a new password'
     : pathname === '/account' ? 'My account'
     : 'Analysis details'
 
@@ -50,24 +81,26 @@ function Workspace() {
       <Link to="/" className="brand"><span className="brand-mark"><HeartPulse size={23}/></span><span>Ablation<span className="brand-light">Outcome</span><small>CLINICAL RESEARCH TOOL</small></span></Link>
       <div className="side-label">WORKSPACE</div>
       <nav aria-label="Main navigation">{navigation.map(item => <NavLink key={item.path} to={item.path} end={item.path !== '/analyses'} className={({isActive}) => `nav-item ${isActive && !(item.path === '/analyses' && pathname === '/analyses/new') ? 'side-active' : ''}`}><item.icon size={18}/>{item.label}</NavLink>)}</nav>
-      <div className="sidebar-bottom"><Link to={account ? '/account' : '/account/create'} className="user-card"><span className="avatar">{account ? account.name.charAt(0).toUpperCase() : 'R'}</span><span>{account?.name || 'Research workspace'}<small>{account ? 'Tab session account' : 'Create a preview account'}</small></span></Link></div>
+      <div className="sidebar-bottom"><Link to={account ? '/account' : '/account/create'} className="user-card"><span className="avatar">{account ? account.name.charAt(0).toUpperCase() : 'R'}</span><span>{account?.name || 'Research workspace'}<small>{account ? (accountsAreSaved ? 'Signed in' : 'Tab session account') : accountsAreSaved ? 'Create an account' : 'Create a preview account'}</small></span></Link></div>
     </aside>
     <div className="main-column">
       <header className="topbar"><span className="breadcrumb">Workspace <span>/</span><strong>{title}</strong></span><span className="top-status"><span className="status-dot"/>{pathname === '/heart-disease' ? 'Live model API' : isDemoMode ? 'Demo mode' : 'Live API mode'}</span></header>
       <main id="main-content">
         {/* Retain the active draft when navigating to other workspace pages. */}
         <div hidden={pathname !== '/analyses/new'}><NewAnalysis onComplete={recordCompleted}/></div>
-        <div hidden={pathname !== '/models/new'}><NewModel/></div>
+        <div hidden={pathname !== '/models/new'}><NewModel account={account}/></div>
         <Routes>
-          <Route path="/" element={<Dashboard records={records} account={account} onSignOut={() => setAccount(null)}/>}/>
-          <Route path="/analyses" element={<Analyses records={records}/>}/>
+          <Route path="/" element={<Dashboard records={records} account={account} onSignOut={handleSignOut}/>}/>
+          <Route path="/analyses" element={<Analyses records={records} signedIn={!!account}/>}/>
           <Route path="/analyses/new" element={null}/>
           <Route path="/models/new" element={null}/>
           <Route path="/heart-disease" element={<HeartDisease/>}/>
           <Route path="/analyses/:analysisId" element={<AnalysisDetail records={records}/>}/>
-          <Route path="/account/create" element={<AccountPage key="create" mode="create" account={account} onAuthenticated={setAccount} onSignOut={() => setAccount(null)}/>}/>
-          <Route path="/account/sign-in" element={<AccountPage key="sign-in" mode="sign-in" account={account} onAuthenticated={setAccount} onSignOut={() => setAccount(null)}/>}/>
-          <Route path="/account" element={<AccountPage key="profile" mode="profile" account={account} onAuthenticated={setAccount} onSignOut={() => setAccount(null)}/>}/>
+          <Route path="/account/create" element={<AccountPage key="create" mode="create" account={account} onAuthenticated={setAccount} onSignOut={handleSignOut}/>}/>
+          <Route path="/account/sign-in" element={<AccountPage key="sign-in" mode="sign-in" account={account} onAuthenticated={setAccount} onSignOut={handleSignOut}/>}/>
+          <Route path="/account/forgot" element={<ForgotPassword account={account}/>}/>
+          <Route path="/account/reset" element={<ResetPassword account={account} onSignedOut={clearAccount}/>}/>
+          <Route path="/account" element={<AccountPage key="profile" mode="profile" account={account} onAuthenticated={setAccount} onSignOut={handleSignOut}/>}/>
           <Route path="/help" element={<Help/>}/>
           <Route path="*" element={<div className="empty-state work-card"><h1>Page not found</h1><Link className="text-button" to="/">Return to dashboard →</Link></div>}/>
         </Routes>
