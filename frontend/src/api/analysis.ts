@@ -19,6 +19,20 @@ export type AnalysisResult = {
   performanceMetrics?: PerformanceMetrics
 }
 
+export type AblationSiteAnalysisResult = {
+  sourceName: string
+  numSites: number
+  numSessions: number
+  cluster: number
+  modelVersion: string
+  pca: {
+    point: { x: number; y: number }
+    trainingPoints: { cluster: number; x: number; y: number }[]
+    explainedVariance: [number, number]
+  }
+  featureContributions: { feature: string; contributionPercent: number }[]
+}
+
 const metricNames: (keyof PerformanceMetrics)[] = [
   'accuracy', 'precision', 'recall', 'f1', 'auroc', 'auprc', 'logLoss',
   'brierScore', 'scaledBrierScore', 'calibrationIntercept',
@@ -130,6 +144,57 @@ export async function analyzeFile(file: File, modelName: ModelName, rowIndex?: n
   if (rowIndex !== undefined) form.append('row_index', String(rowIndex))
   // Do not set Content-Type: the browser adds the multipart boundary.
   return readResult(await fetch('/api/analyses/file', { method: 'POST', body: form }))
+}
+
+export async function analyzeAblationSites(file: File): Promise<AblationSiteAnalysisResult> {
+  const form = new FormData()
+  form.append('file', file, file.name)
+  const result = await readResponse(await fetch('/api/analyses/ablation-sites', { method: 'POST', body: form }))
+  if (!isAblationSiteAnalysisResult(result)) {
+    throw new Error('The server response does not match the agreed clustering format.')
+  }
+  return result
+}
+
+function isRecord(value: unknown): value is Record<string, unknown> {
+  return !!value && typeof value === 'object' && !Array.isArray(value)
+}
+
+function isFiniteNumber(value: unknown): value is number {
+  return typeof value === 'number' && Number.isFinite(value)
+}
+
+function isInteger(value: unknown): value is number {
+  return typeof value === 'number' && Number.isInteger(value)
+}
+
+function isPcaPoint(value: unknown): value is { x: number; y: number } {
+  return isRecord(value) && isFiniteNumber(value.x) && isFiniteNumber(value.y)
+}
+
+function isClusterPoint(value: unknown): value is { cluster: number; x: number; y: number } {
+  return isRecord(value) && isInteger(value.cluster) && value.cluster >= 0 && isPcaPoint(value)
+}
+
+function isFeatureContribution(value: unknown): value is { feature: string; contributionPercent: number } {
+  return isRecord(value) && typeof value.feature === 'string' &&
+    isFiniteNumber(value.contributionPercent) && value.contributionPercent >= 0
+}
+
+function isAblationSiteAnalysisResult(value: unknown): value is AblationSiteAnalysisResult {
+  if (!isRecord(value) || !isRecord(value.pca)) return false
+  const pca = value.pca
+  return typeof value.sourceName === 'string' && value.sourceName.trim().length > 0 &&
+    isInteger(value.numSites) && value.numSites > 0 &&
+    isInteger(value.numSessions) && value.numSessions > 0 &&
+    isInteger(value.cluster) && value.cluster >= 0 &&
+    typeof value.modelVersion === 'string' && value.modelVersion.trim().length > 0 &&
+    isPcaPoint(pca.point) &&
+    Array.isArray(pca.trainingPoints) && pca.trainingPoints.length > 0 && pca.trainingPoints.every(isClusterPoint) &&
+    Array.isArray(pca.explainedVariance) && pca.explainedVariance.length === 2 &&
+    pca.explainedVariance.every(isFiniteNumber) &&
+    Array.isArray(value.featureContributions) && value.featureContributions.length > 0 &&
+    value.featureContributions.every(isFeatureContribution)
 }
 
 /**

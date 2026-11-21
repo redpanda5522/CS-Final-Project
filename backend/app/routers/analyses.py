@@ -24,7 +24,7 @@ from app.schemas import (
     ModelTrainingResult,
     ModelName,
 )
-from app.services import analysis_store, predictor, training
+from app.services import ablation_clustering, analysis_store, predictor, training
 from app.services.file_parser import (
     MAX_UPLOAD_BYTES,
     FileParseError,
@@ -63,6 +63,23 @@ def analyze_file(
         source_name += f" (row {(row_index or 0) + 1})"
     _save(session, result, "file", model_name, source_name, input_data, user)
     return result
+
+
+@router.post("/ablation-sites")
+def analyze_ablation_sites(file: UploadFile) -> dict:
+    """Cluster one patient's ablation-site records and return PCA/chart data."""
+    content = file.file.read(MAX_UPLOAD_BYTES + 1)
+    try:
+        return ablation_clustering.analyze_ablation_sites(content, file.filename)
+    except ablation_clustering.AblationSiteInputError as error:
+        raise HTTPException(status_code=422, detail=str(error)) from error
+    except ablation_clustering.ClusteringModelUnavailableError as error:
+        raise HTTPException(status_code=503, detail=str(error)) from error
+    except Exception as error:
+        logger.exception("Ablation-site clustering failed")
+        raise HTTPException(
+            status_code=500, detail="Ablation-site clustering could not be completed."
+        ) from error
 
 '''
     Train a model using uploaded training data

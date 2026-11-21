@@ -100,6 +100,16 @@ These implement the frontend contract in
   needs `row_index` (0-based, blank rows not counted), and only that row is analyzed and
   saved, with the file name stored as e.g. `data.csv (row 3)`. The `id`, `recur`, and
   `redo` columns are dropped.
+- `POST /api/analyses/ablation-sites`: multipart field `file` (one whitespace-delimited
+  `.txt` patient file, 10 MiB maximum). It summarizes site measurements using the
+  `unsupervised_model_v2.py` feature schema, then uses the cached
+  `app/services/clustering_models/clustering_models.joblib` imputer, scaler, KMeans model, and PCA
+  projection and saved `X_scaled` training samples. The response includes the assigned
+  cluster, projected PCA point, every projected training sample colored by its KMeans
+  cluster, and the top 15 between-cluster feature contributions. This exploratory result
+  is not saved with outcome analyses and is not a clinical outcome prediction. The
+  clustering artifact is stored in `app/services/clustering_models/`, outside the persistent
+  volume used for user-trained outcome models.
 - `POST /api/analyses/train` (requires sign-in, otherwise 401): multipart fields `file` (`.csv`, `.json`, or `.xlsx`, 10 MiB
   maximum), `target_column` (defaults to `recur`), and `model_name` (`xgboost`). The
   target can contain numeric or categorical labels and must have at least two classes,
