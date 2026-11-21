@@ -48,17 +48,17 @@ function Workspace() {
     clearAccount()
   }
   const title = pathname === '/' ? 'Dashboard'
-    : pathname === '/analyses/new' ? 'New analysis'
-    : pathname === '/models/new' ? 'New model'
-    : pathname === '/heart-disease' ? 'Heart disease detection'
+    : pathname === '/analyses/new' ? 'New Ablation Analysis'
+    : pathname === '/models/new' ? 'New Model'
+    : pathname === '/heart-disease' ? 'Heart Disease Detection'
     : pathname === '/analyses' ? 'Analyses'
-    : pathname === '/help' ? 'Help & workflow'
-    : pathname === '/account/create' ? 'Create account'
-    : pathname === '/account/sign-in' ? 'Sign in'
-    : pathname === '/account/forgot' ? 'Reset password'
-    : pathname === '/account/reset' ? 'Choose a new password'
-    : pathname === '/account' ? 'My account'
-    : 'Analysis details'
+    : pathname === '/help' ? 'Help & Workflow'
+    : pathname === '/account/create' ? 'Create Account'
+    : pathname === '/account/sign-in' ? 'Sign In'
+    : pathname === '/account/forgot' ? 'Reset Password'
+    : pathname === '/account/reset' ? 'Choose a New Password'
+    : pathname === '/account' ? 'My Account'
+    : 'Analysis Details'
 
   useEffect(() => { document.title = `${title} | Ablation Outcome`; window.scrollTo(0, 0) }, [title, pathname])
 
@@ -69,12 +69,12 @@ function Workspace() {
 
   const navigation = [
     { path: '/', label: 'Dashboard', icon: LayoutDashboard },
-    { path: '/analyses/new', label: 'New analysis', icon: Activity },
-    { path: '/models/new', label: 'New model', icon: Cog },
-    { path: '/heart-disease', label: 'Heart disease detection', icon: HeartPulse },
+    { path: '/analyses/new', label: 'New Ablation Analysis', icon: Activity },
+    { path: '/models/new', label: 'New Model', icon: Cog },
+    { path: '/heart-disease', label: 'Heart Disease Detection', icon: HeartPulse },
     { path: '/analyses', label: 'Analyses', icon: ClipboardList },
-    { path: '/help', label: 'Help & workflow', icon: CircleHelp },
-    { path: account ? '/account' : '/account/create', label: account ? 'My account' : 'Create account', icon: UserRound },
+    { path: '/help', label: 'Help & Workflow', icon: CircleHelp },
+    { path: account ? '/account' : '/account/create', label: account ? 'My Account' : 'Create Account', icon: UserRound },
   ]
   return <div className="app-shell">
     <aside className="sidebar">
