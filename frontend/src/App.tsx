@@ -60,7 +60,7 @@ function Workspace() {
     : pathname === '/account' ? 'My Account'
     : 'Analysis Details'
 
-  useEffect(() => { document.title = `${title} | Ablation Outcome`; window.scrollTo(0, 0) }, [title, pathname])
+  useEffect(() => { document.title = `${title} | VitalLens`; window.scrollTo(0, 0) }, [title, pathname])
 
   function recordCompleted(result: AnalysisResult, inputMode: 'file' | 'manual', sourceName: string) {
     const record: AnalysisRecord = { ...result, analysisId: isDemoMode ? `demo-${crypto.randomUUID()}` : result.analysisId, createdAt: new Date().toISOString(), inputMode, sourceName, isDemo: isDemoMode }
@@ -78,7 +78,7 @@ function Workspace() {
   ]
   return <div className="app-shell">
     <aside className="sidebar">
-      <Link to="/" className="brand"><span className="brand-mark"><HeartPulse size={23}/></span><span>Ablation<span className="brand-light">Outcome</span><small>CLINICAL RESEARCH TOOL</small></span></Link>
+      <Link to="/" className="brand"><span className="brand-mark"><HeartPulse size={23}/></span><span>Vital<span className="brand-light">Lens</span><small>CLINICAL RESEARCH TOOL</small></span></Link>
       <div className="side-label">WORKSPACE</div>
       <nav aria-label="Main navigation">{navigation.map(item => <NavLink key={item.path} to={item.path} end={item.path !== '/analyses'} className={({isActive}) => `nav-item ${isActive && !(item.path === '/analyses' && pathname === '/analyses/new') ? 'side-active' : ''}`}><item.icon size={18}/>{item.label}</NavLink>)}</nav>
       <div className="sidebar-bottom"><Link to={account ? '/account' : '/account/create'} className="user-card"><span className="avatar">{account ? account.name.charAt(0).toUpperCase() : 'R'}</span><span>{account?.name || 'Research workspace'}<small>{account ? (accountsAreSaved ? 'Signed in' : 'Tab session account') : accountsAreSaved ? 'Create an account' : 'Create a preview account'}</small></span></Link></div>
@@ -105,7 +105,7 @@ function Workspace() {
           <Route path="*" element={<div className="empty-state work-card"><h1>Page not found</h1><Link className="text-button" to="/">Return to dashboard →</Link></div>}/>
         </Routes>
       </main>
-      <footer>Ablation outcome analysis</footer>
+      <footer>VitalLens clinical research workspace</footer>
     </div>
   </div>
 }

@@ -1,4 +1,4 @@
-# Ablation outcome frontend
+# VitalLens frontend
 
 React + TypeScript frontend for a postprocedure workflow: upload a procedure file or assign up to four catheters to heart regions, enter optional measurements, review, and submit for backend processing.
 

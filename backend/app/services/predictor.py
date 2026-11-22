@@ -241,7 +241,7 @@ def predict_from_file(row: pd.DataFrame, model_name: ModelName = "logistic") -> 
     model_info = _model_info(model_name)
     if model_info.get("target_column", "recur") != "recur":
         raise PredictionInputError(
-            "The selected model was trained for a different target and cannot be used for ablation outcome analysis."
+            "The selected model was trained for a different target and cannot be used for procedure outcome analysis."
         )
     # TODO: Remove after Multi-Class Classification is supported for analysis outcomes
     if model_info["class_labels"] != ["0", "1"]:

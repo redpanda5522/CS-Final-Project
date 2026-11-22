@@ -26,7 +26,7 @@ def send_password_reset(email: str, token: str) -> None:
         logger.warning("SMTP is not configured. Password reset link for %s: %s", email, link)
         return
     message = EmailMessage()
-    message["Subject"] = "Reset your Ablation Outcome password"
+    message["Subject"] = "Reset your VitalLens password"
     message["From"] = os.environ.get("SMTP_FROM") or "no-reply@localhost"
     message["To"] = email
     message.set_content(
