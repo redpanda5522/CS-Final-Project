@@ -240,7 +240,7 @@ app/
     file_parser.py     # Upload validation and CSV/JSON/XLSX parsing
     heart_disease.py   # Heart disease model and its input fields
     mailer.py          # Password reset emails (or log lines without SMTP)
-    predictor.py       # Ablation outcome models
+    predictor.py       # Procedure outcome models
     training.py        # XGBoost training
 migrations/            # Alembic migrations
 tests/                 # pytest suite
